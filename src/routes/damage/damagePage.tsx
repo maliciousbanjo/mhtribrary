@@ -1,7 +1,10 @@
 import { Weapons } from 'mh3-data';
 import React from 'react';
-import { WeaponSelectors } from './weapon';
-import { MonsterSelectors } from './monster';
+import { WeaponSelectors } from './weapon-selectors';
+import { MonsterSelectors } from './monster-selectors';
+import { HitzoneTable } from './hitzone-table';
+import { MonsterTypes } from 'mh3-data/monsters';
+import '../../sass/damage-page.scss';
 
 /**
  * Top-level page for damage calculations
@@ -18,13 +21,17 @@ export function DamagePage() {
   >();
 
   // MONSTER STATE
-  const [selectedMonsterId, setSelectedMonsterId] = React.useState<number>(0);
+  const [selectedMonsterName, setSelectedMonsterName] =
+    React.useState<MonsterTypes.MonsterName>('Aptonoth');
   const [selectedMonsterHitzoneGroup, setSelectedMonsterHitzoneGroup] =
     React.useState<number>(0);
   /** undefined denotes  */
   const [selectedQuestId, setSelectedQuestId] = React.useState<
     number | undefined
   >();
+
+  // HITZONE STATE
+  const [selectedHitzone, setSelectedHitzone] = React.useState<string>('');
 
   return (
     <div>
@@ -40,14 +47,21 @@ export function DamagePage() {
 
       {/* // TODO: Monster Args */}
       <MonsterSelectors
-        selectedMonsterId={selectedMonsterId}
-        setSelectedMonsterId={setSelectedMonsterId}
+        selectedMonsterName={selectedMonsterName}
+        setSelectedMonsterName={setSelectedMonsterName}
         selectedMonsterHitzoneGroup={selectedMonsterHitzoneGroup}
         setSelectedMonsterHitzoneGroup={setSelectedMonsterHitzoneGroup}
         selectedQuestId={selectedQuestId}
         setSelectedQuestId={setSelectedQuestId}
       />
+      <div>Selected Quest Id: {selectedQuestId}</div>
       {/* // TODO: Hitzone selection */}
+      <HitzoneTable
+        selectedMonsterName={selectedMonsterName}
+        selectedMonsterHitzoneGroup={selectedMonsterHitzoneGroup}
+        selectedHitzone={selectedHitzone}
+        setSelectedHitzone={setSelectedHitzone}
+      />
       {/* // TODO: Attack Buff Args */}
     </div>
   );

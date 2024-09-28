@@ -1,10 +1,12 @@
 import { HTMLSelect, OptionProps } from '@blueprintjs/core';
-import { Monsters, Quests } from 'mh3-data';
+import { Monsters, MonsterTypes, Quests } from 'mh3-data';
 import React from 'react';
 
 interface MonsterSelectorsProps {
-  selectedMonsterId: number;
-  setSelectedMonsterId: React.Dispatch<React.SetStateAction<number>>;
+  selectedMonsterName: MonsterTypes.MonsterName;
+  setSelectedMonsterName: React.Dispatch<
+    React.SetStateAction<MonsterTypes.MonsterName>
+  >;
 
   selectedMonsterHitzoneGroup: number;
   setSelectedMonsterHitzoneGroup: React.Dispatch<React.SetStateAction<number>>;
@@ -14,8 +16,8 @@ interface MonsterSelectorsProps {
 }
 
 export function MonsterSelectors({
-  selectedMonsterId,
-  setSelectedMonsterId,
+  selectedMonsterName,
+  setSelectedMonsterName,
   selectedMonsterHitzoneGroup,
   setSelectedMonsterHitzoneGroup,
   selectedQuestId,
@@ -26,11 +28,10 @@ export function MonsterSelectors({
     []
   );
 
-  const monsterOptions = React.useMemo<OptionProps<number>[]>(() => {
+  const monsterOptions = React.useMemo<OptionProps<string>[]>(() => {
     return allMonsters.map(mon => {
       return {
-        label: mon.name,
-        value: mon.id
+        value: mon.name
       };
     });
   }, [allMonsters]);
@@ -39,23 +40,21 @@ export function MonsterSelectors({
    * Change handler for selected monster
    * Resets {@link selectedMonsterHitzoneGroup} and {@link selectedQuestId} when changed
    */
-  const onChangeMonsterId = React.useCallback(
+  const onChangeMonsterName = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
-      setSelectedMonsterId(parseInt(target.value));
+      setSelectedMonsterName(target.value as MonsterTypes.MonsterName);
       setSelectedMonsterHitzoneGroup(0);
       setSelectedQuestId(undefined);
     },
-    [setSelectedMonsterHitzoneGroup, setSelectedMonsterId, setSelectedQuestId]
+    [setSelectedMonsterHitzoneGroup, setSelectedMonsterName, setSelectedQuestId]
   );
 
   /**
    * Different hitzoneGroups based on monster state (flying, muddy, enraged, etc)
    */
   const monsterStates = React.useMemo(() => {
-    const selectedMonster = allMonsters.find(
-      mon => mon.id === selectedMonsterId
-    );
+    const selectedMonster = Monsters.getMonster(selectedMonsterName);
 
     return (
       selectedMonster?.hitzoneGroups.map<OptionProps<number>>(
@@ -65,7 +64,7 @@ export function MonsterSelectors({
         })
       ) ?? []
     );
-  }, [allMonsters, selectedMonsterId]);
+  }, [selectedMonsterName]);
 
   const onChangeMonsterState = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -76,7 +75,8 @@ export function MonsterSelectors({
   );
 
   const questOptions = React.useMemo(() => {
-    return Quests.getQuestsWithLargeMonster(selectedMonsterId, 'Both').map<
+    const selectedMonster = Monsters.getMonster(selectedMonsterName);
+    return Quests.getQuestsWithLargeMonster(selectedMonster.id, 'Both').map<
       OptionProps<number>
     >(quest => {
       return {
@@ -84,7 +84,7 @@ export function MonsterSelectors({
         value: quest.id
       };
     });
-  }, [selectedMonsterId]);
+  }, [selectedMonsterName]);
 
   const onChangeQuest = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -109,8 +109,8 @@ export function MonsterSelectors({
       <HTMLSelect
         className="select select-monster"
         options={monsterOptions}
-        value={selectedMonsterId}
-        onChange={onChangeMonsterId}
+        value={selectedMonsterName}
+        onChange={onChangeMonsterName}
       />
 
       {/* Monster State (sometimes) */}
