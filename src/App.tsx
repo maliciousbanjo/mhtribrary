@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { DamagePage } from './routes/damage';
+import { DamagePage } from './routes/damage/';
 
 const router = createBrowserRouter([
   {
