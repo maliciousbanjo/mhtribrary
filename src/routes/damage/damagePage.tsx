@@ -1,17 +1,21 @@
 import { Damage, Weapons } from 'mh3-data';
 import React from 'react';
-import { WeaponSelectors } from './weapon-selectors';
+import { WeaponSelectors } from './weapon/';
 import { MonsterSelectors } from './monster-selectors';
 import { HitzoneTable } from './hitzone-table';
 import { MonsterTypes } from 'mh3-data/monsters';
 import '../../sass/damage-page.scss';
-import { BuffSelectors } from './buffs/buff-selectors';
+import { BuffSelectors } from './buffs';
 import {
   elementArgsReducer,
   rawArgsReducer,
   weaponClassArgsReducer
 } from './buffs';
-import { Button } from '@blueprintjs/core';
+import { WeaponClass } from 'mh3-data/weapons';
+
+// Iron Sword
+const WEAPON_INITIAL_STATE = Weapons.getWeapon(WeaponClass.GREAT_SWORD, 0);
+const WEAPON_ATTACK_INITIAL_STATE = 'Unsheathe Attack';
 
 /**
  * Top-level page for damage calculations
@@ -19,12 +23,19 @@ import { Button } from '@blueprintjs/core';
 export function DamagePage() {
   // WEAPON STATE
   const [selectedWeaponClass, setSelectedWeaponClass] =
-    React.useState<Weapons.WeaponClass>(Weapons.WeaponClass.GREAT_SWORD);
+    React.useState<Weapons.WeaponClass>(WEAPON_INITIAL_STATE.type);
 
-  const [selectedWeaponId, setSelectedWeaponId] = React.useState<number>(0);
+  const [selectedWeaponId, setSelectedWeaponId] = React.useState<number>(
+    WEAPON_INITIAL_STATE.id
+  );
 
   const [selectedSharpness, setSelectedSharpness] =
-    React.useState<Weapons.Sharpness>(Weapons.Sharpness.RED);
+    React.useState<Weapons.Sharpness>(
+      WEAPON_INITIAL_STATE.sharpness.length - 1
+    );
+
+  const [selectedWeaponAttack, setSelectedWeaponAttack] =
+    React.useState<string>(WEAPON_ATTACK_INITIAL_STATE);
 
   // MONSTER STATE
   const [selectedMonsterName, setSelectedMonsterName] =
@@ -71,7 +82,7 @@ export function DamagePage() {
         weaponClass: selectedWeaponClass,
         weaponId: selectedWeaponId,
         sharpness: selectedSharpness,
-        attackName: 'L3 Charge', // TODO:,
+        attackName: selectedWeaponAttack,
         weaponMultipliers: {}
       },
       {
@@ -86,7 +97,7 @@ export function DamagePage() {
         weaponClassArgs
       }
     );
-    alert(JSON.stringify(totalDamage, null, 2));
+    return totalDamage;
   }, [
     elementArgs,
     rawArgs,
@@ -95,10 +106,35 @@ export function DamagePage() {
     selectedMonsterState,
     selectedQuestId,
     selectedSharpness,
+    selectedWeaponAttack,
     selectedWeaponClass,
     selectedWeaponId,
     weaponClassArgs
   ]);
+
+  const renderDamage = () => {
+    try {
+      const damage = calculate();
+      const hitJsx = damage.map((damageResult, index) => (
+        <p>
+          Hit {index + 1}: {damageResult.totalDamage}
+        </p>
+      ));
+      const totalDamage = damage.reduce(
+        (result, nextHit) => result + nextHit.totalDamage,
+        0
+      );
+
+      return (
+        <div className="total-damage">
+          {hitJsx}
+          Total Damage: {totalDamage}
+        </div>
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="damage">
@@ -109,6 +145,8 @@ export function DamagePage() {
         setSelectedWeaponId={setSelectedWeaponId}
         selectedSharpness={selectedSharpness}
         setSelectedSharpness={setSelectedSharpness}
+        selectedWeaponAttack={selectedWeaponAttack}
+        setSelectedWeaponAttack={setSelectedWeaponAttack}
       />
       <MonsterSelectors
         selectedMonsterName={selectedMonsterName}
@@ -132,7 +170,7 @@ export function DamagePage() {
         weaponClassArgs={weaponClassArgs}
         dispatchWeaponClassArgs={dispatchWeaponClassArgs}
       />
-      <Button text="Calculate Damage" onClick={calculate} />
+      <div className="damage-container">{renderDamage()}</div>
     </div>
   );
 }

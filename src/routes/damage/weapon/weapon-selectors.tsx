@@ -1,16 +1,17 @@
 import { HTMLSelect, OptionProps } from '@blueprintjs/core';
 import React from 'react';
-import {
-  WeaponClass,
-  Sharpness,
-  GreatSword,
-  Hammer,
-  Lance,
-  Longsword,
-  SwitchAxe,
-  SwordAndShield
-} from 'mh3-data/weapons';
+import { WeaponClass, Sharpness } from 'mh3-data/weapons';
 import { Weapons } from 'mh3-data';
+import {
+  getWeaponAttackOptions,
+  greatSwordOptions,
+  hammerOptions,
+  lanceOptions,
+  longswordOptions,
+  switchAxeOptions,
+  swordAndShieldOptions,
+  weaponClassOptions
+} from './weapon-options';
 
 export interface WeaponSelectorsProps {
   selectedWeaponClass: WeaponClass;
@@ -21,6 +22,9 @@ export interface WeaponSelectorsProps {
 
   selectedSharpness: Sharpness;
   setSelectedSharpness: React.Dispatch<React.SetStateAction<Sharpness>>;
+
+  selectedWeaponAttack: string;
+  setSelectedWeaponAttack: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export function WeaponSelectors({
@@ -29,52 +33,24 @@ export function WeaponSelectors({
   selectedWeaponId,
   setSelectedWeaponId,
   selectedSharpness,
-  setSelectedSharpness
+  setSelectedSharpness,
+  selectedWeaponAttack,
+  setSelectedWeaponAttack
 }: WeaponSelectorsProps) {
-  const weaponClassOptions = React.useMemo<OptionProps<WeaponClass>[]>(
-    () => [
-      { value: WeaponClass.GREAT_SWORD },
-      { value: WeaponClass.HAMMER },
-      { value: WeaponClass.LANCE },
-      { value: WeaponClass.LONGSWORD },
-      { value: WeaponClass.SWITCH_AXE },
-      { value: WeaponClass.SWORD_AND_SHIELD }
-    ],
-    []
-  );
-
   const weaponSelectOptions = React.useMemo<OptionProps<number>[]>(() => {
     switch (selectedWeaponClass) {
       case 'Great Sword':
-        return GreatSword.GreatSwords.map(gs => ({
-          label: gs.name,
-          value: gs.id
-        }));
+        return greatSwordOptions;
       case 'Hammer':
-        return Hammer.Hammers.map(hm => ({
-          label: hm.name,
-          value: hm.id
-        }));
+        return hammerOptions;
       case 'Lance':
-        return Lance.Lances.map(lnc => ({
-          label: lnc.name,
-          value: lnc.id
-        }));
+        return lanceOptions;
       case 'Longsword':
-        return Longsword.Longswords.map(ls => ({
-          label: ls.name,
-          value: ls.id
-        }));
+        return longswordOptions;
       case 'Switch Axe':
-        return SwitchAxe.SwitchAxes.map(swaxe => ({
-          label: swaxe.name,
-          value: swaxe.id
-        }));
+        return switchAxeOptions;
       case 'Sword and Shield':
-        return SwordAndShield.SwordAndShields.map(sns => ({
-          label: sns.name,
-          value: sns.id
-        }));
+        return swordAndShieldOptions;
       default:
         throw new Error(`Invalid weapon selection ${selectedWeaponClass}`);
     }
@@ -98,22 +74,35 @@ export function WeaponSelectors({
     );
   }, [selectedWeaponClass, selectedWeaponId]);
 
+  /**
+   * Also sets the default weapon ID and weapon attack to first index
+   */
   const onChangeWeaponClass = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
-      setSelectedWeaponClass(target.value as WeaponClass);
+      const newWeaponClass = target.value as WeaponClass;
+      setSelectedWeaponClass(newWeaponClass);
       // clear current selected weapon
       setSelectedWeaponId(0);
+      setSelectedWeaponAttack(getWeaponAttackOptions(newWeaponClass)[0].value);
     },
-    [setSelectedWeaponClass, setSelectedWeaponId]
+    [setSelectedWeaponAttack, setSelectedWeaponClass, setSelectedWeaponId]
   );
 
+  /**
+   * Also sets sharpness to the max possible non-sharpness+1 value of the
+   * particular weapon
+   */
   const onChangeWeapon = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
-      setSelectedWeaponId(parseInt(target.value));
+      const newWeaponId = parseInt(target.value);
+      setSelectedWeaponId(newWeaponId);
+      const weapon = Weapons.getWeapon(selectedWeaponClass, newWeaponId);
+      // Set sharpness
+      setSelectedSharpness(weapon.sharpness.length - 1);
     },
-    [setSelectedWeaponId]
+    [selectedWeaponClass, setSelectedSharpness, setSelectedWeaponId]
   );
 
   const onChangeSharpness = React.useCallback(
@@ -122,6 +111,14 @@ export function WeaponSelectors({
       setSelectedSharpness(parseInt(target.value));
     },
     [setSelectedSharpness]
+  );
+
+  const onChangeWeaponAttack = React.useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const { target } = event;
+      setSelectedWeaponAttack(target.value);
+    },
+    [setSelectedWeaponAttack]
   );
 
   return (
@@ -143,6 +140,12 @@ export function WeaponSelectors({
         options={sharpnessOptions}
         value={selectedSharpness}
         onChange={onChangeSharpness}
+      />
+      <HTMLSelect
+        className="select select-weapon-attack"
+        options={getWeaponAttackOptions(selectedWeaponClass)}
+        value={selectedWeaponAttack}
+        onChange={onChangeWeaponAttack}
       />
     </div>
   );

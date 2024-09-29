@@ -54,14 +54,12 @@ export function HitzoneTable({
   }, [handleRowClick, hitzoneGroup.hitzones, selectedHitzone]);
 
   /**
-   * Auto-select the first hitzone if none selected yet
+   * Auto-select the first hitzone when a new monster is selected
    */
   React.useEffect(() => {
-    if (selectedHitzone === '') {
-      const hitzoneName = Object.keys(hitzoneGroup.hitzones)[0];
-      handleRowClick(hitzoneName);
-    }
-  }, [handleRowClick, hitzoneGroup.hitzones, selectedHitzone]);
+    const hitzoneName = Object.keys(hitzoneGroup.hitzones)[0];
+    handleRowClick(hitzoneName);
+  }, [handleRowClick, hitzoneGroup.hitzones, selectedMonsterName]);
 
   return (
     <HTMLTable className={'hitzone-table'} compact interactive bordered>
