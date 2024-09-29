@@ -8,18 +8,18 @@ interface MonsterSelectorsProps {
     React.SetStateAction<MonsterTypes.MonsterName>
   >;
 
-  selectedMonsterHitzoneGroup: number;
-  setSelectedMonsterHitzoneGroup: React.Dispatch<React.SetStateAction<number>>;
+  selectedMonsterState: number;
+  setSelectedMonsterState: React.Dispatch<React.SetStateAction<number>>;
 
-  selectedQuestId: number | undefined;
-  setSelectedQuestId: React.Dispatch<React.SetStateAction<number | undefined>>;
+  selectedQuestId: number;
+  setSelectedQuestId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export function MonsterSelectors({
   selectedMonsterName,
   setSelectedMonsterName,
-  selectedMonsterHitzoneGroup,
-  setSelectedMonsterHitzoneGroup,
+  selectedMonsterState,
+  setSelectedMonsterState,
   selectedQuestId,
   setSelectedQuestId
 }: MonsterSelectorsProps) {
@@ -44,10 +44,10 @@ export function MonsterSelectors({
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
       setSelectedMonsterName(target.value as MonsterTypes.MonsterName);
-      setSelectedMonsterHitzoneGroup(0);
-      setSelectedQuestId(undefined);
+      setSelectedMonsterState(0);
+      setSelectedQuestId(-1);
     },
-    [setSelectedMonsterHitzoneGroup, setSelectedMonsterName, setSelectedQuestId]
+    [setSelectedMonsterState, setSelectedMonsterName, setSelectedQuestId]
   );
 
   /**
@@ -57,10 +57,10 @@ export function MonsterSelectors({
     const selectedMonster = Monsters.getMonster(selectedMonsterName);
 
     return (
-      selectedMonster?.hitzoneGroups.map<OptionProps<number>>(
-        (hitGroup, index) => ({
+      selectedMonster?.monsterStates.map<OptionProps<number>>(
+        (monsterState, index) => ({
           value: index,
-          label: hitGroup.name
+          label: monsterState.name
         })
       ) ?? []
     );
@@ -69,9 +69,9 @@ export function MonsterSelectors({
   const onChangeMonsterState = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
-      setSelectedMonsterHitzoneGroup(parseInt(target.value));
+      setSelectedMonsterState(parseInt(target.value));
     },
-    [setSelectedMonsterHitzoneGroup]
+    [setSelectedMonsterState]
   );
 
   const questOptions = React.useMemo(() => {
@@ -98,14 +98,13 @@ export function MonsterSelectors({
    * Set the initial/default quest ID when the selected monster has changed
    */
   React.useEffect(() => {
-    if (selectedQuestId === undefined && questOptions.length > 0) {
-      console.log('useEffect');
+    if (selectedQuestId === -1 && questOptions.length > 0) {
       setSelectedQuestId(questOptions[0].value);
     }
   }, [questOptions, selectedQuestId, setSelectedQuestId]);
 
   return (
-    <div>
+    <div className="monster">
       <HTMLSelect
         className="select select-monster"
         options={monsterOptions}
@@ -118,7 +117,7 @@ export function MonsterSelectors({
         <HTMLSelect
           className="select select-monster-state"
           options={monsterStates}
-          value={selectedMonsterHitzoneGroup}
+          value={selectedMonsterState}
           onChange={onChangeMonsterState}
         />
       )}

@@ -1,6 +1,15 @@
-
 .table-row {
     &--selected {
         background-color: powderblue;
     }
-} 
+}
+
+.attack-buffs {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5em
+}
+
+.negative-skill {
+    color: red;
+}

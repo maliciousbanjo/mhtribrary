@@ -19,10 +19,8 @@ export interface WeaponSelectorsProps {
   selectedWeaponId: number;
   setSelectedWeaponId: React.Dispatch<React.SetStateAction<number>>;
 
-  selectedSharpness: Sharpness | undefined;
-  setSelectedSharpness: React.Dispatch<
-    React.SetStateAction<Sharpness | undefined>
-  >;
+  selectedSharpness: Sharpness;
+  setSelectedSharpness: React.Dispatch<React.SetStateAction<Sharpness>>;
 }
 
 export function WeaponSelectors({
@@ -127,7 +125,7 @@ export function WeaponSelectors({
   );
 
   return (
-    <div>
+    <div className="weapon">
       <HTMLSelect
         className="select select-weapon-class"
         options={weaponClassOptions}

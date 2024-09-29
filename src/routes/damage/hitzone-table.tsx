@@ -3,7 +3,7 @@ import { HTMLTable } from '@blueprintjs/core';
 import React from 'react';
 import classNames from 'classnames';
 
-interface HitzoneSelectorProps {
+interface HitzoneTableProps {
   selectedMonsterName: MonsterTypes.MonsterName;
   selectedMonsterHitzoneGroup: number;
 
@@ -16,9 +16,9 @@ export function HitzoneTable({
   selectedMonsterHitzoneGroup,
   selectedHitzone,
   setSelectedHitzone
-}: HitzoneSelectorProps) {
+}: HitzoneTableProps) {
   const monster = Monsters.getMonster(selectedMonsterName);
-  const hitzoneGroup = monster.hitzoneGroups[selectedMonsterHitzoneGroup];
+  const hitzoneGroup = monster.monsterStates[selectedMonsterHitzoneGroup];
 
   const handleRowClick = React.useCallback(
     (hitzoneName: string) => {
@@ -29,13 +29,10 @@ export function HitzoneTable({
 
   const buildHitzoneRow = React.useCallback(() => {
     return Object.entries(hitzoneGroup.hitzones).map(
-      ([hitzoneName, hitzoneValues], index) => {
-        // Auto-select the first hitzone if none selected yet
-        if (selectedHitzone === '' && index === 0) {
-          handleRowClick(hitzoneName);
-        }
+      ([hitzoneName, hitzoneValues]) => {
         return (
           <tr
+            key={hitzoneName}
             className={classNames('table-row', {
               'table-row--selected': selectedHitzone === hitzoneName
             })}
@@ -54,6 +51,16 @@ export function HitzoneTable({
         );
       }
     );
+  }, [handleRowClick, hitzoneGroup.hitzones, selectedHitzone]);
+
+  /**
+   * Auto-select the first hitzone if none selected yet
+   */
+  React.useEffect(() => {
+    if (selectedHitzone === '') {
+      const hitzoneName = Object.keys(hitzoneGroup.hitzones)[0];
+      handleRowClick(hitzoneName);
+    }
   }, [handleRowClick, hitzoneGroup.hitzones, selectedHitzone]);
 
   return (
