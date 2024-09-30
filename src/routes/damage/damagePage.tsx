@@ -1,6 +1,6 @@
-import { Damage, Weapons } from 'mh3-data';
+import { Damage, DamageTypes, Weapons } from 'mh3-data';
 import React from 'react';
-import { WeaponSelectors } from './weapon/';
+import { UniqueWeaponSelectors, WeaponSelectors } from './weapon/';
 import { MonsterSelectors } from './monster-selectors';
 import { HitzoneTable } from './hitzone-table';
 import { MonsterTypes } from 'mh3-data/monsters';
@@ -16,6 +16,16 @@ import { WeaponClass } from 'mh3-data/weapons';
 // Iron Sword
 const WEAPON_INITIAL_STATE = Weapons.getWeapon(WeaponClass.GREAT_SWORD, 0);
 const WEAPON_ATTACK_INITIAL_STATE = 'Unsheathe Attack';
+
+const DEFAULT_WEAPON_MULTIPLIERS: DamageTypes.WeaponMultipliers = {
+  middleOfBlade: false,
+  switchAxeMode: 'axe',
+  swordAndShieldMode: 'land',
+  longsword: {
+    fullSpiritGauge: false,
+    spiritGaugeColor: 'NONE'
+  }
+};
 
 /**
  * Top-level page for damage calculations
@@ -74,6 +84,9 @@ export function DamagePage() {
       might: 'none'
     }
   );
+
+  const [weaponMultipliers, setWeaponMultipliers] =
+    React.useState<DamageTypes.WeaponMultipliers>(DEFAULT_WEAPON_MULTIPLIERS);
 
   const calculate = React.useCallback(() => {
     // TODO: Validate args
@@ -147,6 +160,11 @@ export function DamagePage() {
         setSelectedSharpness={setSelectedSharpness}
         selectedWeaponAttack={selectedWeaponAttack}
         setSelectedWeaponAttack={setSelectedWeaponAttack}
+      />
+      <UniqueWeaponSelectors
+        selectedWeaponClass={selectedWeaponClass}
+        weaponMultipliers={weaponMultipliers}
+        setWeaponMultipliers={setWeaponMultipliers}
       />
       <MonsterSelectors
         selectedMonsterName={selectedMonsterName}

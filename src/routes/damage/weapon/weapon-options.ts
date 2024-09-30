@@ -62,6 +62,8 @@ export const swordAndShieldOptions = SwordAndShield.SwordAndShields.map<
   value: sns.id
 }));
 
+// WEAPON ATTACK NAMES
+
 export const greatSwordAttackOptions: OptionProps<GreatSwordTypes.GreatSwordAttack>[] =
   [
     { value: 'Unsheathe Attack' },
@@ -176,3 +178,33 @@ export function getWeaponAttackOptions(weaponClass: WeaponClass) {
       throw new Error(`Invalid weapon selection ${weaponClass}`);
   }
 }
+
+// UNIQUE WEAPON OPTIONS
+
+export const swordAndShieldModes =
+  SwordAndShield.SwordAndShieldDamageProperties.attackModes.map(
+    mode => mode.name
+  );
+
+export const switchAxeModes =
+  SwitchAxe.SwitchAxeDamageProperties.attackModes.map(mode => mode.name);
+
+export const spiritGaugeColorOptions: OptionProps<LongswordTypes.SpiritGaugeColors>[] =
+  [
+    {
+      value: 'NONE',
+      label: 'None'
+    },
+    {
+      value: 'WHITE',
+      label: 'White'
+    },
+    {
+      value: 'YELLOW',
+      label: 'Yellow'
+    },
+    {
+      value: 'RED',
+      label: 'Red'
+    }
+  ];

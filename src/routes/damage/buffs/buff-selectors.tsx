@@ -43,10 +43,6 @@ export function BuffSelectors({
   weaponClassArgs,
   dispatchWeaponClassArgs
 }: BuffSelectorsProps) {
-  /**
-   * TODO:
-   * awaken (checkbox)
-   */
   return (
     <div className="attack-buffs">
       <div>
@@ -90,20 +86,35 @@ export function BuffSelectors({
           });
         }}
       />
-      <RadioGroup
-        className="element-attack-radios"
-        options={elementAttackOptions}
-        selectedValue={elementArgs.elementAttack}
-        onChange={event => {
-          dispatchElementArgs({
-            type: 'ELEMENT_ATTACK',
-            payload: {
-              elementAttack: event.currentTarget
-                .value as ElementArgs['elementAttack']
-            }
-          });
-        }}
-      />
+      <div>
+        <RadioGroup
+          className="element-attack-radios"
+          options={elementAttackOptions}
+          selectedValue={elementArgs.elementAttack}
+          onChange={event => {
+            dispatchElementArgs({
+              type: 'ELEMENT_ATTACK',
+              payload: {
+                elementAttack: event.currentTarget
+                  .value as ElementArgs['elementAttack']
+              }
+            });
+          }}
+        />
+        <Checkbox
+          className="awaken"
+          label="Awaken"
+          checked={elementArgs.awaken}
+          onChange={event => {
+            dispatchElementArgs({
+              type: 'AWAKEN',
+              payload: {
+                awaken: event.target.checked
+              }
+            });
+          }}
+        />
+      </div>
       <RadioGroup
         className="critical-hit-radios"
         options={criticalHitOptions}
