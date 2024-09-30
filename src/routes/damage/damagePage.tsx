@@ -11,21 +11,11 @@ import {
   rawArgsReducer,
   weaponClassArgsReducer
 } from './buffs';
-import { WeaponClass } from 'mh3-data/weapons';
-
-// Iron Sword
-const WEAPON_INITIAL_STATE = Weapons.getWeapon(WeaponClass.GREAT_SWORD, 0);
-const WEAPON_ATTACK_INITIAL_STATE = 'Unsheathe Attack';
-
-const DEFAULT_WEAPON_MULTIPLIERS: DamageTypes.WeaponMultipliers = {
-  middleOfBlade: false,
-  switchAxeMode: 'axe',
-  swordAndShieldMode: 'land',
-  longsword: {
-    fullSpiritGauge: false,
-    spiritGaugeColor: 'NONE'
-  }
-};
+import {
+  WEAPON_INITIAL_STATE,
+  WEAPON_ATTACK_INITIAL_STATE,
+  DEFAULT_WEAPON_MULTIPLIERS
+} from './damage-util';
 
 /**
  * Top-level page for damage calculations
@@ -96,7 +86,7 @@ export function DamagePage() {
         weaponId: selectedWeaponId,
         sharpness: selectedSharpness,
         attackName: selectedWeaponAttack,
-        weaponMultipliers: {}
+        weaponMultipliers
       },
       {
         monsterName: selectedMonsterName,
@@ -122,7 +112,8 @@ export function DamagePage() {
     selectedWeaponAttack,
     selectedWeaponClass,
     selectedWeaponId,
-    weaponClassArgs
+    weaponClassArgs,
+    weaponMultipliers
   ]);
 
   const renderDamage = () => {

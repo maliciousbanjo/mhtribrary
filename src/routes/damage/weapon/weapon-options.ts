@@ -181,13 +181,15 @@ export function getWeaponAttackOptions(weaponClass: WeaponClass) {
 
 // UNIQUE WEAPON OPTIONS
 
-export const swordAndShieldModes =
-  SwordAndShield.SwordAndShieldDamageProperties.attackModes.map(
-    mode => mode.name
-  );
+export const swordAndShieldModeOptions =
+  SwordAndShield.SwordAndShieldDamageProperties.attackModes.map<
+    OptionProps<string>
+  >(mode => ({ value: mode.name }));
 
-export const switchAxeModes =
-  SwitchAxe.SwitchAxeDamageProperties.attackModes.map(mode => mode.name);
+export const switchAxeModeOptions =
+  SwitchAxe.SwitchAxeDamageProperties.attackModes.map<OptionProps<string>>(
+    mode => ({ value: mode.name })
+  );
 
 export const spiritGaugeColorOptions: OptionProps<LongswordTypes.SpiritGaugeColors>[] =
   [
