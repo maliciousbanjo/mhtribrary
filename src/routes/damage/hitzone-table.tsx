@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 interface HitzoneTableProps {
   selectedMonsterName: MonsterTypes.MonsterName;
-  selectedMonsterHitzoneGroup: number;
+  selectedMonsterState: number;
 
   selectedHitzone: string;
   setSelectedHitzone: React.Dispatch<React.SetStateAction<string>>;
@@ -13,12 +13,12 @@ interface HitzoneTableProps {
 
 export function HitzoneTable({
   selectedMonsterName,
-  selectedMonsterHitzoneGroup,
+  selectedMonsterState,
   selectedHitzone,
   setSelectedHitzone
 }: HitzoneTableProps) {
   const monster = Monsters.getMonster(selectedMonsterName);
-  const hitzoneGroup = monster.monsterStates[selectedMonsterHitzoneGroup];
+  const hitzoneGroup = monster.monsterStates[selectedMonsterState];
 
   const handleRowClick = React.useCallback(
     (hitzoneName: string) => {

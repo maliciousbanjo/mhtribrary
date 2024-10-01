@@ -1,10 +1,26 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
-import './main.css';
+import './main.scss';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { DamagePage } from './routes/damage/damagePage.tsx';
+import { RootPage } from './routes/root/rootPage.tsx';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootPage />,
+    children: [
+      {
+        // path: 'damageBlade/',
+        path: '/',
+        element: <DamagePage />
+      }
+    ]
+  }
+]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>
 );

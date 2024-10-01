@@ -14,6 +14,7 @@ import {
   SwordAndShieldTypes,
   WeaponClass
 } from 'mh3-data/weapons';
+import { capitalize } from '../../../utils/format-utils';
 
 export const weaponClassOptions: OptionProps<WeaponClass>[] = [
   { value: WeaponClass.GREAT_SWORD },
@@ -184,11 +185,11 @@ export function getWeaponAttackOptions(weaponClass: WeaponClass) {
 export const swordAndShieldModeOptions =
   SwordAndShield.SwordAndShieldDamageProperties.attackModes.map<
     OptionProps<string>
-  >(mode => ({ value: mode.name }));
+  >(mode => ({ value: mode.name, label: capitalize(mode.name) }));
 
 export const switchAxeModeOptions =
   SwitchAxe.SwitchAxeDamageProperties.attackModes.map<OptionProps<string>>(
-    mode => ({ value: mode.name })
+    mode => ({ value: mode.name, label: capitalize(mode.name) })
   );
 
 export const spiritGaugeColorOptions: OptionProps<LongswordTypes.SpiritGaugeColors>[] =

@@ -1,6 +1,7 @@
-import { HTMLSelect, OptionProps } from '@blueprintjs/core';
+import { FormGroup, HTMLSelect, OptionProps } from '@blueprintjs/core';
 import { Monsters, MonsterTypes, Quests } from 'mh3-data';
 import React from 'react';
+import { HitzoneTable } from './hitzone-table';
 
 interface MonsterSelectorsProps {
   selectedMonsterName: MonsterTypes.MonsterName;
@@ -13,6 +14,9 @@ interface MonsterSelectorsProps {
 
   selectedQuestId: number;
   setSelectedQuestId: React.Dispatch<React.SetStateAction<number>>;
+
+  selectedHitzone: string;
+  setSelectedHitzone: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export function MonsterSelectors({
@@ -21,7 +25,9 @@ export function MonsterSelectors({
   selectedMonsterState,
   setSelectedMonsterState,
   selectedQuestId,
-  setSelectedQuestId
+  setSelectedQuestId,
+  selectedHitzone,
+  setSelectedHitzone
 }: MonsterSelectorsProps) {
   const allMonsters = React.useMemo(
     () => Monsters.SmallMonsterData.concat(Monsters.LargeMonsterData),
@@ -105,33 +111,47 @@ export function MonsterSelectors({
 
   return (
     <div className="monster">
-      <HTMLSelect
-        className="select select-monster"
-        options={monsterOptions}
-        value={selectedMonsterName}
-        onChange={onChangeMonsterName}
+      <h3>Monster</h3>
+      <div className="monster--selectors">
+        <FormGroup label="Monster">
+          <HTMLSelect
+            className="select select-monster"
+            options={monsterOptions}
+            value={selectedMonsterName}
+            onChange={onChangeMonsterName}
+          />
+        </FormGroup>
+
+        {/* Monster State (sometimes) */}
+        {monsterStates.length > 1 && (
+          <FormGroup label="State">
+            <HTMLSelect
+              className="select select-monster-state"
+              options={monsterStates}
+              value={selectedMonsterState}
+              onChange={onChangeMonsterState}
+            />
+          </FormGroup>
+        )}
+
+        {/* Quest */}
+        {questOptions.length !== 0 && (
+          <FormGroup label="Quest">
+            <HTMLSelect
+              className="select select-quest"
+              options={questOptions}
+              onChange={onChangeQuest}
+              disabled={questOptions.length < 2}
+            />
+          </FormGroup>
+        )}
+      </div>
+      <HitzoneTable
+        selectedMonsterName={selectedMonsterName}
+        selectedMonsterState={selectedMonsterState}
+        selectedHitzone={selectedHitzone}
+        setSelectedHitzone={setSelectedHitzone}
       />
-
-      {/* Monster State (sometimes) */}
-      {monsterStates.length > 1 && (
-        <HTMLSelect
-          className="select select-monster-state"
-          options={monsterStates}
-          value={selectedMonsterState}
-          onChange={onChangeMonsterState}
-        />
-      )}
-
-      {/* Quest */}
-      {questOptions.length !== 0 && (
-        <HTMLSelect
-          className="select select-quest"
-          options={questOptions}
-          onChange={onChangeQuest}
-          disabled={questOptions.length < 2}
-        />
-      )}
-
       {/* // TODO: Display read-only defense/stagger multipliers */}
     </div>
   );

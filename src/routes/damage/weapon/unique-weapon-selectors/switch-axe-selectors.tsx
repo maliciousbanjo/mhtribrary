@@ -10,7 +10,9 @@ export function SwitchAxeSelectors({
   return (
     <>
       <RadioGroup
+        label="Mode"
         className="switch-axe-mode"
+        inline
         options={switchAxeModeOptions}
         selectedValue={weaponMultipliers.switchAxeMode}
         onChange={event =>

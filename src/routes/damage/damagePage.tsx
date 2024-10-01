@@ -1,8 +1,7 @@
 import { Damage, DamageTypes, Weapons } from 'mh3-data';
 import React from 'react';
-import { UniqueWeaponSelectors, WeaponSelectors } from './weapon/';
+import { WeaponSelectors } from './weapon/';
 import { MonsterSelectors } from './monster-selectors';
-import { HitzoneTable } from './hitzone-table';
 import { MonsterTypes } from 'mh3-data/monsters';
 import '../../sass/damage-page.scss';
 import { BuffSelectors } from './buffs';
@@ -43,8 +42,8 @@ export function DamagePage() {
   const [selectedMonsterState, setSelectedMonsterState] =
     React.useState<number>(0);
 
-  /** -1 denotes no quest has been selected */
-  const [selectedQuestId, setSelectedQuestId] = React.useState<number>(-1);
+  /** 0 denotes no quest has been selected */
+  const [selectedQuestId, setSelectedQuestId] = React.useState<number>(0);
 
   // HITZONE STATE
   const [selectedHitzone, setSelectedHitzone] = React.useState<string>('');
@@ -131,6 +130,7 @@ export function DamagePage() {
 
       return (
         <div className="total-damage">
+          <h3>Results</h3>
           {hitJsx}
           Total Damage: {totalDamage}
         </div>
@@ -142,35 +142,30 @@ export function DamagePage() {
 
   return (
     <div className="damage">
-      <WeaponSelectors
-        selectedWeaponClass={selectedWeaponClass}
-        setSelectedWeaponClass={setSelectedWeaponClass}
-        selectedWeaponId={selectedWeaponId}
-        setSelectedWeaponId={setSelectedWeaponId}
-        selectedSharpness={selectedSharpness}
-        setSelectedSharpness={setSelectedSharpness}
-        selectedWeaponAttack={selectedWeaponAttack}
-        setSelectedWeaponAttack={setSelectedWeaponAttack}
-      />
-      <UniqueWeaponSelectors
-        selectedWeaponClass={selectedWeaponClass}
-        weaponMultipliers={weaponMultipliers}
-        setWeaponMultipliers={setWeaponMultipliers}
-      />
-      <MonsterSelectors
-        selectedMonsterName={selectedMonsterName}
-        setSelectedMonsterName={setSelectedMonsterName}
-        selectedMonsterState={selectedMonsterState}
-        setSelectedMonsterState={setSelectedMonsterState}
-        selectedQuestId={selectedQuestId}
-        setSelectedQuestId={setSelectedQuestId}
-      />
-      <HitzoneTable
-        selectedMonsterName={selectedMonsterName}
-        selectedMonsterHitzoneGroup={selectedMonsterState}
-        selectedHitzone={selectedHitzone}
-        setSelectedHitzone={setSelectedHitzone}
-      />
+      <div className="weapons-and-monsters">
+        <WeaponSelectors
+          selectedWeaponClass={selectedWeaponClass}
+          setSelectedWeaponClass={setSelectedWeaponClass}
+          selectedWeaponId={selectedWeaponId}
+          setSelectedWeaponId={setSelectedWeaponId}
+          selectedSharpness={selectedSharpness}
+          setSelectedSharpness={setSelectedSharpness}
+          selectedWeaponAttack={selectedWeaponAttack}
+          setSelectedWeaponAttack={setSelectedWeaponAttack}
+          weaponMultipliers={weaponMultipliers}
+          setWeaponMultipliers={setWeaponMultipliers}
+        />
+        <MonsterSelectors
+          selectedMonsterName={selectedMonsterName}
+          setSelectedMonsterName={setSelectedMonsterName}
+          selectedMonsterState={selectedMonsterState}
+          setSelectedMonsterState={setSelectedMonsterState}
+          selectedQuestId={selectedQuestId}
+          setSelectedQuestId={setSelectedQuestId}
+          selectedHitzone={selectedHitzone}
+          setSelectedHitzone={setSelectedHitzone}
+        />
+      </div>
       <BuffSelectors
         rawArgs={rawArgs}
         dispatchRawArgs={dispatchRawArgs}

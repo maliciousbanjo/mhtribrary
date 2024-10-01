@@ -1,7 +1,7 @@
-import { HTMLSelect, OptionProps } from '@blueprintjs/core';
+import { FormGroup, HTMLSelect, OptionProps } from '@blueprintjs/core';
 import React from 'react';
 import { WeaponClass, Sharpness } from 'mh3-data/weapons';
-import { Weapons } from 'mh3-data';
+import { DamageTypes, Weapons } from 'mh3-data';
 import {
   getWeaponAttackOptions,
   greatSwordOptions,
@@ -12,6 +12,8 @@ import {
   swordAndShieldOptions,
   weaponClassOptions
 } from './weapon-options';
+import { UniqueWeaponSelectors } from './unique-weapon-selectors';
+import { capitalize } from '../../../utils/format-utils';
 
 export interface WeaponSelectorsProps {
   selectedWeaponClass: WeaponClass;
@@ -25,6 +27,11 @@ export interface WeaponSelectorsProps {
 
   selectedWeaponAttack: string;
   setSelectedWeaponAttack: React.Dispatch<React.SetStateAction<string>>;
+
+  weaponMultipliers: DamageTypes.WeaponMultipliers;
+  setWeaponMultipliers: React.Dispatch<
+    React.SetStateAction<DamageTypes.WeaponMultipliers>
+  >;
 }
 
 export function WeaponSelectors({
@@ -35,7 +42,9 @@ export function WeaponSelectors({
   selectedSharpness,
   setSelectedSharpness,
   selectedWeaponAttack,
-  setSelectedWeaponAttack
+  setSelectedWeaponAttack,
+  weaponMultipliers,
+  setWeaponMultipliers
 }: WeaponSelectorsProps) {
   const weaponSelectOptions = React.useMemo<OptionProps<number>[]>(() => {
     switch (selectedWeaponClass) {
@@ -65,7 +74,9 @@ export function WeaponSelectors({
       (_sharpnessTicks, index) => {
         // If this index is not part of the base sharpness list then it must be an extra level
         const requiresSharpnessUp = weapon.sharpness[index] === undefined;
-        const label = Weapons.sharpnessAsString(index as Weapons.Sharpness);
+        const label = capitalize(
+          Weapons.sharpnessAsString(index as Weapons.Sharpness)
+        );
         return {
           value: index,
           label: requiresSharpnessUp ? `(${label})` : label
@@ -121,32 +132,55 @@ export function WeaponSelectors({
     [setSelectedWeaponAttack]
   );
 
+  const selectStyle: React.CSSProperties = { display: 'flex', gap: '1em' };
+
   return (
     <div className="weapon">
-      <HTMLSelect
-        className="select select-weapon-class"
-        options={weaponClassOptions}
-        value={selectedWeaponClass}
-        onChange={onChangeWeaponClass}
-      />
-      <HTMLSelect
-        className="select select-weapon"
-        options={weaponSelectOptions}
-        value={selectedWeaponId}
-        onChange={onChangeWeapon}
-      />
-      <HTMLSelect
-        className="select select-weapon-sharpness"
-        options={sharpnessOptions}
-        value={selectedSharpness}
-        onChange={onChangeSharpness}
-      />
-      <HTMLSelect
-        className="select select-weapon-attack"
-        options={getWeaponAttackOptions(selectedWeaponClass)}
-        value={selectedWeaponAttack}
-        onChange={onChangeWeaponAttack}
-      />
+      <h3>Weapon</h3>
+      <div className="weapon--selectors">
+        <div style={selectStyle}>
+          <FormGroup label="Class">
+            <HTMLSelect
+              className="select select-weapon-class"
+              options={weaponClassOptions}
+              value={selectedWeaponClass}
+              onChange={onChangeWeaponClass}
+            />
+          </FormGroup>
+          <FormGroup label="Weapon">
+            <HTMLSelect
+              className="select select-weapon"
+              options={weaponSelectOptions}
+              value={selectedWeaponId}
+              onChange={onChangeWeapon}
+            />
+          </FormGroup>
+        </div>
+
+        <div style={selectStyle}>
+          <FormGroup label="Sharpness">
+            <HTMLSelect
+              className="select select-weapon-sharpness"
+              options={sharpnessOptions}
+              value={selectedSharpness}
+              onChange={onChangeSharpness}
+            />
+          </FormGroup>
+          <FormGroup label="Attack">
+            <HTMLSelect
+              className="select select-weapon-attack"
+              options={getWeaponAttackOptions(selectedWeaponClass)}
+              value={selectedWeaponAttack}
+              onChange={onChangeWeaponAttack}
+            />
+          </FormGroup>
+        </div>
+        <UniqueWeaponSelectors
+          selectedWeaponClass={selectedWeaponClass}
+          weaponMultipliers={weaponMultipliers}
+          setWeaponMultipliers={setWeaponMultipliers}
+        />
+      </div>
     </div>
   );
 }

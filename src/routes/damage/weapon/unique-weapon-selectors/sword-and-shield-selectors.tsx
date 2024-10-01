@@ -10,7 +10,9 @@ export function SwordAndShieldSelectors({
   return (
     <>
       <RadioGroup
+        label="Mode"
         className="sword-and-shield-mode"
+        inline
         options={swordAndShieldModeOptions}
         selectedValue={weaponMultipliers.swordAndShieldMode}
         onChange={event =>

@@ -1,4 +1,4 @@
-import { Checkbox, RadioGroup } from '@blueprintjs/core';
+import { Checkbox, ControlGroup, RadioGroup } from '@blueprintjs/core';
 import {
   armorSkillOptions,
   elementAttackOptions,
@@ -43,146 +43,167 @@ export function BuffSelectors({
   weaponClassArgs,
   dispatchWeaponClassArgs
 }: BuffSelectorsProps) {
+  /**
+   * ARMOR | MIGHT | DEMONDRUG
+   */
   return (
-    <div className="attack-buffs">
-      <div>
-        <Checkbox
-          className="powercharm"
-          label="Powercharm"
-          checked={weaponClassArgs.powercharm}
-          onChange={event => {
-            dispatchWeaponClassArgs({
-              type: 'POWERCHARM',
-              payload: {
-                powercharm: event.target.checked
-              }
-            });
-          }}
-        />
-        <Checkbox
-          className="powertalon"
-          label="Powertalon"
-          checked={weaponClassArgs.powertalon}
-          onChange={event => {
-            dispatchWeaponClassArgs({
-              type: 'POWERTALON',
-              payload: {
-                powertalon: event.target.checked
-              }
-            });
-          }}
-        />
+    <div className="attack-buffs-container">
+      <h3>Buffs</h3>
+      <div className="attack-buffs">
+        <ControlGroup vertical>
+          <RadioGroup
+            label="Attack (Armor skill)"
+            className="attack-buffs--armor-skill"
+            options={armorSkillOptions}
+            selectedValue={weaponClassArgs.armor}
+            onChange={event => {
+              dispatchWeaponClassArgs({
+                type: 'ARMOR',
+                payload: {
+                  armor: event.currentTarget.value as WeaponClassArgs['armor']
+                }
+              });
+            }}
+          />
+          <span>
+            <Checkbox
+              className="attack-buffs--powercharm"
+              label="Powercharm"
+              checked={weaponClassArgs.powercharm}
+              onChange={event => {
+                dispatchWeaponClassArgs({
+                  type: 'POWERCHARM',
+                  payload: {
+                    powercharm: event.target.checked
+                  }
+                });
+              }}
+            />
+            <Checkbox
+              className="attack-buffs--powertalon"
+              label="Powertalon"
+              checked={weaponClassArgs.powertalon}
+              onChange={event => {
+                dispatchWeaponClassArgs({
+                  type: 'POWERTALON',
+                  payload: {
+                    powertalon: event.target.checked
+                  }
+                });
+              }}
+            />
+          </span>
+        </ControlGroup>
+        <ControlGroup vertical>
+          <RadioGroup
+            label="Demondrug"
+            className="attack-buffs--demondrug"
+            options={demondrugOptions}
+            selectedValue={weaponClassArgs.demondrug}
+            onChange={event => {
+              dispatchWeaponClassArgs({
+                type: 'DEMONDRUG',
+                payload: {
+                  demondrug: event.currentTarget
+                    .value as WeaponClassArgs['demondrug']
+                }
+              });
+            }}
+          />
+          <RadioGroup
+            label="Might"
+            className="attack-buffs--might"
+            options={mightOptions}
+            selectedValue={weaponClassArgs.might}
+            onChange={event => {
+              dispatchWeaponClassArgs({
+                type: 'MIGHT',
+                payload: {
+                  might: event.currentTarget.value as WeaponClassArgs['might']
+                }
+              });
+            }}
+          />
+        </ControlGroup>
+        <ControlGroup vertical>
+          <RadioGroup
+            label="Critical Hit"
+            className="attack-buffs--critical-hit"
+            options={criticalHitOptions}
+            selectedValue={rawArgs.criticalHit}
+            onChange={event => {
+              dispatchRawArgs({
+                type: 'CRITICAL',
+                payload: {
+                  criticalHit: event.currentTarget
+                    .value as RawArgs['criticalHit']
+                }
+              });
+            }}
+          />
+          <RadioGroup
+            label="Low HP"
+            className="attack-buffs--low-health"
+            options={lowHealthSkillOptions}
+            selectedValue={rawArgs.lowHealthSkill}
+            onChange={event => {
+              dispatchRawArgs({
+                type: 'LOW_HEALTH_SKILL',
+                payload: {
+                  lowHealthSkill: event.currentTarget
+                    .value as RawArgs['lowHealthSkill']
+                }
+              });
+            }}
+          />
+        </ControlGroup>
+        <ControlGroup vertical>
+          <span>
+            <RadioGroup
+              label="Element Attack"
+              className="attack-buffs--element-attack"
+              options={elementAttackOptions}
+              selectedValue={elementArgs.elementAttack}
+              onChange={event => {
+                dispatchElementArgs({
+                  type: 'ELEMENT_ATTACK',
+                  payload: {
+                    elementAttack: event.currentTarget
+                      .value as ElementArgs['elementAttack']
+                  }
+                });
+              }}
+            />
+            <Checkbox
+              className="attack-buffs--awaken"
+              label="Awaken"
+              checked={elementArgs.awaken}
+              onChange={event => {
+                dispatchElementArgs({
+                  type: 'AWAKEN',
+                  payload: {
+                    awaken: event.target.checked
+                  }
+                });
+              }}
+            />
+          </span>
+          <RadioGroup
+            label="Fortify"
+            className="attack-buffs--fortify"
+            options={fortifyOptions}
+            selectedValue={rawArgs.fortify}
+            onChange={event => {
+              dispatchRawArgs({
+                type: 'FORTIFY',
+                payload: {
+                  fortify: event.currentTarget.value as RawArgs['fortify']
+                }
+              });
+            }}
+          />
+        </ControlGroup>
       </div>
-      <RadioGroup
-        className="armor-skill-radios"
-        options={armorSkillOptions}
-        selectedValue={weaponClassArgs.armor}
-        onChange={event => {
-          dispatchWeaponClassArgs({
-            type: 'ARMOR',
-            payload: {
-              armor: event.currentTarget.value as WeaponClassArgs['armor']
-            }
-          });
-        }}
-      />
-      <div>
-        <RadioGroup
-          className="element-attack-radios"
-          options={elementAttackOptions}
-          selectedValue={elementArgs.elementAttack}
-          onChange={event => {
-            dispatchElementArgs({
-              type: 'ELEMENT_ATTACK',
-              payload: {
-                elementAttack: event.currentTarget
-                  .value as ElementArgs['elementAttack']
-              }
-            });
-          }}
-        />
-        <Checkbox
-          className="awaken"
-          label="Awaken"
-          checked={elementArgs.awaken}
-          onChange={event => {
-            dispatchElementArgs({
-              type: 'AWAKEN',
-              payload: {
-                awaken: event.target.checked
-              }
-            });
-          }}
-        />
-      </div>
-      <RadioGroup
-        className="critical-hit-radios"
-        options={criticalHitOptions}
-        selectedValue={rawArgs.criticalHit}
-        onChange={event => {
-          dispatchRawArgs({
-            type: 'CRITICAL',
-            payload: {
-              criticalHit: event.currentTarget.value as RawArgs['criticalHit']
-            }
-          });
-        }}
-      />
-      <RadioGroup
-        className="low-health-radios"
-        options={lowHealthSkillOptions}
-        selectedValue={rawArgs.lowHealthSkill}
-        onChange={event => {
-          dispatchRawArgs({
-            type: 'LOW_HEALTH_SKILL',
-            payload: {
-              lowHealthSkill: event.currentTarget
-                .value as RawArgs['lowHealthSkill']
-            }
-          });
-        }}
-      />
-      <RadioGroup
-        className="fortify-radios"
-        options={fortifyOptions}
-        selectedValue={rawArgs.fortify}
-        onChange={event => {
-          dispatchRawArgs({
-            type: 'FORTIFY',
-            payload: {
-              fortify: event.currentTarget.value as RawArgs['fortify']
-            }
-          });
-        }}
-      />
-
-      <RadioGroup
-        className="demondrug-radios"
-        options={demondrugOptions}
-        selectedValue={weaponClassArgs.demondrug}
-        onChange={event => {
-          dispatchWeaponClassArgs({
-            type: 'DEMONDRUG',
-            payload: {
-              demondrug: event.currentTarget
-                .value as WeaponClassArgs['demondrug']
-            }
-          });
-        }}
-      />
-      <RadioGroup
-        className="might-radios"
-        options={mightOptions}
-        selectedValue={weaponClassArgs.might}
-        onChange={event => {
-          dispatchWeaponClassArgs({
-            type: 'MIGHT',
-            payload: {
-              might: event.currentTarget.value as WeaponClassArgs['might']
-            }
-          });
-        }}
-      />
     </div>
   );
 }

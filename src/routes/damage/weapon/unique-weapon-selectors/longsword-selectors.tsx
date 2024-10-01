@@ -37,7 +37,9 @@ export function LongswordSelectors({
         />
       </div>
       <RadioGroup
+        label="Spirit gauge color"
         className="spirit-color"
+        inline
         options={spiritGaugeColorOptions}
         selectedValue={weaponMultipliers.longsword.spiritGaugeColor}
         onChange={event =>

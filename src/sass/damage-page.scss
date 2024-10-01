@@ -1,21 +1,56 @@
-.table-row {
-    &--selected {
-        background-color: powderblue;
-    }
+.damage {
+  min-width: 1000px;
 }
 
-.attack-buffs {
+.weapons-and-monsters {
+  display: flex;
+  //   gap: 10em;
+}
+
+// Weapons
+.weapon {
+  min-width: 50%;
+  &--selectors {
     display: flex;
-    flex-direction: row;
-    gap: 1.5em
+    flex-direction: column;
+    gap: 1em;
+    min-height: 350px;
+  }
 }
-
 .unique-weapon-selectors {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5em;
+}
+
+// Monsters
+.monster {
+  min-width: 50%;
+  &--selectors {
     display: flex;
-    flex-direction: row;
-    gap: 1.5em;
+    gap: 1em;
+  }
+}
+
+// Hitzones
+.table-row {
+  &--selected {
+    background-color: powderblue;
+  }
+}
+
+// Buffs
+.attack-buffs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1.5em;
+
+  .bp5-control-group.bp5-vertical {
+    justify-content: space-between;
+  }
 }
 
 .negative-skill {
-    color: red;
+  color: red;
 }
