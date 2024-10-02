@@ -1,19 +1,18 @@
 .damage {
   min-width: 1080px;
-}
-
-.weapons-and-monsters {
-  display: flex;
-  //   gap: 10em;
-}
-
-.buffs-and-results {
-  display: flex;
+  display: grid;
+  grid-template-columns: 50%;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'weapon damage'
+    'weapon buff'
+    'monster buff'
+    'monster .';
 }
 
 // Weapons
 .weapon {
-  min-width: 50%;
+  grid-area: weapon;
   &--selectors {
     display: flex;
     flex-direction: column;
@@ -27,9 +26,14 @@
   gap: 1.5em;
 }
 
+// Damage Results
+.damage-results {
+  grid-area: damage;
+}
+
 // Monsters
 .monster {
-  min-width: 50%;
+  grid-area: monster;
   &--selectors {
     display: flex;
     gap: 1em;
@@ -43,15 +47,11 @@
   }
 }
 
-// .attack-buffs-container {
-//   min-width: 50%;
-// }
-
-// .damage-container {
-//   min-width: 50%;
-// }
-
 // Buffs
+.attack-buffs-container {
+  grid-area: buff;
+  align-self: end;
+}
 .attack-buffs {
   display: flex;
   flex-direction: row;

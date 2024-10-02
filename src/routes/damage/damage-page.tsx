@@ -142,41 +142,37 @@ export function DamagePage() {
 
   return (
     <div className="damage">
-      <div className="weapons-and-monsters">
-        <WeaponSelectors
-          selectedWeaponClass={selectedWeaponClass}
-          setSelectedWeaponClass={setSelectedWeaponClass}
-          selectedWeaponId={selectedWeaponId}
-          setSelectedWeaponId={setSelectedWeaponId}
-          selectedSharpness={selectedSharpness}
-          setSelectedSharpness={setSelectedSharpness}
-          selectedWeaponAttack={selectedWeaponAttack}
-          setSelectedWeaponAttack={setSelectedWeaponAttack}
-          weaponMultipliers={weaponMultipliers}
-          setWeaponMultipliers={setWeaponMultipliers}
-        />
-        <MonsterSelectors
-          selectedMonsterName={selectedMonsterName}
-          setSelectedMonsterName={setSelectedMonsterName}
-          selectedMonsterState={selectedMonsterState}
-          setSelectedMonsterState={setSelectedMonsterState}
-          selectedQuestId={selectedQuestId}
-          setSelectedQuestId={setSelectedQuestId}
-          selectedHitzone={selectedHitzone}
-          setSelectedHitzone={setSelectedHitzone}
-        />
-      </div>
-      <div className="buffs-and-results">
-        <BuffSelectors
-          rawArgs={rawArgs}
-          dispatchRawArgs={dispatchRawArgs}
-          elementArgs={elementArgs}
-          dispatchElementArgs={dispatchElementArgs}
-          weaponClassArgs={weaponClassArgs}
-          dispatchWeaponClassArgs={dispatchWeaponClassArgs}
-        />
-        <div className="damage-container">{renderDamage()}</div>
-      </div>
+      <WeaponSelectors
+        selectedWeaponClass={selectedWeaponClass}
+        setSelectedWeaponClass={setSelectedWeaponClass}
+        selectedWeaponId={selectedWeaponId}
+        setSelectedWeaponId={setSelectedWeaponId}
+        selectedSharpness={selectedSharpness}
+        setSelectedSharpness={setSelectedSharpness}
+        selectedWeaponAttack={selectedWeaponAttack}
+        setSelectedWeaponAttack={setSelectedWeaponAttack}
+        weaponMultipliers={weaponMultipliers}
+        setWeaponMultipliers={setWeaponMultipliers}
+      />
+      <div className="damage-results">{renderDamage()}</div>
+      <MonsterSelectors
+        selectedMonsterName={selectedMonsterName}
+        setSelectedMonsterName={setSelectedMonsterName}
+        selectedMonsterState={selectedMonsterState}
+        setSelectedMonsterState={setSelectedMonsterState}
+        selectedQuestId={selectedQuestId}
+        setSelectedQuestId={setSelectedQuestId}
+        selectedHitzone={selectedHitzone}
+        setSelectedHitzone={setSelectedHitzone}
+      />
+      <BuffSelectors
+        rawArgs={rawArgs}
+        dispatchRawArgs={dispatchRawArgs}
+        elementArgs={elementArgs}
+        dispatchElementArgs={dispatchElementArgs}
+        weaponClassArgs={weaponClassArgs}
+        dispatchWeaponClassArgs={dispatchWeaponClassArgs}
+      />
     </div>
   );
 }

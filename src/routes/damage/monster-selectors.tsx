@@ -51,7 +51,7 @@ export function MonsterSelectors({
       const { target } = event;
       setSelectedMonsterName(target.value as MonsterTypes.MonsterName);
       setSelectedMonsterState(0);
-      setSelectedQuestId(-1);
+      setSelectedQuestId(0);
     },
     [setSelectedMonsterState, setSelectedMonsterName, setSelectedQuestId]
   );
@@ -104,7 +104,7 @@ export function MonsterSelectors({
    * Set the initial/default quest ID when the selected monster has changed
    */
   React.useEffect(() => {
-    if (selectedQuestId === -1 && questOptions.length > 0) {
+    if (selectedQuestId === 0 && questOptions.length > 0) {
       setSelectedQuestId(questOptions[0].value);
     }
   }, [questOptions, selectedQuestId, setSelectedQuestId]);
