@@ -2,17 +2,20 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './main.scss';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { DamagePage } from './routes/damage/damagePage.tsx';
-import { RootPage } from './routes/root/rootPage.tsx';
+import { DamagePage } from './routes/damage/damage-page.tsx';
+import { NavigationBar } from './routes/navigation/navigation-bar.tsx';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <RootPage />,
+    element: <NavigationBar />,
     children: [
       {
-        // path: 'damageBlade/',
+        // TODO: Create a home page?
         path: '/',
+        element: <DamagePage />
+      },
+      {
+        path: 'blade-damage',
         element: <DamagePage />
       }
     ]

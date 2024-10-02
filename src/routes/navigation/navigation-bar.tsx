@@ -1,15 +1,17 @@
-import { Outlet } from 'react-router-dom';
-import '../../sass/root-page.scss';
+import { Link, Outlet } from 'react-router-dom';
+import '../../sass/navigation-bar.scss';
 import { Button, Navbar } from '@blueprintjs/core';
 
-export function RootPage() {
+export function NavigationBar() {
   return (
     <>
       <Navbar>
         <Navbar.Group>
           <Navbar.Heading>MH Tribrary</Navbar.Heading>
           <Navbar.Divider />
-          <Button minimal icon="calculator" text="Damage (not working)" />
+          <Link to="/blade-damage">
+            <Button minimal icon="calculator" text="Damage" />
+          </Link>
         </Navbar.Group>
       </Navbar>
       <div className="wrapper">

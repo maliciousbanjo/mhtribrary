@@ -1,10 +1,14 @@
 .damage {
-  min-width: 1000px;
+  min-width: 1080px;
 }
 
 .weapons-and-monsters {
   display: flex;
   //   gap: 10em;
+}
+
+.buffs-and-results {
+  display: flex;
 }
 
 // Weapons
@@ -39,11 +43,19 @@
   }
 }
 
+// .attack-buffs-container {
+//   min-width: 50%;
+// }
+
+// .damage-container {
+//   min-width: 50%;
+// }
+
 // Buffs
 .attack-buffs {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 1.5em;
 
   .bp5-control-group.bp5-vertical {

@@ -1,1 +1,1 @@
-export { DamagePage } from './damagePage';
+export { DamagePage } from './damage-page';

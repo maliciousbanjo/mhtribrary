@@ -1,6 +1,6 @@
 import { Damage, DamageTypes, Weapons } from 'mh3-data';
 import React from 'react';
-import { WeaponSelectors } from './weapon/';
+import { WeaponSelectors } from './weapon';
 import { MonsterSelectors } from './monster-selectors';
 import { MonsterTypes } from 'mh3-data/monsters';
 import '../../sass/damage-page.scss';
@@ -129,11 +129,11 @@ export function DamagePage() {
       );
 
       return (
-        <div className="total-damage">
+        <>
           <h3>Results</h3>
           {hitJsx}
           Total Damage: {totalDamage}
-        </div>
+        </>
       );
     } catch (error) {
       console.error(error);
@@ -166,15 +166,17 @@ export function DamagePage() {
           setSelectedHitzone={setSelectedHitzone}
         />
       </div>
-      <BuffSelectors
-        rawArgs={rawArgs}
-        dispatchRawArgs={dispatchRawArgs}
-        elementArgs={elementArgs}
-        dispatchElementArgs={dispatchElementArgs}
-        weaponClassArgs={weaponClassArgs}
-        dispatchWeaponClassArgs={dispatchWeaponClassArgs}
-      />
-      <div className="damage-container">{renderDamage()}</div>
+      <div className="buffs-and-results">
+        <BuffSelectors
+          rawArgs={rawArgs}
+          dispatchRawArgs={dispatchRawArgs}
+          elementArgs={elementArgs}
+          dispatchElementArgs={dispatchElementArgs}
+          weaponClassArgs={weaponClassArgs}
+          dispatchWeaponClassArgs={dispatchWeaponClassArgs}
+        />
+        <div className="damage-container">{renderDamage()}</div>
+      </div>
     </div>
   );
 }
