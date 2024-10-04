@@ -1,20 +1,21 @@
 import { Damage, DamageTypes, Weapons } from 'mh3-data';
-import React from 'react';
-import { WeaponSelectors } from './weapon';
-import { MonsterSelectors } from './monster-selectors';
 import { MonsterTypes } from 'mh3-data/monsters';
+import React from 'react';
+import { v3 as uuidv3 } from 'uuid';
 import '../../sass/damage-page.scss';
-import { BuffSelectors } from './buffs';
 import {
+  BuffSelectors,
   elementArgsReducer,
   rawArgsReducer,
   weaponClassArgsReducer
 } from './buffs';
 import {
-  WEAPON_INITIAL_STATE,
+  DEFAULT_WEAPON_MULTIPLIERS,
   WEAPON_ATTACK_INITIAL_STATE,
-  DEFAULT_WEAPON_MULTIPLIERS
+  WEAPON_INITIAL_STATE
 } from './damage-util';
+import { MonsterSelectors } from './monster-selectors';
+import { WeaponSelectors } from './weapon';
 
 /**
  * Top-level page for damage calculations
@@ -99,6 +100,7 @@ export function DamagePage() {
         weaponClassArgs
       }
     );
+
     return totalDamage;
   }, [
     elementArgs,
@@ -119,7 +121,7 @@ export function DamagePage() {
     try {
       const damage = calculate();
       const hitJsx = damage.map((damageResult, index) => (
-        <p>
+        <p key={uuidv3(JSON.stringify(damageResult), uuidv3.URL)}>
           Hit {index + 1}: {damageResult.totalDamage}
         </p>
       ));
