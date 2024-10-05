@@ -53,14 +53,14 @@ export function HitzoneTable({
       <thead>
         <tr>
           <th>Hitzone</th>
-          <th>cut</th>
-          <th>impact</th>
-          <th>fire</th>
-          <th>water</th>
-          <th>thunder</th>
-          <th>ice</th>
-          <th>dragon</th>
-          <th>stagger</th>
+          <th>Cut</th>
+          <th>Impact</th>
+          <th>Fire</th>
+          <th>Water</th>
+          <th>Thunder</th>
+          <th>Ice</th>
+          <th>Dragon</th>
+          <th>Stagger</th>
         </tr>
       </thead>
       <tbody>{buildHitzoneRow()}</tbody>
