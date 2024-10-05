@@ -1,33 +1,17 @@
 import { FormGroup, HTMLSelect, OptionProps } from '@blueprintjs/core';
-import { Monsters, MonsterTypes, Quests } from 'mh3-data';
+import { DamageTypes, Monsters, MonsterTypes, Quests } from 'mh3-data';
 import React from 'react';
-import { HitzoneTable } from './hitzone-table';
+import { HitzoneTable } from '../hitzone-table';
+import { MonsterArgAction } from './monster-utils';
 
 interface MonsterSelectorsProps {
-  selectedMonsterName: MonsterTypes.MonsterName;
-  setSelectedMonsterName: React.Dispatch<
-    React.SetStateAction<MonsterTypes.MonsterName>
-  >;
-
-  selectedMonsterState: number;
-  setSelectedMonsterState: React.Dispatch<React.SetStateAction<number>>;
-
-  selectedQuestId: number;
-  setSelectedQuestId: React.Dispatch<React.SetStateAction<number>>;
-
-  selectedHitzone: string;
-  setSelectedHitzone: React.Dispatch<React.SetStateAction<string>>;
+  monsterArgs: DamageTypes.MonsterArgs;
+  dispatchMonsterArgs: React.Dispatch<MonsterArgAction>;
 }
 
 export function MonsterSelectors({
-  selectedMonsterName,
-  setSelectedMonsterName,
-  selectedMonsterState,
-  setSelectedMonsterState,
-  selectedQuestId,
-  setSelectedQuestId,
-  selectedHitzone,
-  setSelectedHitzone
+  monsterArgs,
+  dispatchMonsterArgs
 }: MonsterSelectorsProps) {
   const allMonsters = React.useMemo(
     () => Monsters.SmallMonsterData.concat(Monsters.LargeMonsterData),
@@ -49,18 +33,19 @@ export function MonsterSelectors({
   const onChangeMonsterName = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
-      setSelectedMonsterName(target.value as MonsterTypes.MonsterName);
-      setSelectedMonsterState(0);
-      setSelectedQuestId(0);
+      dispatchMonsterArgs({
+        type: 'MONSTER_NAME',
+        payload: target.value as MonsterTypes.MonsterName
+      });
     },
-    [setSelectedMonsterState, setSelectedMonsterName, setSelectedQuestId]
+    [dispatchMonsterArgs]
   );
 
   /**
    * Different hitzoneGroups based on monster state (flying, muddy, enraged, etc)
    */
   const monsterStates = React.useMemo(() => {
-    const selectedMonster = Monsters.getMonster(selectedMonsterName);
+    const selectedMonster = Monsters.getMonster(monsterArgs.monsterName);
 
     return (
       selectedMonster?.monsterStates.map<OptionProps<number>>(
@@ -70,18 +55,21 @@ export function MonsterSelectors({
         })
       ) ?? []
     );
-  }, [selectedMonsterName]);
+  }, [monsterArgs.monsterName]);
 
   const onChangeMonsterState = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
-      setSelectedMonsterState(parseInt(target.value));
+      dispatchMonsterArgs({
+        type: 'MONSTER_STATE_INDEX',
+        payload: parseInt(target.value)
+      });
     },
-    [setSelectedMonsterState]
+    [dispatchMonsterArgs]
   );
 
   const questOptions = React.useMemo(() => {
-    const selectedMonster = Monsters.getMonster(selectedMonsterName);
+    const selectedMonster = Monsters.getMonster(monsterArgs.monsterName);
     return Quests.getQuestsWithLargeMonster(selectedMonster.id, 'Both').map<
       OptionProps<number>
     >(quest => {
@@ -90,24 +78,18 @@ export function MonsterSelectors({
         value: quest.id
       };
     });
-  }, [selectedMonsterName]);
+  }, [monsterArgs.monsterName]);
 
   const onChangeQuest = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
-      setSelectedQuestId(parseInt(target.value));
+      dispatchMonsterArgs({
+        type: 'QUEST_ID',
+        payload: parseInt(target.value)
+      });
     },
-    [setSelectedQuestId]
+    [dispatchMonsterArgs]
   );
-
-  /**
-   * Set the initial/default quest ID when the selected monster has changed
-   */
-  React.useEffect(() => {
-    if (selectedQuestId === 0 && questOptions.length > 0) {
-      setSelectedQuestId(questOptions[0].value);
-    }
-  }, [questOptions, selectedQuestId, setSelectedQuestId]);
 
   return (
     <div className="monster">
@@ -117,7 +99,7 @@ export function MonsterSelectors({
           <HTMLSelect
             className="select select-monster"
             options={monsterOptions}
-            value={selectedMonsterName}
+            value={monsterArgs.monsterName}
             onChange={onChangeMonsterName}
           />
         </FormGroup>
@@ -128,7 +110,7 @@ export function MonsterSelectors({
             <HTMLSelect
               className="select select-monster-state"
               options={monsterStates}
-              value={selectedMonsterState}
+              value={monsterArgs.monsterStateIndex}
               onChange={onChangeMonsterState}
             />
           </FormGroup>
@@ -147,10 +129,8 @@ export function MonsterSelectors({
         )}
       </div>
       <HitzoneTable
-        selectedMonsterName={selectedMonsterName}
-        selectedMonsterState={selectedMonsterState}
-        selectedHitzone={selectedHitzone}
-        setSelectedHitzone={setSelectedHitzone}
+        monsterArgs={monsterArgs}
+        dispatchMonsterArgs={dispatchMonsterArgs}
       />
       {/* // TODO: Display read-only defense/stagger multipliers */}
     </div>

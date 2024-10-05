@@ -1,5 +1,4 @@
 import { Damage, DamageTypes, Weapons } from 'mh3-data';
-import { MonsterTypes } from 'mh3-data/monsters';
 import React from 'react';
 import { v3 as uuidv3 } from 'uuid';
 import '../../sass/damage-page.scss';
@@ -14,7 +13,11 @@ import {
   WEAPON_ATTACK_INITIAL_STATE,
   WEAPON_INITIAL_STATE
 } from './damage-util';
-import { MonsterSelectors } from './monster-selectors';
+import {
+  MONSTER_ARGS_INITIAL_STATE,
+  monsterArgsReducer,
+  MonsterSelectors
+} from './monster';
 import { WeaponSelectors } from './weapon';
 
 /**
@@ -38,16 +41,10 @@ export function DamagePage() {
     React.useState<string>(WEAPON_ATTACK_INITIAL_STATE);
 
   // MONSTER STATE
-  const [selectedMonsterName, setSelectedMonsterName] =
-    React.useState<MonsterTypes.MonsterName>('Aptonoth');
-  const [selectedMonsterState, setSelectedMonsterState] =
-    React.useState<number>(0);
-
-  /** 0 denotes no quest has been selected */
-  const [selectedQuestId, setSelectedQuestId] = React.useState<number>(0);
-
-  // HITZONE STATE
-  const [selectedHitzone, setSelectedHitzone] = React.useState<string>('');
+  const [monsterArgs, dispatchMonsterArgs] = React.useReducer(
+    monsterArgsReducer,
+    MONSTER_ARGS_INITIAL_STATE
+  );
 
   // BUFF STATE
   /** Custom reducer for Raw Args */
@@ -79,7 +76,6 @@ export function DamagePage() {
     React.useState<DamageTypes.WeaponMultipliers>(DEFAULT_WEAPON_MULTIPLIERS);
 
   const calculate = React.useCallback(() => {
-    // TODO: Validate args
     const totalDamage = Damage.calculateDamage(
       {
         weaponClass: selectedWeaponClass,
@@ -88,12 +84,7 @@ export function DamagePage() {
         attackName: selectedWeaponAttack,
         weaponMultipliers
       },
-      {
-        monsterName: selectedMonsterName,
-        questId: selectedQuestId,
-        monsterStateIndex: selectedMonsterState,
-        hitzoneName: selectedHitzone
-      },
+      monsterArgs,
       {
         rawArgs,
         elementArgs,
@@ -104,11 +95,8 @@ export function DamagePage() {
     return totalDamage;
   }, [
     elementArgs,
+    monsterArgs,
     rawArgs,
-    selectedHitzone,
-    selectedMonsterName,
-    selectedMonsterState,
-    selectedQuestId,
     selectedSharpness,
     selectedWeaponAttack,
     selectedWeaponClass,
@@ -158,14 +146,8 @@ export function DamagePage() {
       />
       <div className="damage-results">{renderDamage()}</div>
       <MonsterSelectors
-        selectedMonsterName={selectedMonsterName}
-        setSelectedMonsterName={setSelectedMonsterName}
-        selectedMonsterState={selectedMonsterState}
-        setSelectedMonsterState={setSelectedMonsterState}
-        selectedQuestId={selectedQuestId}
-        setSelectedQuestId={setSelectedQuestId}
-        selectedHitzone={selectedHitzone}
-        setSelectedHitzone={setSelectedHitzone}
+        monsterArgs={monsterArgs}
+        dispatchMonsterArgs={dispatchMonsterArgs}
       />
       <BuffSelectors
         rawArgs={rawArgs}
