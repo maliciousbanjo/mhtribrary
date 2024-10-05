@@ -11,3 +11,21 @@
 .page {
   min-width: 1080px;
 }
+
+.warning-banner {
+  color: red;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .footer {
+    font-size: small;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+  }
+}
