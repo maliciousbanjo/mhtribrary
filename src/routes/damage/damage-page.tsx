@@ -70,21 +70,40 @@ export function DamagePage() {
   const renderDamage = () => {
     try {
       const damage = calculate();
-      const hitJsx = damage.map((damageResult, index) => (
-        <p key={uuidv3(JSON.stringify(damageResult) + index, uuidv3.URL)}>
-          Hit {index + 1}: {damageResult.totalDamage}
-        </p>
-      ));
+      const hitJsx = damage.map((damageResult, index) => {
+        const key = uuidv3(JSON.stringify(damageResult) + index, uuidv3.URL);
+        return (
+          <p key={key}>
+            Hit {index + 1}: <b>{damageResult.totalDamage} </b>
+            {damageResult.koDamage !== 0 && (
+              <>
+                and <b>{damageResult.koDamage}</b> KO
+              </>
+            )}
+          </p>
+        );
+      });
+
       const totalDamage = damage.reduce(
-        (result, nextHit) => result + nextHit.totalDamage,
-        0
+        (result, nextHit) => {
+          return {
+            dmg: result.dmg + nextHit.totalDamage,
+            ko: nextHit.koDamage ? nextHit.koDamage + result.ko : result.ko
+          };
+        },
+        { dmg: 0, ko: 0 }
       );
 
       return (
         <>
           <h3>Results</h3>
           {hitJsx}
-          Total Damage: {totalDamage}
+          Total Damage: <b>{totalDamage.dmg} </b>
+          {totalDamage.ko !== 0 && (
+            <>
+              and <b>{totalDamage.ko}</b> KO
+            </>
+          )}
         </>
       );
     } catch (error) {
