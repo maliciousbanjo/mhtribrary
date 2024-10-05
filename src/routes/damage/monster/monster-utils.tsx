@@ -1,11 +1,5 @@
 import { DamageTypes } from 'mh3-data';
 
-export type MonsterArgReducerActions =
-  | 'MONSTER_NAME'
-  | 'QUEST_ID'
-  | 'MONSTER_STATE_INDEX'
-  | 'HITZONE_INDEX';
-
 interface MonsterNameAction {
   type: 'MONSTER_NAME';
   payload: DamageTypes.MonsterArgs['monsterName'];
@@ -26,7 +20,7 @@ interface HitzoneIndexAction {
   payload: DamageTypes.MonsterArgs['monsterStateIndex'];
 }
 
-export type MonsterArgAction =
+export type MonsterArgReducerAction =
   | MonsterNameAction
   | QuestIdAction
   | MonsterStateIndexAction
@@ -45,7 +39,7 @@ export const MONSTER_ARGS_INITIAL_STATE: DamageTypes.MonsterArgs = {
  */
 export function monsterArgsReducer(
   state: DamageTypes.MonsterArgs,
-  action: MonsterArgAction
+  action: MonsterArgReducerAction
 ): DamageTypes.MonsterArgs {
   switch (action.type) {
     // Changing the monster needs to reset all other fields

@@ -2,11 +2,11 @@ import { FormGroup, HTMLSelect, OptionProps } from '@blueprintjs/core';
 import { DamageTypes, Monsters, MonsterTypes, Quests } from 'mh3-data';
 import React from 'react';
 import { HitzoneTable } from '../hitzone-table';
-import { MonsterArgAction } from './monster-utils';
+import { MonsterArgReducerAction } from './monster-utils';
 
 interface MonsterSelectorsProps {
   monsterArgs: DamageTypes.MonsterArgs;
-  dispatchMonsterArgs: React.Dispatch<MonsterArgAction>;
+  dispatchMonsterArgs: React.Dispatch<MonsterArgReducerAction>;
 }
 
 export function MonsterSelectors({

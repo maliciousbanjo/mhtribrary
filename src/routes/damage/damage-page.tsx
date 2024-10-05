@@ -4,8 +4,11 @@ import { v3 as uuidv3 } from 'uuid';
 import '../../sass/damage-page.scss';
 import {
   BuffSelectors,
+  ELEMENTAL_ARGS_INITIAL_STATE,
   elementArgsReducer,
+  RAW_ARGS_INITIAL_STATE,
   rawArgsReducer,
+  WEAPON_CLASS_ARGS_INITIAL_STATE,
   weaponClassArgsReducer
 } from './buffs';
 import {
@@ -48,28 +51,21 @@ export function DamagePage() {
 
   // BUFF STATE
   /** Custom reducer for Raw Args */
-  const [rawArgs, dispatchRawArgs] = React.useReducer(rawArgsReducer, {
-    criticalHit: 'none',
-    lowHealthSkill: 'none',
-    fortify: 'none'
-  });
+  const [rawArgs, dispatchRawArgs] = React.useReducer(
+    rawArgsReducer,
+    RAW_ARGS_INITIAL_STATE
+  );
 
   /** Custom reducer for Element Args */
   const [elementArgs, dispatchElementArgs] = React.useReducer(
     elementArgsReducer,
-    { awaken: false, elementAttack: 'none' }
+    ELEMENTAL_ARGS_INITIAL_STATE
   );
 
   /** Custom reducer for Weapon Class Args */
   const [weaponClassArgs, dispatchWeaponClassArgs] = React.useReducer(
     weaponClassArgsReducer,
-    {
-      powercharm: false,
-      powertalon: false,
-      armor: 'none',
-      demondrug: 'none',
-      might: 'none'
-    }
+    WEAPON_CLASS_ARGS_INITIAL_STATE
   );
 
   const [weaponMultipliers, setWeaponMultipliers] =

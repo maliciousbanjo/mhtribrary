@@ -11,7 +11,7 @@ import {
 import {
   ElementArgReducerActions,
   ElementArgs,
-  RawArgReducerActions,
+  RawArgReducerAction,
   RawArgs,
   WeaponClassArgReducerActions,
   WeaponClassArgs
@@ -19,20 +19,11 @@ import {
 
 interface BuffSelectorsProps {
   rawArgs: RawArgs;
-  dispatchRawArgs: React.Dispatch<{
-    type: RawArgReducerActions;
-    payload: Partial<RawArgs>;
-  }>;
+  dispatchRawArgs: React.Dispatch<RawArgReducerAction>;
   elementArgs: ElementArgs;
-  dispatchElementArgs: React.Dispatch<{
-    type: ElementArgReducerActions;
-    payload: Partial<ElementArgs>;
-  }>;
+  dispatchElementArgs: React.Dispatch<ElementArgReducerActions>;
   weaponClassArgs: WeaponClassArgs;
-  dispatchWeaponClassArgs: React.Dispatch<{
-    type: WeaponClassArgReducerActions;
-    payload: Partial<WeaponClassArgs>;
-  }>;
+  dispatchWeaponClassArgs: React.Dispatch<WeaponClassArgReducerActions>;
 }
 
 export function BuffSelectors({
@@ -56,9 +47,7 @@ export function BuffSelectors({
               onChange={event => {
                 dispatchWeaponClassArgs({
                   type: 'POWERCHARM',
-                  payload: {
-                    powercharm: event.target.checked
-                  }
+                  payload: event.target.checked
                 });
               }}
             />
@@ -69,9 +58,7 @@ export function BuffSelectors({
               onChange={event => {
                 dispatchWeaponClassArgs({
                   type: 'POWERTALON',
-                  payload: {
-                    powertalon: event.target.checked
-                  }
+                  payload: event.target.checked
                 });
               }}
             />
@@ -84,10 +71,7 @@ export function BuffSelectors({
             onChange={event => {
               dispatchRawArgs({
                 type: 'CRITICAL',
-                payload: {
-                  criticalHit: event.currentTarget
-                    .value as RawArgs['criticalHit']
-                }
+                payload: event.currentTarget.value as RawArgs['criticalHit']
               });
             }}
           />
@@ -100,9 +84,7 @@ export function BuffSelectors({
           onChange={event => {
             dispatchWeaponClassArgs({
               type: 'ARMOR',
-              payload: {
-                armor: event.currentTarget.value as WeaponClassArgs['armor']
-              }
+              payload: event.currentTarget.value as WeaponClassArgs['armor']
             });
           }}
         />
@@ -114,10 +96,7 @@ export function BuffSelectors({
           onChange={event => {
             dispatchWeaponClassArgs({
               type: 'DEMONDRUG',
-              payload: {
-                demondrug: event.currentTarget
-                  .value as WeaponClassArgs['demondrug']
-              }
+              payload: event.currentTarget.value as WeaponClassArgs['demondrug']
             });
           }}
         />
@@ -129,9 +108,7 @@ export function BuffSelectors({
           onChange={event => {
             dispatchWeaponClassArgs({
               type: 'MIGHT',
-              payload: {
-                might: event.currentTarget.value as WeaponClassArgs['might']
-              }
+              payload: event.currentTarget.value as WeaponClassArgs['might']
             });
           }}
         />
@@ -143,10 +120,7 @@ export function BuffSelectors({
           onChange={event => {
             dispatchRawArgs({
               type: 'LOW_HEALTH_SKILL',
-              payload: {
-                lowHealthSkill: event.currentTarget
-                  .value as RawArgs['lowHealthSkill']
-              }
+              payload: event.currentTarget.value as RawArgs['lowHealthSkill']
             });
           }}
         />
@@ -159,10 +133,8 @@ export function BuffSelectors({
             onChange={event => {
               dispatchElementArgs({
                 type: 'ELEMENT_ATTACK',
-                payload: {
-                  elementAttack: event.currentTarget
-                    .value as ElementArgs['elementAttack']
-                }
+                payload: event.currentTarget
+                  .value as ElementArgs['elementAttack']
               });
             }}
           />
@@ -173,9 +145,7 @@ export function BuffSelectors({
             onChange={event => {
               dispatchElementArgs({
                 type: 'AWAKEN',
-                payload: {
-                  awaken: event.target.checked
-                }
+                payload: event.target.checked
               });
             }}
           />
@@ -188,9 +158,7 @@ export function BuffSelectors({
           onChange={event => {
             dispatchRawArgs({
               type: 'FORTIFY',
-              payload: {
-                fortify: event.currentTarget.value as RawArgs['fortify']
-              }
+              payload: event.currentTarget.value as RawArgs['fortify']
             });
           }}
         />

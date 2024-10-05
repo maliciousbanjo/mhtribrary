@@ -2,11 +2,11 @@ import { HTMLTable } from '@blueprintjs/core';
 import classNames from 'classnames';
 import { DamageTypes, Monsters } from 'mh3-data';
 import React from 'react';
-import { MonsterArgAction } from './monster';
+import { MonsterArgReducerAction } from './monster';
 
 interface HitzoneTableProps {
   monsterArgs: DamageTypes.MonsterArgs;
-  dispatchMonsterArgs: React.Dispatch<MonsterArgAction>;
+  dispatchMonsterArgs: React.Dispatch<MonsterArgReducerAction>;
 }
 
 export function HitzoneTable({
