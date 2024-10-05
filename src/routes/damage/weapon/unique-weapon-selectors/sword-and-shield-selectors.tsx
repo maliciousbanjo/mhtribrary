@@ -5,7 +5,7 @@ import { UniqueWeaponSelectorsProps } from './unique-weapon-selectors';
 
 export function SwordAndShieldSelectors({
   weaponMultipliers,
-  setWeaponMultipliers
+  dispatchWeaponMultipliers
 }: Omit<UniqueWeaponSelectorsProps, 'selectedWeaponClass'>) {
   return (
     <>
@@ -16,11 +16,11 @@ export function SwordAndShieldSelectors({
         options={swordAndShieldModeOptions}
         selectedValue={weaponMultipliers.swordAndShieldMode}
         onChange={event =>
-          setWeaponMultipliers(prev => ({
-            ...prev,
-            swordAndShieldMode: (event.target as HTMLInputElement)
+          dispatchWeaponMultipliers({
+            type: 'SWORD_AND_SHIELD',
+            payload: (event.target as HTMLInputElement)
               .value as SwordAndShieldTypes.SwordAndShieldAttackMode
-          }))
+          })
         }
       />
     </>

@@ -5,7 +5,7 @@ import { UniqueWeaponSelectorsProps } from './unique-weapon-selectors';
 
 export function SwitchAxeSelectors({
   weaponMultipliers,
-  setWeaponMultipliers
+  dispatchWeaponMultipliers
 }: Omit<UniqueWeaponSelectorsProps, 'selectedWeaponClass'>) {
   return (
     <>
@@ -16,11 +16,11 @@ export function SwitchAxeSelectors({
         options={switchAxeModeOptions}
         selectedValue={weaponMultipliers.switchAxeMode}
         onChange={event =>
-          setWeaponMultipliers(prev => ({
-            ...prev,
-            switchAxeMode: (event.target as HTMLInputElement)
+          dispatchWeaponMultipliers({
+            type: 'SWITCH_AXE',
+            payload: (event.target as HTMLInputElement)
               .value as SwitchAxeTypes.SwitchAxeAttackMode
-          }))
+          })
         }
       />
     </>

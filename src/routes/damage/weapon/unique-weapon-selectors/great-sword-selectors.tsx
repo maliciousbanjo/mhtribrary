@@ -3,7 +3,7 @@ import { UniqueWeaponSelectorsProps } from './unique-weapon-selectors';
 
 export function GreatSwordSelectors({
   weaponMultipliers,
-  setWeaponMultipliers
+  dispatchWeaponMultipliers
 }: Omit<UniqueWeaponSelectorsProps, 'selectedWeaponClass'>) {
   return (
     <>
@@ -12,10 +12,10 @@ export function GreatSwordSelectors({
         label="Middle of blade"
         checked={weaponMultipliers.middleOfBlade}
         onChange={event =>
-          setWeaponMultipliers(prev => ({
-            ...prev,
-            middleOfBlade: event.target.checked
-          }))
+          dispatchWeaponMultipliers({
+            type: 'GREAT_SWORD',
+            payload: event.target.checked
+          })
         }
       />
     </>

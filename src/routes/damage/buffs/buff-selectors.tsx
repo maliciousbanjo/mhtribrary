@@ -7,7 +7,7 @@ import {
   fortifyOptions,
   demondrugOptions,
   mightOptions
-} from './buff-utils';
+} from './constants';
 import {
   ElementArgReducerActions,
   ElementArgs,

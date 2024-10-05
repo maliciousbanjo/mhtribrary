@@ -5,7 +5,7 @@ import { UniqueWeaponSelectorsProps } from './unique-weapon-selectors';
 
 export function LongswordSelectors({
   weaponMultipliers,
-  setWeaponMultipliers
+  dispatchWeaponMultipliers
 }: Omit<UniqueWeaponSelectorsProps, 'selectedWeaponClass'>) {
   return (
     <>
@@ -15,10 +15,12 @@ export function LongswordSelectors({
           label="Middle of blade"
           checked={weaponMultipliers.middleOfBlade}
           onChange={event =>
-            setWeaponMultipliers(prev => ({
-              ...prev,
-              middleOfBlade: event.target.checked
-            }))
+            dispatchWeaponMultipliers({
+              type: 'LONGSWORD',
+              payload: {
+                middleOfBlade: event.target.checked
+              }
+            })
           }
         />
         <Checkbox
@@ -26,13 +28,12 @@ export function LongswordSelectors({
           label="Full spirit gauge"
           checked={weaponMultipliers.longsword.fullSpiritGauge}
           onChange={event =>
-            setWeaponMultipliers(prev => ({
-              ...prev,
-              longsword: {
-                ...prev.longsword,
+            dispatchWeaponMultipliers({
+              type: 'LONGSWORD',
+              payload: {
                 fullSpiritGauge: event.target.checked
               }
-            }))
+            })
           }
         />
       </div>
@@ -43,14 +44,13 @@ export function LongswordSelectors({
         options={spiritGaugeColorOptions}
         selectedValue={weaponMultipliers.longsword.spiritGaugeColor}
         onChange={event =>
-          setWeaponMultipliers(prev => ({
-            ...prev,
-            longsword: {
-              ...prev.longsword,
+          dispatchWeaponMultipliers({
+            type: 'LONGSWORD',
+            payload: {
               spiritGaugeColor: (event.target as HTMLInputElement)
                 .value as LongswordTypes.SpiritGaugeColors
             }
-          }))
+          })
         }
       />
     </>
