@@ -4,9 +4,9 @@ import { swordAndShieldModeOptions } from '../weapon-options';
 import { UniqueWeaponSelectorsProps } from './unique-weapon-selectors';
 
 export function SwordAndShieldSelectors({
-  weaponMultipliers,
-  dispatchWeaponMultipliers
-}: Omit<UniqueWeaponSelectorsProps, 'selectedWeaponClass'>) {
+  weaponArgs,
+  dispatchWeaponArgs
+}: UniqueWeaponSelectorsProps) {
   return (
     <>
       <RadioGroup
@@ -14,10 +14,10 @@ export function SwordAndShieldSelectors({
         className="sword-and-shield-mode"
         inline
         options={swordAndShieldModeOptions}
-        selectedValue={weaponMultipliers.swordAndShieldMode}
+        selectedValue={weaponArgs.weaponMultipliers.swordAndShieldMode}
         onChange={event =>
-          dispatchWeaponMultipliers({
-            type: 'SWORD_AND_SHIELD',
+          dispatchWeaponArgs({
+            type: 'MULTIPLIER_SWORD_AND_SHIELD',
             payload: (event.target as HTMLInputElement)
               .value as SwordAndShieldTypes.SwordAndShieldAttackMode
           })

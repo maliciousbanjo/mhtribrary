@@ -4,19 +4,19 @@ import { spiritGaugeColorOptions } from '../weapon-options';
 import { UniqueWeaponSelectorsProps } from './unique-weapon-selectors';
 
 export function LongswordSelectors({
-  weaponMultipliers,
-  dispatchWeaponMultipliers
-}: Omit<UniqueWeaponSelectorsProps, 'selectedWeaponClass'>) {
+  weaponArgs,
+  dispatchWeaponArgs
+}: UniqueWeaponSelectorsProps) {
   return (
     <>
       <div>
         <Checkbox
           className="middle-of-blade"
           label="Middle of blade"
-          checked={weaponMultipliers.middleOfBlade}
+          checked={weaponArgs.weaponMultipliers.middleOfBlade}
           onChange={event =>
-            dispatchWeaponMultipliers({
-              type: 'LONGSWORD',
+            dispatchWeaponArgs({
+              type: 'MULTIPLIER_LONGSWORD',
               payload: {
                 middleOfBlade: event.target.checked
               }
@@ -26,10 +26,10 @@ export function LongswordSelectors({
         <Checkbox
           className="full-spirit"
           label="Full spirit gauge"
-          checked={weaponMultipliers.longsword.fullSpiritGauge}
+          checked={weaponArgs.weaponMultipliers.longsword.fullSpiritGauge}
           onChange={event =>
-            dispatchWeaponMultipliers({
-              type: 'LONGSWORD',
+            dispatchWeaponArgs({
+              type: 'MULTIPLIER_LONGSWORD',
               payload: {
                 fullSpiritGauge: event.target.checked
               }
@@ -42,10 +42,10 @@ export function LongswordSelectors({
         className="spirit-color"
         inline
         options={spiritGaugeColorOptions}
-        selectedValue={weaponMultipliers.longsword.spiritGaugeColor}
+        selectedValue={weaponArgs.weaponMultipliers.longsword.spiritGaugeColor}
         onChange={event =>
-          dispatchWeaponMultipliers({
-            type: 'LONGSWORD',
+          dispatchWeaponArgs({
+            type: 'MULTIPLIER_LONGSWORD',
             payload: {
               spiritGaugeColor: (event.target as HTMLInputElement)
                 .value as LongswordTypes.SpiritGaugeColors

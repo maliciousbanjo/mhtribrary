@@ -17,10 +17,8 @@ import {
   MonsterSelectors
 } from './monster';
 import {
-  DEFAULT_WEAPON_MULTIPLIERS,
   WEAPON_ARGS_INITIAL_STATE,
   weaponArgsReducer,
-  weaponMultipliersReducer,
   WeaponSelectors
 } from './weapon';
 
@@ -32,11 +30,6 @@ export function DamagePage() {
   const [weaponArgs, dispatchWeaponArgs] = React.useReducer(
     weaponArgsReducer,
     WEAPON_ARGS_INITIAL_STATE
-  );
-
-  const [weaponMultipliers, dispatchWeaponMultipliers] = React.useReducer(
-    weaponMultipliersReducer,
-    DEFAULT_WEAPON_MULTIPLIERS
   );
 
   // MONSTER STATE
@@ -65,34 +58,20 @@ export function DamagePage() {
   );
 
   const calculate = React.useCallback(() => {
-    const totalDamage = Damage.calculateDamage(
-      {
-        ...weaponArgs,
-        weaponMultipliers
-      },
-      monsterArgs,
-      {
-        rawArgs,
-        elementArgs,
-        weaponClassArgs
-      }
-    );
+    const totalDamage = Damage.calculateDamage(weaponArgs, monsterArgs, {
+      rawArgs,
+      elementArgs,
+      weaponClassArgs
+    });
 
     return totalDamage;
-  }, [
-    elementArgs,
-    monsterArgs,
-    rawArgs,
-    weaponArgs,
-    weaponClassArgs,
-    weaponMultipliers
-  ]);
+  }, [elementArgs, monsterArgs, rawArgs, weaponArgs, weaponClassArgs]);
 
   const renderDamage = () => {
     try {
       const damage = calculate();
       const hitJsx = damage.map((damageResult, index) => (
-        <p key={uuidv3(JSON.stringify(damageResult), uuidv3.URL)}>
+        <p key={uuidv3(JSON.stringify(damageResult) + index, uuidv3.URL)}>
           Hit {index + 1}: {damageResult.totalDamage}
         </p>
       ));
@@ -118,8 +97,6 @@ export function DamagePage() {
       <WeaponSelectors
         weaponArgs={weaponArgs}
         dispatchWeaponArgs={dispatchWeaponArgs}
-        weaponMultipliers={weaponMultipliers}
-        dispatchWeaponMultipliers={dispatchWeaponMultipliers}
       />
       <div className="damage-results">{renderDamage()}</div>
       <MonsterSelectors

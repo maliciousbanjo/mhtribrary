@@ -18,50 +18,81 @@ export const DEFAULT_WEAPON_MULTIPLIERS: DamageTypes.WeaponMultipliers = {
   }
 };
 
-export const WEAPON_ARGS_INITIAL_STATE: Omit<
+export type WeaponArgsState = Omit<
   DamageTypes.WeaponArgs,
   'weaponMultipliers'
-> = {
+> & { weaponMultipliers: DamageTypes.WeaponMultipliers };
+
+export const WEAPON_ARGS_INITIAL_STATE: WeaponArgsState = {
   weaponClass: WEAPON_INITIAL_STATE.type,
   weaponId: WEAPON_INITIAL_STATE.id,
   sharpness: WEAPON_INITIAL_STATE.sharpness.length - 1,
   attackName: Weapons.getWeaponDamageProperties(WEAPON_INITIAL_STATE.type)
-    .attackModes[0].attacks[0].name
+    .attackModes[0].attacks[0].name,
+  weaponMultipliers: DEFAULT_WEAPON_MULTIPLIERS
 };
 
 interface WeaponClassAction {
   type: 'WEAPON_CLASS';
-  payload: DamageTypes.WeaponArgs['weaponClass'];
+  payload: WeaponArgsState['weaponClass'];
 }
 
 interface WeaponIdAction {
   type: 'WEAPON_ID';
-  payload: DamageTypes.WeaponArgs['weaponId'];
+  payload: WeaponArgsState['weaponId'];
 }
 
 interface SharpnessAction {
   type: 'SHARPNESS';
-  payload: DamageTypes.WeaponArgs['sharpness'];
+  payload: WeaponArgsState['sharpness'];
 }
 
 interface AttackNameAction {
   type: 'ATTACK_NAME';
-  payload: {
-    attackName: DamageTypes.WeaponArgs['attackName'];
-    mode?: string;
-  };
+  payload: WeaponArgsState['attackName'];
 }
+
+interface GreatSwordMultipliersAction {
+  type: 'MULTIPLIER_GREAT_SWORD';
+  payload: DamageTypes.WeaponMultipliers['middleOfBlade'];
+}
+
+interface SwitchAxeMultipliersAction {
+  type: 'MULTIPLIER_SWITCH_AXE';
+  payload: DamageTypes.WeaponMultipliers['switchAxeMode'];
+}
+
+interface SwordAndShieldMultipliersAction {
+  type: 'MULTIPLIER_SWORD_AND_SHIELD';
+  payload: DamageTypes.WeaponMultipliers['swordAndShieldMode'];
+}
+
+interface LongswordMultipliersAction {
+  type: 'MULTIPLIER_LONGSWORD';
+  payload: Partial<{
+    middleOfBlade: DamageTypes.WeaponMultipliers['middleOfBlade'];
+    fullSpiritGauge: DamageTypes.WeaponMultipliers['longsword']['fullSpiritGauge'];
+    spiritGaugeColor: DamageTypes.WeaponMultipliers['longsword']['spiritGaugeColor'];
+  }>;
+}
+
+export type WeaponMultipliersReducerActions =
+  | GreatSwordMultipliersAction
+  | SwitchAxeMultipliersAction
+  | SwordAndShieldMultipliersAction
+  | LongswordMultipliersAction;
 
 export type WeaponArgReducerActions =
   | WeaponClassAction
   | WeaponIdAction
   | AttackNameAction
-  | SharpnessAction;
+  | SharpnessAction
+  | WeaponMultipliersReducerActions;
 
 export function weaponArgsReducer(
-  state: Omit<DamageTypes.WeaponArgs, 'weaponMultipliers'>,
+  state: WeaponArgsState,
   action: WeaponArgReducerActions
-): Omit<DamageTypes.WeaponArgs, 'weaponMultipliers'> {
+): WeaponArgsState {
   switch (action.type) {
     case 'WEAPON_CLASS': {
       // Get first weapon of provided class from dataset
@@ -71,7 +102,8 @@ export function weaponArgsReducer(
         weaponId: initialWeapon.id,
         sharpness: initialWeapon.sharpness.length - 1,
         attackName: Weapons.getWeaponDamageProperties(action.payload)
-          .attackModes[0].attacks[0].name
+          .attackModes[0].attacks[0].name,
+        weaponMultipliers: DEFAULT_WEAPON_MULTIPLIERS
       };
     }
     case 'WEAPON_ID': {
@@ -104,85 +136,77 @@ export function weaponArgsReducer(
         state.weaponClass
       ).attackModes;
 
+      let mode = '';
+      switch (state.weaponClass) {
+        case WeaponClass.SWITCH_AXE:
+          mode = state.weaponMultipliers.switchAxeMode;
+          break;
+        case WeaponClass.SWORD_AND_SHIELD:
+          mode = state.weaponMultipliers.swordAndShieldMode;
+          break;
+        default:
+          break;
+      }
+
       const weaponAttacks =
-        attackModes.find(atkMode => atkMode.name === action.payload.mode)
-          ?.attacks ?? attackModes[0].attacks;
+        attackModes.find(atkMode => atkMode.name === mode)?.attacks ??
+        attackModes[0].attacks;
 
       // Validate
-      if (!weaponAttacks.some(atk => atk.name === action.payload.attackName)) {
+      if (!weaponAttacks.some(atk => atk.name === action.payload)) {
         throw new Error(
           `${action.payload} is not a valid ${state.weaponClass} attack`
         );
       }
       return {
         ...state,
-        attackName: action.payload.attackName
+        attackName: action.payload
       };
     }
-    default:
-      return state;
-  }
-}
-
-interface GreatSwordMultipliersAction {
-  type: 'GREAT_SWORD';
-  payload: DamageTypes.WeaponMultipliers['middleOfBlade'];
-}
-
-interface SwitchAxeMultipliersAction {
-  type: 'SWITCH_AXE';
-  payload: DamageTypes.WeaponMultipliers['switchAxeMode'];
-}
-
-interface SwordAndShieldMultipliersAction {
-  type: 'SWORD_AND_SHIELD';
-  payload: DamageTypes.WeaponMultipliers['swordAndShieldMode'];
-}
-
-interface LongswordMultipliersAction {
-  type: 'LONGSWORD';
-  payload: Partial<{
-    middleOfBlade: DamageTypes.WeaponMultipliers['middleOfBlade'];
-    fullSpiritGauge: DamageTypes.WeaponMultipliers['longsword']['fullSpiritGauge'];
-    spiritGaugeColor: DamageTypes.WeaponMultipliers['longsword']['spiritGaugeColor'];
-  }>;
-}
-
-export type WeaponMultipliersReducerActions =
-  | GreatSwordMultipliersAction
-  | SwitchAxeMultipliersAction
-  | SwordAndShieldMultipliersAction
-  | LongswordMultipliersAction;
-
-export function weaponMultipliersReducer(
-  state: DamageTypes.WeaponMultipliers,
-  action: WeaponMultipliersReducerActions
-): DamageTypes.WeaponMultipliers {
-  switch (action.type) {
-    case 'GREAT_SWORD':
+    case 'MULTIPLIER_GREAT_SWORD':
       return {
         ...state,
-        middleOfBlade: action.payload
+        weaponMultipliers: {
+          ...state.weaponMultipliers,
+          middleOfBlade: action.payload
+        }
       };
-    case 'SWITCH_AXE':
+    case 'MULTIPLIER_SWITCH_AXE':
       return {
         ...state,
-        switchAxeMode: action.payload
+        attackName: 'Unsheathe Attack',
+        weaponMultipliers: {
+          ...state.weaponMultipliers,
+          switchAxeMode: action.payload
+        }
       };
-    case 'SWORD_AND_SHIELD':
+    case 'MULTIPLIER_SWORD_AND_SHIELD':
       return {
         ...state,
-        swordAndShieldMode: action.payload
+        attackName: 'Unsheathe Attack',
+        weaponMultipliers: {
+          ...state.weaponMultipliers,
+          swordAndShieldMode: action.payload
+        }
       };
-    case 'LONGSWORD':
+    case 'MULTIPLIER_LONGSWORD':
       return {
         ...state,
-        middleOfBlade: action.payload.middleOfBlade ?? state.middleOfBlade,
-        longsword: {
-          fullSpiritGauge:
-            action.payload.fullSpiritGauge ?? state.longsword.fullSpiritGauge,
-          spiritGaugeColor:
-            action.payload.spiritGaugeColor ?? state.longsword.spiritGaugeColor
+        weaponMultipliers: {
+          ...state.weaponMultipliers,
+          middleOfBlade:
+            action.payload.middleOfBlade ??
+            state.weaponMultipliers.middleOfBlade,
+          longsword: {
+            fullSpiritGauge:
+              action.payload.fullSpiritGauge ??
+              state.weaponMultipliers.longsword?.fullSpiritGauge ??
+              DEFAULT_WEAPON_MULTIPLIERS.longsword.fullSpiritGauge,
+            spiritGaugeColor:
+              action.payload.spiritGaugeColor ??
+              state.weaponMultipliers.longsword?.spiritGaugeColor ??
+              DEFAULT_WEAPON_MULTIPLIERS.longsword.spiritGaugeColor
+          }
         }
       };
     default:

@@ -1,5 +1,5 @@
 import { FormGroup, HTMLSelect, OptionProps } from '@blueprintjs/core';
-import { DamageTypes, Weapons } from 'mh3-data';
+import { Weapons } from 'mh3-data';
 import { WeaponClass } from 'mh3-data/weapons';
 import React from 'react';
 import { capitalize } from '../../../utils/format-utils';
@@ -14,24 +14,16 @@ import {
   swordAndShieldOptions,
   weaponClassOptions
 } from './weapon-options';
-import {
-  WeaponArgReducerActions,
-  WeaponMultipliersReducerActions
-} from './weapon-reducer';
+import { WeaponArgReducerActions, WeaponArgsState } from './weapon-reducer';
 
 export interface WeaponSelectorsProps {
-  weaponArgs: Omit<DamageTypes.WeaponArgs, 'weaponMultipliers'>;
+  weaponArgs: WeaponArgsState;
   dispatchWeaponArgs: React.Dispatch<WeaponArgReducerActions>;
-
-  weaponMultipliers: DamageTypes.WeaponMultipliers;
-  dispatchWeaponMultipliers: React.Dispatch<WeaponMultipliersReducerActions>;
 }
 
 export function WeaponSelectors({
   weaponArgs,
-  dispatchWeaponArgs,
-  weaponMultipliers,
-  dispatchWeaponMultipliers
+  dispatchWeaponArgs
 }: WeaponSelectorsProps) {
   const weaponSelectOptions = React.useMemo<OptionProps<number>[]>(() => {
     switch (weaponArgs.weaponClass) {
@@ -121,51 +113,31 @@ export function WeaponSelectors({
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
 
-      let mode = '';
-      switch (weaponArgs.weaponClass) {
-        case WeaponClass.SWITCH_AXE:
-          mode = weaponMultipliers.switchAxeMode;
-          break;
-        case WeaponClass.SWORD_AND_SHIELD:
-          mode = weaponMultipliers.swordAndShieldMode;
-          break;
-        default:
-          mode = '';
-      }
-
       dispatchWeaponArgs({
         type: 'ATTACK_NAME',
-        payload: {
-          attackName: target.value,
-          mode: mode
-        }
+        payload: target.value
       });
     },
-    [
-      dispatchWeaponArgs,
-      weaponArgs.weaponClass,
-      weaponMultipliers.switchAxeMode,
-      weaponMultipliers.swordAndShieldMode
-    ]
+    [dispatchWeaponArgs]
   );
 
   const weaponAttackOptions = React.useMemo(() => {
     if (weaponArgs.weaponClass === WeaponClass.SWITCH_AXE)
       return getWeaponAttackOptions(
         weaponArgs.weaponClass,
-        weaponMultipliers.switchAxeMode
+        weaponArgs.weaponMultipliers.switchAxeMode
       );
     else if (weaponArgs.weaponClass === WeaponClass.SWORD_AND_SHIELD)
       return getWeaponAttackOptions(
         weaponArgs.weaponClass,
-        weaponMultipliers.swordAndShieldMode
+        weaponArgs.weaponMultipliers.swordAndShieldMode
       );
 
     return getWeaponAttackOptions(weaponArgs.weaponClass);
   }, [
     weaponArgs.weaponClass,
-    weaponMultipliers.switchAxeMode,
-    weaponMultipliers.swordAndShieldMode
+    weaponArgs.weaponMultipliers.switchAxeMode,
+    weaponArgs.weaponMultipliers.swordAndShieldMode
   ]);
 
   const selectStyle: React.CSSProperties = { display: 'flex', gap: '1em' };
@@ -212,9 +184,8 @@ export function WeaponSelectors({
           </FormGroup>
         </div>
         <UniqueWeaponSelectors
-          selectedWeaponClass={weaponArgs.weaponClass}
-          weaponMultipliers={weaponMultipliers}
-          dispatchWeaponMultipliers={dispatchWeaponMultipliers}
+          weaponArgs={weaponArgs}
+          dispatchWeaponArgs={dispatchWeaponArgs}
         />
       </div>
     </div>

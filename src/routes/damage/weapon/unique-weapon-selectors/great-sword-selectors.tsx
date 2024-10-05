@@ -2,18 +2,18 @@ import { Checkbox } from '@blueprintjs/core';
 import { UniqueWeaponSelectorsProps } from './unique-weapon-selectors';
 
 export function GreatSwordSelectors({
-  weaponMultipliers,
-  dispatchWeaponMultipliers
-}: Omit<UniqueWeaponSelectorsProps, 'selectedWeaponClass'>) {
+  weaponArgs,
+  dispatchWeaponArgs
+}: UniqueWeaponSelectorsProps) {
   return (
     <>
       <Checkbox
         className="middle-of-blade"
         label="Middle of blade"
-        checked={weaponMultipliers.middleOfBlade}
+        checked={weaponArgs.weaponMultipliers.middleOfBlade}
         onChange={event =>
-          dispatchWeaponMultipliers({
-            type: 'GREAT_SWORD',
+          dispatchWeaponArgs({
+            type: 'MULTIPLIER_GREAT_SWORD',
             payload: event.target.checked
           })
         }

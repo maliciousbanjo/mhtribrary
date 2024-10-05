@@ -4,9 +4,9 @@ import { switchAxeModeOptions } from '../weapon-options';
 import { UniqueWeaponSelectorsProps } from './unique-weapon-selectors';
 
 export function SwitchAxeSelectors({
-  weaponMultipliers,
-  dispatchWeaponMultipliers
-}: Omit<UniqueWeaponSelectorsProps, 'selectedWeaponClass'>) {
+  weaponArgs,
+  dispatchWeaponArgs
+}: UniqueWeaponSelectorsProps) {
   return (
     <>
       <RadioGroup
@@ -14,10 +14,10 @@ export function SwitchAxeSelectors({
         className="switch-axe-mode"
         inline
         options={switchAxeModeOptions}
-        selectedValue={weaponMultipliers.switchAxeMode}
+        selectedValue={weaponArgs.weaponMultipliers.switchAxeMode}
         onChange={event =>
-          dispatchWeaponMultipliers({
-            type: 'SWITCH_AXE',
+          dispatchWeaponArgs({
+            type: 'MULTIPLIER_SWITCH_AXE',
             payload: (event.target as HTMLInputElement)
               .value as SwitchAxeTypes.SwitchAxeAttackMode
           })

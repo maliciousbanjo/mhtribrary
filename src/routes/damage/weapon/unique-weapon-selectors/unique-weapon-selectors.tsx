@@ -4,60 +4,57 @@
  * switchAxe mode
  */
 
-import { DamageTypes } from 'mh3-data';
 import { WeaponClass } from 'mh3-data/weapons';
 import React from 'react';
-import { WeaponMultipliersReducerActions } from '../weapon-reducer';
+import { WeaponArgReducerActions, WeaponArgsState } from '../weapon-reducer';
 import { GreatSwordSelectors } from './great-sword-selectors';
 import { LongswordSelectors } from './longsword-selectors';
 import { SwitchAxeSelectors } from './switch-axe-selectors';
 import { SwordAndShieldSelectors } from './sword-and-shield-selectors';
 
 export interface UniqueWeaponSelectorsProps {
-  selectedWeaponClass: WeaponClass;
-  weaponMultipliers: DamageTypes.WeaponMultipliers;
-  dispatchWeaponMultipliers: React.Dispatch<WeaponMultipliersReducerActions>;
+  weaponArgs: WeaponArgsState;
+  dispatchWeaponArgs: React.Dispatch<WeaponArgReducerActions>;
 }
 
 export function UniqueWeaponSelectors({
-  selectedWeaponClass,
-  weaponMultipliers,
-  dispatchWeaponMultipliers
+  weaponArgs,
+  dispatchWeaponArgs
 }: UniqueWeaponSelectorsProps) {
   const content = React.useMemo(() => {
-    switch (selectedWeaponClass) {
+    switch (weaponArgs.weaponClass) {
       case WeaponClass.GREAT_SWORD:
         return (
           <GreatSwordSelectors
-            weaponMultipliers={weaponMultipliers}
-            dispatchWeaponMultipliers={dispatchWeaponMultipliers}
+            weaponArgs={weaponArgs}
+            dispatchWeaponArgs={dispatchWeaponArgs}
           />
         );
       case WeaponClass.SWORD_AND_SHIELD:
         return (
           <SwordAndShieldSelectors
-            weaponMultipliers={weaponMultipliers}
-            dispatchWeaponMultipliers={dispatchWeaponMultipliers}
+            weaponArgs={weaponArgs}
+            dispatchWeaponArgs={dispatchWeaponArgs}
           />
         );
       case WeaponClass.SWITCH_AXE:
         return (
           <SwitchAxeSelectors
-            weaponMultipliers={weaponMultipliers}
-            dispatchWeaponMultipliers={dispatchWeaponMultipliers}
+            weaponArgs={weaponArgs}
+            dispatchWeaponArgs={dispatchWeaponArgs}
           />
         );
       case WeaponClass.LONGSWORD:
         return (
           <LongswordSelectors
-            weaponMultipliers={weaponMultipliers}
-            dispatchWeaponMultipliers={dispatchWeaponMultipliers}
+            weaponArgs={weaponArgs}
+            dispatchWeaponArgs={dispatchWeaponArgs}
           />
         );
       default:
         return undefined;
     }
-  }, [dispatchWeaponMultipliers, selectedWeaponClass, weaponMultipliers]);
+  }, [dispatchWeaponArgs, weaponArgs]);
 
   return <div className="unique-weapon-selectors">{content}</div>;
 }
