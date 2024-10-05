@@ -120,13 +120,53 @@ export function WeaponSelectors({
   const onChangeWeaponAttack = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
+
+      let mode = '';
+      switch (weaponArgs.weaponClass) {
+        case WeaponClass.SWITCH_AXE:
+          mode = weaponMultipliers.switchAxeMode;
+          break;
+        case WeaponClass.SWORD_AND_SHIELD:
+          mode = weaponMultipliers.swordAndShieldMode;
+          break;
+        default:
+          mode = '';
+      }
+
       dispatchWeaponArgs({
         type: 'ATTACK_NAME',
-        payload: target.value
+        payload: {
+          attackName: target.value,
+          mode: mode
+        }
       });
     },
-    [dispatchWeaponArgs]
+    [
+      dispatchWeaponArgs,
+      weaponArgs.weaponClass,
+      weaponMultipliers.switchAxeMode,
+      weaponMultipliers.swordAndShieldMode
+    ]
   );
+
+  const weaponAttackOptions = React.useMemo(() => {
+    if (weaponArgs.weaponClass === WeaponClass.SWITCH_AXE)
+      return getWeaponAttackOptions(
+        weaponArgs.weaponClass,
+        weaponMultipliers.switchAxeMode
+      );
+    else if (weaponArgs.weaponClass === WeaponClass.SWORD_AND_SHIELD)
+      return getWeaponAttackOptions(
+        weaponArgs.weaponClass,
+        weaponMultipliers.swordAndShieldMode
+      );
+
+    return getWeaponAttackOptions(weaponArgs.weaponClass);
+  }, [
+    weaponArgs.weaponClass,
+    weaponMultipliers.switchAxeMode,
+    weaponMultipliers.swordAndShieldMode
+  ]);
 
   const selectStyle: React.CSSProperties = { display: 'flex', gap: '1em' };
 
@@ -165,7 +205,7 @@ export function WeaponSelectors({
           <FormGroup label="Attack">
             <HTMLSelect
               className="select select-weapon-attack"
-              options={getWeaponAttackOptions(weaponArgs.weaponClass)}
+              options={weaponAttackOptions}
               value={weaponArgs.attackName}
               onChange={onChangeWeaponAttack}
             />

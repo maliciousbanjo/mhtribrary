@@ -64,104 +64,64 @@ export const swordAndShieldOptions = SwordAndShield.SwordAndShields.map<
 }));
 
 // WEAPON ATTACK NAMES
+const greatSwordAttackOptions =
+  GreatSword.GreatSwordDamageProperties.attackModes[0].attacks.map<
+    OptionProps<GreatSwordTypes.GreatSwordAttack>
+  >(atk => ({ value: atk.name }));
 
-export const greatSwordAttackOptions: OptionProps<GreatSwordTypes.GreatSwordAttack>[] =
-  [
-    { value: 'Unsheathe Attack' },
-    { value: 'Regular Slice' },
-    { value: 'Sideways Slash' },
-    { value: 'Upswing' },
-    { value: 'L1 Charge' },
-    { value: 'L2 Charge' },
-    { value: 'L3 Charge' },
-    { value: 'Overcharge' },
-    { value: 'Slap' },
-    { value: 'Overhead Smash' },
-    { value: 'L1 Smash Charge' },
-    { value: 'L2 Smash Charge' },
-    { value: 'L3 Smash Charge' },
-    { value: 'Smash Overcharge' }
-  ];
+const hammerAttackOptions =
+  Hammer.HammerDamageProperties.attackModes[0].attacks.map<
+    OptionProps<HammerTypes.HammerAttack>
+  >(atk => ({ value: atk.name }));
 
-export const hammerAttackOptions: OptionProps<HammerTypes.HammerAttack>[] = [
-  { value: 'Unsheathe Attack' },
-  { value: 'Side Swing' },
-  { value: 'Triple Pound' },
-  { value: 'Short Charge' },
-  { value: 'Uppercut' },
-  { value: 'Superpound' },
-  { value: 'Spin Attack' },
-  { value: 'Spin Release' },
-  { value: 'Spin Golfswing' },
-  { value: 'Spin Finisher' }
-];
+const lanceAttackOptions =
+  Lance.LanceDamageProperties.attackModes[0].attacks.map<
+    OptionProps<LanceTypes.LanceAttack>
+  >(atk => ({ value: atk.name }));
 
-export const lanceAttackOptions: OptionProps<LanceTypes.LanceAttack>[] = [
-  { value: 'Unsheathe Attack' },
-  { value: 'Low Stab Combo' },
-  { value: 'High Stab Combo' },
-  { value: 'Fast Counter' },
-  { value: 'Charge Counter' },
-  { value: 'Sweep' },
-  { value: 'Charge' },
-  { value: 'Charge Finisher' },
-  { value: 'Guard Attack' },
-  { value: 'Shield Bash' }
-];
+const longswordAttackOptions =
+  Longsword.LongswordDamageProperties.attackModes[0].attacks.map<
+    OptionProps<LongswordTypes.LongswordAttack>
+  >(atk => ({
+    value: atk.name
+  }));
 
-export const longswordAttackOptions: OptionProps<LongswordTypes.LongswordAttack>[] =
-  [
-    { value: 'Unsheathe Attack' },
-    { value: 'Sweep' },
-    { value: 'Step Slash' },
-    { value: 'Downward Slash' },
-    { value: 'Stab' },
-    { value: 'Upward Slash' },
-    { value: 'Empty Spirit' },
-    { value: 'Spirit 1' },
-    { value: 'Spirit 2' },
-    { value: 'Spirit 3' },
-    { value: 'Spirit Finisher' }
-  ];
+const switchAxeAxeAttacks = SwitchAxe.SwitchAxeDamageProperties.attackModes
+  .find(atkMode => atkMode.name === 'axe')
+  ?.attacks.map<OptionProps<SwitchAxeTypes.SwitchAxeAttack>>(atk => ({
+    value: atk.name
+  }));
 
-export const switchAxeAttackOptions: OptionProps<SwitchAxeTypes.SwitchAxeAttack>[] =
-  [
-    { value: 'Unsheathe Attack' },
-    { value: 'Overhead Slash' },
-    { value: 'Forward Slash' },
-    { value: 'Side Slash' },
-    { value: 'Rising Slash' },
-    { value: 'Slash Combo' },
-    { value: 'Switch to Sword' },
-    { value: 'Discharge Thrust' },
-    { value: 'Discharge Combo' },
-    { value: 'Discharge Finisher' },
-    { value: 'Switch to Axe' }
-  ];
+const switchAxeSwordAttacks = SwitchAxe.SwitchAxeDamageProperties.attackModes
+  .find(atkMode => atkMode.name === 'sword')
+  ?.attacks.map<OptionProps<SwitchAxeTypes.SwitchAxeAttack>>(atk => ({
+    value: atk.name
+  }));
 
-export const swordAndShieldAttackOptions: OptionProps<SwordAndShieldTypes.SwordAndShieldAttack>[] =
-  [
-    { value: 'Unsheathe Attack' },
-    { value: 'Jumping Slash' },
-    { value: 'Rising Slash' },
-    { value: 'Regular Combo' },
-    { value: 'Horizontal Combo' },
-    { value: 'Shield Combo' },
-    { value: 'Revolving Slice' },
-    { value: 'Guard Slice' },
-    { value: 'Unsheathe Attack' },
-    { value: 'Forward Slash' },
-    { value: 'Normal Slash' },
-    { value: 'Upward Slash' },
-    { value: 'Uppercut Slash' },
-    { value: 'Horizontal Slash' },
-    { value: 'Shield Bash' },
-    { value: 'Rising Slice' },
-    { value: 'Revolving Slice' },
-    { value: 'Guard Slice' }
-  ];
+const swordAndShieldLandAttacks =
+  SwordAndShield.SwordAndShieldDamageProperties.attackModes
+    .find(atkMode => atkMode.name === 'land')
+    ?.attacks.map<OptionProps<SwordAndShieldTypes.SwordAndShieldAttack>>(
+      atk => ({
+        value: atk.name
+      })
+    );
 
-export function getWeaponAttackOptions(weaponClass: WeaponClass) {
+const swordAndShieldWaterAttacks =
+  SwordAndShield.SwordAndShieldDamageProperties.attackModes
+    .find(atkMode => atkMode.name === 'water')
+    ?.attacks.map<OptionProps<SwordAndShieldTypes.SwordAndShieldAttack>>(
+      atk => ({
+        value: atk.name
+      })
+    );
+
+export function getWeaponAttackOptions(
+  weaponClass: WeaponClass,
+  mode?:
+    | SwitchAxeTypes.SwitchAxeAttackMode
+    | SwordAndShieldTypes.SwordAndShieldAttackMode
+) {
   switch (weaponClass) {
     case 'Great Sword':
       return greatSwordAttackOptions;
@@ -171,10 +131,16 @@ export function getWeaponAttackOptions(weaponClass: WeaponClass) {
       return lanceAttackOptions;
     case 'Longsword':
       return longswordAttackOptions;
-    case 'Switch Axe':
-      return switchAxeAttackOptions;
-    case 'Sword and Shield':
-      return swordAndShieldAttackOptions;
+    case 'Switch Axe': {
+      if (!mode) throw Error(`Attack mode must be provided for ${weaponClass}`);
+      return mode === 'axe' ? switchAxeAxeAttacks : switchAxeSwordAttacks;
+    }
+    case 'Sword and Shield': {
+      if (!mode) throw Error(`Attack mode must be provided for ${weaponClass}`);
+      return mode === 'land'
+        ? swordAndShieldLandAttacks
+        : swordAndShieldWaterAttacks;
+    }
     default:
       throw new Error(`Invalid weapon selection ${weaponClass}`);
   }

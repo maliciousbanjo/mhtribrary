@@ -1,6 +1,5 @@
 import { DamageTypes, Weapons } from 'mh3-data';
 import { WeaponClass } from 'mh3-data/weapons';
-import { getWeaponAttackOptions } from './weapon-options';
 
 // Iron Sword
 export const WEAPON_INITIAL_STATE = Weapons.getWeapon(
@@ -26,7 +25,8 @@ export const WEAPON_ARGS_INITIAL_STATE: Omit<
   weaponClass: WEAPON_INITIAL_STATE.type,
   weaponId: WEAPON_INITIAL_STATE.id,
   sharpness: WEAPON_INITIAL_STATE.sharpness.length - 1,
-  attackName: getWeaponAttackOptions(WEAPON_INITIAL_STATE.type)[0].value
+  attackName: Weapons.getWeaponDamageProperties(WEAPON_INITIAL_STATE.type)
+    .attackModes[0].attacks[0].name
 };
 
 interface WeaponClassAction {
@@ -46,7 +46,10 @@ interface SharpnessAction {
 
 interface AttackNameAction {
   type: 'ATTACK_NAME';
-  payload: DamageTypes.WeaponArgs['attackName'];
+  payload: {
+    attackName: DamageTypes.WeaponArgs['attackName'];
+    mode?: string;
+  };
 }
 
 export type WeaponArgReducerActions =
@@ -67,7 +70,8 @@ export function weaponArgsReducer(
         weaponClass: action.payload,
         weaponId: initialWeapon.id,
         sharpness: initialWeapon.sharpness.length - 1,
-        attackName: getWeaponAttackOptions(action.payload)[0].value
+        attackName: Weapons.getWeaponDamageProperties(action.payload)
+          .attackModes[0].attacks[0].name
       };
     }
     case 'WEAPON_ID': {
@@ -96,16 +100,23 @@ export function weaponArgsReducer(
       };
     }
     case 'ATTACK_NAME': {
-      const weaponAttacks = getWeaponAttackOptions(state.weaponClass);
+      const attackModes = Weapons.getWeaponDamageProperties(
+        state.weaponClass
+      ).attackModes;
+
+      const weaponAttacks =
+        attackModes.find(atkMode => atkMode.name === action.payload.mode)
+          ?.attacks ?? attackModes[0].attacks;
+
       // Validate
-      if (!weaponAttacks.some(atk => atk.value === action.payload)) {
+      if (!weaponAttacks.some(atk => atk.name === action.payload.attackName)) {
         throw new Error(
           `${action.payload} is not a valid ${state.weaponClass} attack`
         );
       }
       return {
         ...state,
-        attackName: action.payload
+        attackName: action.payload.attackName
       };
     }
     default:
