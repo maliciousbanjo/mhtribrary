@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
-import '../../sass/navigation-bar.scss';
+import '../../sass/base-rules.scss';
 import { Button, Navbar } from '@blueprintjs/core';
 import billybobjho from '../../assets/billybobjho.png';
 
@@ -7,7 +7,7 @@ export function NavigationBar() {
   return (
     <>
       <Navbar>
-        <Navbar.Group>
+        <Navbar.Group align="left">
           <Navbar.Heading
             style={{
               display: 'flex',
@@ -23,6 +23,11 @@ export function NavigationBar() {
           <Link to="/blade-damage">
             <Button minimal icon="calculator" text="Damage" />
           </Link>
+        </Navbar.Group>
+        <Navbar.Group align="right">
+          <Link to="/about">
+            <Button minimal icon="help" text="About" />
+          </Link>{' '}
         </Navbar.Group>
       </Navbar>
       <div className="wrapper">

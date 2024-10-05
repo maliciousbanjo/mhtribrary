@@ -4,6 +4,7 @@ import './main.scss';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { DamagePage } from './routes/damage/damage-page.tsx';
 import { NavigationBar } from './routes/navigation/navigation-bar.tsx';
+import { AboutPage } from './routes/about/about-page.tsx';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: 'blade-damage',
         element: <DamagePage />
+      },
+      {
+        path: 'about',
+        element: <AboutPage />
       }
     ]
   }
