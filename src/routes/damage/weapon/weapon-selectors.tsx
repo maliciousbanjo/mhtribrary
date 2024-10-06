@@ -15,6 +15,7 @@ import {
   weaponClassOptions
 } from './weapon-options';
 import { WeaponArgReducerActions, WeaponArgsState } from './weapon-reducer';
+import classNames from 'classnames';
 
 export interface WeaponSelectorsProps {
   weaponArgs: WeaponArgsState;
@@ -143,7 +144,7 @@ export function WeaponSelectors({
   const selectStyle: React.CSSProperties = { display: 'flex', gap: '1em' };
 
   return (
-    <div className="weapon">
+    <div className={classNames(['weapon', 'column'])}>
       <h3>Weapon</h3>
       <div className="weapon--selectors">
         <div style={selectStyle}>

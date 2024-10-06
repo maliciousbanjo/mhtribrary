@@ -30,40 +30,42 @@ export function HitzoneTable({
     return hitzoneGroup.hitzones.map((hitzone, index) => (
       <tr
         key={hitzone.name}
-        className={classNames('table-row', {
+        className={classNames({
           'table-row--selected': monsterArgs.hitzoneIndex === index
         })}
         onClick={() => handleRowClick(index)}
       >
-        <td>{hitzone.name}</td>
-        <td>{hitzone.values.cut}</td>
-        <td>{hitzone.values.impact}</td>
-        <td>{hitzone.values.fire}</td>
-        <td>{hitzone.values.water}</td>
-        <td>{hitzone.values.thunder}</td>
-        <td>{hitzone.values.ice}</td>
-        <td>{hitzone.values.dragon}</td>
-        <td>{hitzone.values.stagger} HP</td>
+        <td data-label="Hitzone">{hitzone.name}</td>
+        <td data-label="Cut">{hitzone.values.cut}</td>
+        <td data-label="Impact">{hitzone.values.impact}</td>
+        <td data-label="Fire">{hitzone.values.fire}</td>
+        <td data-label="Water">{hitzone.values.water}</td>
+        <td data-label="Thunder">{hitzone.values.thunder}</td>
+        <td data-label="Ice">{hitzone.values.ice}</td>
+        <td data-label="Dragon">{hitzone.values.dragon}</td>
+        <td data-label="Stagger">{hitzone.values.stagger} HP</td>
       </tr>
     ));
   }, [handleRowClick, hitzoneGroup.hitzones, monsterArgs.hitzoneIndex]);
 
   return (
-    <HTMLTable className={'hitzone-table'} compact interactive bordered>
-      <thead>
-        <tr>
-          <th>Hitzone</th>
-          <th>Cut</th>
-          <th>Impact</th>
-          <th>Fire</th>
-          <th>Water</th>
-          <th>Thunder</th>
-          <th>Ice</th>
-          <th>Dragon</th>
-          <th>Stagger</th>
-        </tr>
-      </thead>
-      <tbody>{buildHitzoneRow()}</tbody>
-    </HTMLTable>
+    <div className="table-wrapper">
+      <HTMLTable className={'hitzone-table'} compact interactive bordered>
+        <thead>
+          <tr>
+            <th>Hitzone</th>
+            <th>Cut</th>
+            <th>Impact</th>
+            <th>Fire</th>
+            <th>Water</th>
+            <th>Thunder</th>
+            <th>Ice</th>
+            <th>Dragon</th>
+            <th>Stagger</th>
+          </tr>
+        </thead>
+        <tbody>{buildHitzoneRow()}</tbody>
+      </HTMLTable>
+    </div>
   );
 }

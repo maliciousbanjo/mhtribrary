@@ -1,7 +1,6 @@
 import { Damage } from 'mh3-data';
 import React from 'react';
 import { v3 as uuidv3 } from 'uuid';
-import '../../sass/damage-page.scss';
 import {
   BuffSelectors,
   ELEMENTAL_ARGS_INITIAL_STATE,
@@ -113,24 +112,26 @@ export function DamagePage() {
   };
 
   return (
-    <div className={classNames(['page', 'damage'])}>
-      <WeaponSelectors
-        weaponArgs={weaponArgs}
-        dispatchWeaponArgs={dispatchWeaponArgs}
-      />
-      <div className="damage-results">{renderDamage()}</div>
-      <MonsterSelectors
-        monsterArgs={monsterArgs}
-        dispatchMonsterArgs={dispatchMonsterArgs}
-      />
-      <BuffSelectors
+    <div className={classNames(['flex-grid', 'damage'])}>
+      <div className="flex-grid">
+        <WeaponSelectors
+          weaponArgs={weaponArgs}
+          dispatchWeaponArgs={dispatchWeaponArgs}
+        />
+        <MonsterSelectors
+          monsterArgs={monsterArgs}
+          dispatchMonsterArgs={dispatchMonsterArgs}
+        />
+      </div>
+      {/* <div className="damage-results">{renderDamage()}</div> */}
+      {/* <BuffSelectors
         rawArgs={rawArgs}
         dispatchRawArgs={dispatchRawArgs}
         elementArgs={elementArgs}
         dispatchElementArgs={dispatchElementArgs}
         weaponClassArgs={weaponClassArgs}
         dispatchWeaponClassArgs={dispatchWeaponClassArgs}
-      />
+      /> */}
     </div>
   );
 }

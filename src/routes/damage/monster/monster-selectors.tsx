@@ -4,6 +4,7 @@ import React from 'react';
 import { HitzoneTable } from '../hitzone-table';
 import { MonsterArgReducerAction } from './monster-reducer';
 import { monsterOptions } from './constants';
+import classNames from 'classnames';
 
 interface MonsterSelectorsProps {
   monsterArgs: DamageTypes.MonsterArgs;
@@ -80,7 +81,7 @@ export function MonsterSelectors({
   );
 
   return (
-    <div className="monster">
+    <div className={classNames(['monster', 'column'])}>
       <h3>Monster</h3>
       <div className="monster--selectors">
         <FormGroup label="Monster">
@@ -92,7 +93,6 @@ export function MonsterSelectors({
           />
         </FormGroup>
 
-        {/* Monster State (sometimes) */}
         {monsterStates.length > 1 && (
           <FormGroup label="State">
             <HTMLSelect
@@ -104,7 +104,6 @@ export function MonsterSelectors({
           </FormGroup>
         )}
 
-        {/* Quest */}
         {questOptions.length !== 0 && (
           <FormGroup label="Quest">
             <HTMLSelect

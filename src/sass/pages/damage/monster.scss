@@ -1,0 +1,18 @@
+.monster {
+  &--selectors {
+    display: flex;
+    gap: 1em;
+  }
+}
+.table-wrapper {
+  width: calc(100vw);
+  overflow-x: auto;
+}
+
+.hitzone-table {
+  .table-row {
+    &--selected {
+      background-color: powderblue;
+    }
+  }
+}

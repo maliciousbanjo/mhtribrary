@@ -1,0 +1,15 @@
+.attack-buffs-container {
+}
+.attack-buffs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .bp5-control-group.bp5-vertical {
+    justify-content: space-between;
+  }
+}
+
+.negative-skill {
+  color: red;
+}
