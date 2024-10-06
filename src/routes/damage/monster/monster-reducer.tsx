@@ -1,4 +1,4 @@
-import { DamageTypes } from 'mh3-data';
+import { DamageTypes, Monsters, Quests } from 'mh3-data';
 
 interface MonsterNameAction {
   type: 'MONSTER_NAME';
@@ -43,11 +43,16 @@ export function monsterArgsReducer(
 ): DamageTypes.MonsterArgs {
   switch (action.type) {
     // Changing the monster needs to reset all other fields
-    case 'MONSTER_NAME':
+    case 'MONSTER_NAME': {
+      const newMonster = Monsters.getMonster(action.payload);
+      const quests = Quests.getQuestsWithLargeMonster(newMonster.id, 'Both');
+      const newQuestId = quests.length > 0 ? quests[0].id : 0x0;
       return {
         ...MONSTER_ARGS_INITIAL_STATE,
-        monsterName: action.payload
+        monsterName: action.payload,
+        questId: newQuestId
       };
+    }
     case 'QUEST_ID': {
       return {
         ...state,

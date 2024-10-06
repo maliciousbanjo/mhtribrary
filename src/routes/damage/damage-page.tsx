@@ -76,7 +76,7 @@ export function DamagePage() {
         return (
           <p key={key}>
             Hit {index + 1}: <b>{damageResult.totalDamage} </b>
-            {damageResult.koDamage !== 0 && (
+            {damageResult.koDamage && (
               <>
                 and <b>{damageResult.koDamage}</b> KO
               </>
