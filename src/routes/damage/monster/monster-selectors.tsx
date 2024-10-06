@@ -3,6 +3,7 @@ import { DamageTypes, Monsters, MonsterTypes, Quests } from 'mh3-data';
 import React from 'react';
 import { HitzoneTable } from '../hitzone-table';
 import { MonsterArgReducerAction } from './monster-reducer';
+import { monsterOptions } from './constants';
 
 interface MonsterSelectorsProps {
   monsterArgs: DamageTypes.MonsterArgs;
@@ -13,19 +14,6 @@ export function MonsterSelectors({
   monsterArgs,
   dispatchMonsterArgs
 }: MonsterSelectorsProps) {
-  const allMonsters = React.useMemo(
-    () => Monsters.SmallMonsterData.concat(Monsters.LargeMonsterData),
-    []
-  );
-
-  const monsterOptions = React.useMemo<OptionProps<string>[]>(() => {
-    return allMonsters.map(mon => {
-      return {
-        value: mon.name
-      };
-    });
-  }, [allMonsters]);
-
   /**
    * Change handler for selected monster
    * Resets {@link selectedMonsterHitzoneGroup} and {@link selectedQuestId} when changed

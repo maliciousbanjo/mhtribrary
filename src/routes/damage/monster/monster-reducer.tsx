@@ -27,8 +27,8 @@ export type MonsterArgReducerAction =
   | HitzoneIndexAction;
 
 export const MONSTER_ARGS_INITIAL_STATE: DamageTypes.MonsterArgs = {
-  monsterName: 'Aptonoth',
-  questId: 0,
+  monsterName: 'Great Jaggi',
+  questId: 0x03f5, // Big Game Hunting
   monsterStateIndex: 0,
   hitzoneIndex: 0
 };

@@ -65,6 +65,10 @@ export const faqs: FAQ[] = [
           You can find me, @malicious_banjo, in the{' '}
           <a href="https://discord.gg/4sBmXC55V6">MH3SP Discord Server.</a>
         </p>
+        <p>
+          Updates might be slow. Rest assured that I <i>am</i> working on it in
+          my free time.
+        </p>
       </>
     )
   }

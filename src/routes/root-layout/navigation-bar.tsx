@@ -29,7 +29,7 @@ export function NavigationBar() {
           developer <Icon icon="arrow-right" />
         </div>
         <Link to="/about">
-          <Button minimal icon="help" text="About" />
+          <Button minimal icon="help" text="About/FAQ" />
         </Link>{' '}
       </Navbar.Group>
     </Navbar>
