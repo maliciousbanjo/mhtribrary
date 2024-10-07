@@ -1,6 +1,7 @@
+@import '../../abstracts';
+
 .damage-results {
   .damage-results-content {
-    // TODO: Mixin
-    margin: 0 0.5em 0.9em 0.5em;
+    @include indented-block;
   }
 }

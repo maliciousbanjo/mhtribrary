@@ -20,7 +20,6 @@ import {
   weaponArgsReducer,
   WeaponSelectors
 } from './weapon';
-import classNames from 'classnames';
 
 /**
  * Top-level page for damage calculations
@@ -114,7 +113,7 @@ export function DamagePage() {
   };
 
   return (
-    <div className={classNames(['damage'])}>
+    <div className="damage">
       <div className="flex-container">
         <WeaponSelectors
           weaponArgs={weaponArgs}

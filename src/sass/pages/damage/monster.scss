@@ -1,10 +1,11 @@
+@import '../../abstracts';
+
 .monster {
   max-width: 768px;
   &--selectors {
     display: flex;
     gap: 1em;
-    // TODO: Mixin
-    margin: 0 0.5em 0.9em 0.5em;
+    @include indented-block;
   }
 }
 
@@ -55,7 +56,7 @@
     tr {
       display: block;
       // TODO: Apply as mixin?
-      margin: 0 0.5em 0.9em 0.5em;
+      margin: 0 0.5em 0em 0.5em;
     }
 
     // More specific selector to override blueprint

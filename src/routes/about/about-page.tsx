@@ -1,6 +1,5 @@
-import classNames from 'classnames';
-import { faqs } from './faqs';
 import React from 'react';
+import { faqs } from './faqs';
 
 export function AboutPage() {
   /**
@@ -9,7 +8,7 @@ export function AboutPage() {
    * 3.
    */
   return (
-    <div className={classNames(['page', 'about'])}>
+    <div className="about">
       <div className="faqs">
         <h1>Frequently Asked Questions</h1>
         {faqs.map(faq => (
