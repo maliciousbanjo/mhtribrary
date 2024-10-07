@@ -3,6 +3,19 @@
 @import './sass/blueprint-overrides.scss';
 @import './sass/all';
 
+#root {
+  min-height: 100vh;
+  position: relative;
+}
+
 body {
   min-width: 415px; // TODO: Make this a sass variable
+}
+
+footer {
+  height: 2.5rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }

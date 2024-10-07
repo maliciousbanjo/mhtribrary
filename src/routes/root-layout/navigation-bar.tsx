@@ -1,11 +1,11 @@
-import { Button, Icon, Navbar } from '@blueprintjs/core';
+import { Button, Navbar } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import billybobjho from '../../assets/billybobjho.png';
 
 export function NavigationBar() {
   return (
     <>
-      <Navbar>
+      <Navbar className="navbar">
         <Navbar.Group align="left">
           <Navbar.Heading
             style={{

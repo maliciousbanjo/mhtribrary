@@ -9,30 +9,13 @@
 .content-wrapper {
   display: flex;
   justify-content: center;
+
+  padding-bottom: 2.5rem;
 }
 
-.flex-grid {
+.flex-container {
   display: flex;
   // padding: 0 1rem 0 1rem;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
-
-  .column {
-    gap: 1rem;
-    min-width: 415px;
-  }
-}
-
-.footer-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  .footer {
-    font-size: small;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-  }
 }

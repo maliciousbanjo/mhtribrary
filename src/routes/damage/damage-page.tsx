@@ -97,13 +97,15 @@ export function DamagePage() {
       return (
         <>
           <h3>Results</h3>
-          {hitJsx}
-          Total Damage: <b>{totalDamage.dmg} </b>
-          {totalDamage.ko !== 0 && (
-            <>
-              and <b>{totalDamage.ko}</b> KO
-            </>
-          )}
+          <div className="damage-results-content">
+            {hitJsx}
+            Total Damage: <b>{totalDamage.dmg} </b>
+            {totalDamage.ko !== 0 && (
+              <>
+                and <b>{totalDamage.ko}</b> KO
+              </>
+            )}
+          </div>
         </>
       );
     } catch (error) {
@@ -113,7 +115,7 @@ export function DamagePage() {
 
   return (
     <div className={classNames(['damage'])}>
-      <div className="flex-grid">
+      <div className="flex-container">
         <WeaponSelectors
           weaponArgs={weaponArgs}
           dispatchWeaponArgs={dispatchWeaponArgs}
@@ -123,15 +125,15 @@ export function DamagePage() {
           dispatchMonsterArgs={dispatchMonsterArgs}
         />
       </div>
-      {/* <div className="damage-results">{renderDamage()}</div> */}
-      {/* <BuffSelectors
+      <BuffSelectors
         rawArgs={rawArgs}
         dispatchRawArgs={dispatchRawArgs}
         elementArgs={elementArgs}
         dispatchElementArgs={dispatchElementArgs}
         weaponClassArgs={weaponClassArgs}
         dispatchWeaponClassArgs={dispatchWeaponClassArgs}
-      /> */}
+      />
+      <div className="damage-results">{renderDamage()}</div>
     </div>
   );
 }
