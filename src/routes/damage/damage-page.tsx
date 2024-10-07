@@ -1,7 +1,6 @@
 import { Damage } from 'mh3-data';
 import React from 'react';
 import { v3 as uuidv3 } from 'uuid';
-import '../../sass/damage-page.scss';
 import {
   BuffSelectors,
   ELEMENTAL_ARGS_INITIAL_STATE,
@@ -21,7 +20,6 @@ import {
   weaponArgsReducer,
   WeaponSelectors
 } from './weapon';
-import classNames from 'classnames';
 
 /**
  * Top-level page for damage calculations
@@ -98,13 +96,15 @@ export function DamagePage() {
       return (
         <>
           <h3>Results</h3>
-          {hitJsx}
-          Total Damage: <b>{totalDamage.dmg} </b>
-          {totalDamage.ko !== 0 && (
-            <>
-              and <b>{totalDamage.ko}</b> KO
-            </>
-          )}
+          <div className="damage-results-content">
+            {hitJsx}
+            Total Damage: <b>{totalDamage.dmg} </b>
+            {totalDamage.ko !== 0 && (
+              <>
+                and <b>{totalDamage.ko}</b> KO
+              </>
+            )}
+          </div>
         </>
       );
     } catch (error) {
@@ -113,16 +113,17 @@ export function DamagePage() {
   };
 
   return (
-    <div className={classNames(['page', 'damage'])}>
-      <WeaponSelectors
-        weaponArgs={weaponArgs}
-        dispatchWeaponArgs={dispatchWeaponArgs}
-      />
-      <div className="damage-results">{renderDamage()}</div>
-      <MonsterSelectors
-        monsterArgs={monsterArgs}
-        dispatchMonsterArgs={dispatchMonsterArgs}
-      />
+    <div className="damage">
+      <div className="flex-container">
+        <WeaponSelectors
+          weaponArgs={weaponArgs}
+          dispatchWeaponArgs={dispatchWeaponArgs}
+        />
+        <MonsterSelectors
+          monsterArgs={monsterArgs}
+          dispatchMonsterArgs={dispatchMonsterArgs}
+        />
+      </div>
       <BuffSelectors
         rawArgs={rawArgs}
         dispatchRawArgs={dispatchRawArgs}
@@ -131,6 +132,7 @@ export function DamagePage() {
         weaponClassArgs={weaponClassArgs}
         dispatchWeaponClassArgs={dispatchWeaponClassArgs}
       />
+      <div className="damage-results">{renderDamage()}</div>
     </div>
   );
 }

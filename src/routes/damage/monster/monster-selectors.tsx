@@ -2,8 +2,8 @@ import { FormGroup, HTMLSelect, OptionProps } from '@blueprintjs/core';
 import { DamageTypes, Monsters, MonsterTypes, Quests } from 'mh3-data';
 import React from 'react';
 import { HitzoneTable } from '../hitzone-table';
-import { MonsterArgReducerAction } from './monster-reducer';
 import { monsterOptions } from './constants';
+import { MonsterArgReducerAction } from './monster-reducer';
 
 interface MonsterSelectorsProps {
   monsterArgs: DamageTypes.MonsterArgs;
@@ -92,7 +92,6 @@ export function MonsterSelectors({
           />
         </FormGroup>
 
-        {/* Monster State (sometimes) */}
         {monsterStates.length > 1 && (
           <FormGroup label="State">
             <HTMLSelect
@@ -104,7 +103,6 @@ export function MonsterSelectors({
           </FormGroup>
         )}
 
-        {/* Quest */}
         {questOptions.length !== 0 && (
           <FormGroup label="Quest">
             <HTMLSelect

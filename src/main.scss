@@ -1,3 +1,21 @@
 @import 'normalize.css';
 @import '@blueprintjs/core/lib/css/blueprint.css';
-@import './sass/blueprint-overrides.scss'
+@import './sass/blueprint-overrides.scss';
+@import './sass';
+
+#root {
+  min-height: 100vh;
+  position: relative;
+}
+
+body {
+  min-width: 415px; // TODO: Make this a sass variable
+}
+
+footer {
+  height: 2.5rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}

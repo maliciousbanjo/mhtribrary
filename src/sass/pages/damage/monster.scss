@@ -1,0 +1,75 @@
+@import '../../abstracts';
+
+.monster {
+  max-width: 768px;
+  &--selectors {
+    display: flex;
+    gap: 1em;
+    @include indented-block;
+  }
+}
+
+.hitzone-table {
+  table-layout: fixed;
+  width: 100%;
+  tr.table-row {
+    padding: 0.35em;
+  }
+
+  tr.table-row:nth-child(even):not(.table-row--selected) {
+    background-color: #e0dfdf;
+  }
+
+  th,
+  td {
+    text-align: center;
+    padding: 0.625em;
+  }
+
+  .table-row {
+    &--selected {
+      background-color: powderblue;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hitzone-table {
+    border: 0;
+    thead {
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    td.cell {
+      border: none;
+    }
+    td.cell[scope='row'] {
+      font-weight: bold;
+    }
+
+    tr {
+      display: block;
+      // TODO: Apply as mixin?
+      margin: 0 0.5em 0em 0.5em;
+    }
+
+    // More specific selector to override blueprint
+    td.cell {
+      display: block;
+      font-size: 0.9em;
+      text-align: right;
+    }
+
+    td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+    }
+  }
+}

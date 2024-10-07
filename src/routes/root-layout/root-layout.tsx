@@ -9,8 +9,8 @@ export function RootLayout() {
   return (
     <>
       <NavigationBar />
-      <div className="wrapper">
-        <div id="detail">
+      <div className="content-wrapper">
+        <div id="content">
           <Outlet />
         </div>
       </div>

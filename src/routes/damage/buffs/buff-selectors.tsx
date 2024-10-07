@@ -35,13 +35,13 @@ export function BuffSelectors({
   dispatchWeaponClassArgs
 }: BuffSelectorsProps) {
   return (
-    <div className="attack-buffs-container">
+    <div>
       <h3>Buffs</h3>
-      <div className="attack-buffs">
-        <ControlGroup vertical>
+      <div className="flex-container attack-buffs">
+        <ControlGroup vertical className="buff-control">
           <span>
             <Checkbox
-              className="attack-buffs--powercharm"
+              key="powercharm"
               label="Powercharm"
               checked={weaponClassArgs.powercharm}
               onChange={event => {
@@ -52,7 +52,7 @@ export function BuffSelectors({
               }}
             />
             <Checkbox
-              className="attack-buffs--powertalon"
+              key="powertalon"
               label="Powertalon"
               checked={weaponClassArgs.powertalon}
               onChange={event => {
@@ -64,8 +64,9 @@ export function BuffSelectors({
             />
           </span>
           <RadioGroup
+            key="critical-hit"
             label="Critical Hit"
-            className="attack-buffs--critical-hit"
+            className="buff-control"
             options={criticalHitOptions}
             selectedValue={rawArgs.criticalHit}
             onChange={event => {
@@ -77,8 +78,9 @@ export function BuffSelectors({
           />
         </ControlGroup>
         <RadioGroup
+          key="armor-skill"
           label="Attack (Armor skill)"
-          className="attack-buffs--armor-skill"
+          className="buff-control"
           options={armorSkillOptions}
           selectedValue={weaponClassArgs.armor}
           onChange={event => {
@@ -89,8 +91,9 @@ export function BuffSelectors({
           }}
         />
         <RadioGroup
+          key="demondrug"
           label="Demondrug"
-          className="attack-buffs--demondrug"
+          className="buff-control"
           options={demondrugOptions}
           selectedValue={weaponClassArgs.demondrug}
           onChange={event => {
@@ -101,8 +104,9 @@ export function BuffSelectors({
           }}
         />
         <RadioGroup
+          key="might"
           label="Might"
-          className="attack-buffs--might"
+          className="buff-control"
           options={mightOptions}
           selectedValue={weaponClassArgs.might}
           onChange={event => {
@@ -113,8 +117,9 @@ export function BuffSelectors({
           }}
         />
         <RadioGroup
+          key="low-health"
           label="Low HP"
-          className="attack-buffs--low-health"
+          className="buff-control"
           options={lowHealthSkillOptions}
           selectedValue={rawArgs.lowHealthSkill}
           onChange={event => {
@@ -125,34 +130,37 @@ export function BuffSelectors({
           }}
         />
         <span>
-          <RadioGroup
-            label="Element Attack"
-            className="attack-buffs--element-attack"
-            options={elementAttackOptions}
-            selectedValue={elementArgs.elementAttack}
-            onChange={event => {
-              dispatchElementArgs({
-                type: 'ELEMENT_ATTACK',
-                payload: event.currentTarget
-                  .value as ElementArgs['elementAttack']
-              });
-            }}
-          />
-          <Checkbox
-            className="attack-buffs--awaken"
-            label="Awaken"
-            checked={elementArgs.awaken}
-            onChange={event => {
-              dispatchElementArgs({
-                type: 'AWAKEN',
-                payload: event.target.checked
-              });
-            }}
-          />
+          <ControlGroup vertical className="buff-control">
+            <RadioGroup
+              key="element-attack"
+              label="Element Attack"
+              options={elementAttackOptions}
+              selectedValue={elementArgs.elementAttack}
+              onChange={event => {
+                dispatchElementArgs({
+                  type: 'ELEMENT_ATTACK',
+                  payload: event.currentTarget
+                    .value as ElementArgs['elementAttack']
+                });
+              }}
+            />
+            <Checkbox
+              key="awaken"
+              label="Awaken"
+              checked={elementArgs.awaken}
+              onChange={event => {
+                dispatchElementArgs({
+                  type: 'AWAKEN',
+                  payload: event.target.checked
+                });
+              }}
+            />
+          </ControlGroup>
         </span>
         <RadioGroup
+          key="fortify"
           label="Fortify"
-          className="attack-buffs--fortify"
+          className="buff-control"
           options={fortifyOptions}
           selectedValue={rawArgs.fortify}
           onChange={event => {

@@ -1,31 +1,21 @@
-.wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-#detail {
-  min-width: 1080px;
-  max-width: 1200px;
-}
-
-.page {
-  min-width: 1080px;
-}
+// TODO: Sass variables
 
 .warning-banner {
   color: red;
+  display: flex;
+  justify-content: center;
 }
 
-.footer-container {
+.content-wrapper {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
 
-  .footer {
-    font-size: small;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-  }
+  padding-bottom: 2.5rem;
+}
+
+.flex-container {
+  display: flex;
+  // padding: 0 1rem 0 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
 }

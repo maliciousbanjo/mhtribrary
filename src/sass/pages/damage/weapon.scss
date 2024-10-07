@@ -1,0 +1,17 @@
+@import '../../abstracts/';
+
+.weapon {
+  &--selectors {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    @include indented-block;
+    /* // TODO: This space is for the sharpness graph/weapon stats */
+    // min-height: 350px;
+  }
+}
+.unique-weapon-selectors {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5em;
+}

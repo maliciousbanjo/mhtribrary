@@ -1,7 +1,5 @@
-import classNames from 'classnames';
-import { faqs } from './faqs';
-import '../../sass/about-page.scss';
 import React from 'react';
+import { faqs } from './faqs';
 
 export function AboutPage() {
   /**
@@ -10,7 +8,7 @@ export function AboutPage() {
    * 3.
    */
   return (
-    <div className={classNames(['page', 'about'])}>
+    <div className="about">
       <div className="faqs">
         <h1>Frequently Asked Questions</h1>
         {faqs.map(faq => (
@@ -46,7 +44,7 @@ export function AboutPage() {
               <a href="https://web.archive.org/web/20130407144830/http://mhtri.stilltruth.com/">
                 MHTri.StillTruth.com
               </a>{' '}
-              (archive link) website, created by Capcom Unity user Feox/
+              (archive link) website, created by Capcom Unity user Feox
             </li>
             <li>
               Quest IDs were discovered thanks to the{' '}
