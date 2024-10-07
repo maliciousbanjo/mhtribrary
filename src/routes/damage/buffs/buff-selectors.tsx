@@ -16,6 +16,7 @@ import {
   WeaponClassArgReducerActions,
   WeaponClassArgs
 } from './buff-types';
+import classNames from 'classnames';
 
 interface BuffSelectorsProps {
   rawArgs: RawArgs;
@@ -35,7 +36,7 @@ export function BuffSelectors({
   dispatchWeaponClassArgs
 }: BuffSelectorsProps) {
   return (
-    <div className="attack-buffs-container">
+    <div className={classNames(['column'])}>
       <h3>Buffs</h3>
       <div className="attack-buffs">
         <ControlGroup vertical>

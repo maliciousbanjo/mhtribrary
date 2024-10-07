@@ -112,7 +112,7 @@ export function DamagePage() {
   };
 
   return (
-    <div className={classNames(['flex-grid', 'damage'])}>
+    <div className={classNames(['damage'])}>
       <div className="flex-grid">
         <WeaponSelectors
           weaponArgs={weaponArgs}
