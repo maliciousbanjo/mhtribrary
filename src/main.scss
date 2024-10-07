@@ -9,7 +9,7 @@
 }
 
 body {
-  min-width: 415px; // TODO: Make this a sass variable
+  min-width: $min-width;
 }
 
 footer {

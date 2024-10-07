@@ -12,7 +12,7 @@ export function NavigationBar() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: '0.5em'
+              gap: '0.2em'
             }}
           >
             <img src={billybobjho} alt="Deviljho holding raw meat"></img>

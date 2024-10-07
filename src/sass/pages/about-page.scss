@@ -1,10 +1,7 @@
-@import '../abstracts/';
-
 .about {
   max-width: 1000px;
 
   .faqs,
   .acknowledgements {
-    @include indented-block;
   }
 }
