@@ -4,18 +4,10 @@
 @import './sass';
 
 #root {
-  min-height: 100vh;
+  // min-height: 100vh;
   position: relative;
 }
 
 body {
   min-width: $min-width;
-}
-
-footer {
-  height: 2.5rem;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
 }

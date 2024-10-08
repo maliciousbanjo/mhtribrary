@@ -38,7 +38,7 @@ export function BuffSelectors({
     <div>
       <h3>Buffs</h3>
       <div className="flex-container attack-buffs">
-        <ControlGroup vertical className="buff-control">
+        <ControlGroup vertical>
           <span>
             <Checkbox
               key="powercharm"
@@ -66,7 +66,6 @@ export function BuffSelectors({
           <RadioGroup
             key="critical-hit"
             label="Critical Hit"
-            className="buff-control"
             options={criticalHitOptions}
             selectedValue={rawArgs.criticalHit}
             onChange={event => {
@@ -80,7 +79,6 @@ export function BuffSelectors({
         <RadioGroup
           key="armor-skill"
           label="Attack (Armor skill)"
-          className="buff-control"
           options={armorSkillOptions}
           selectedValue={weaponClassArgs.armor}
           onChange={event => {
@@ -93,7 +91,6 @@ export function BuffSelectors({
         <RadioGroup
           key="demondrug"
           label="Demondrug"
-          className="buff-control"
           options={demondrugOptions}
           selectedValue={weaponClassArgs.demondrug}
           onChange={event => {
@@ -106,7 +103,6 @@ export function BuffSelectors({
         <RadioGroup
           key="might"
           label="Might"
-          className="buff-control"
           options={mightOptions}
           selectedValue={weaponClassArgs.might}
           onChange={event => {
@@ -119,7 +115,6 @@ export function BuffSelectors({
         <RadioGroup
           key="low-health"
           label="Low HP"
-          className="buff-control"
           options={lowHealthSkillOptions}
           selectedValue={rawArgs.lowHealthSkill}
           onChange={event => {
@@ -130,7 +125,7 @@ export function BuffSelectors({
           }}
         />
         <span>
-          <ControlGroup vertical className="buff-control">
+          <ControlGroup vertical>
             <RadioGroup
               key="element-attack"
               label="Element Attack"
@@ -160,7 +155,6 @@ export function BuffSelectors({
         <RadioGroup
           key="fortify"
           label="Fortify"
-          className="buff-control"
           options={fortifyOptions}
           selectedValue={rawArgs.fortify}
           onChange={event => {

@@ -1,23 +1,28 @@
 @import './abstracts';
-
 .warning-banner {
   color: red;
-  display: flex;
-  justify-content: center;
-  margin-top: 0.5em;
+  text-align: center;
 }
 
+// Main body
 .content-wrapper {
   display: flex;
   justify-content: center;
-  /* This is to keep distance between the footer */
-  padding-bottom: 4rem;
+  padding-bottom: 4rem; // Footer height + some padding
 
   @media screen and (max-width: $mediaMobileWidth) {
     #content {
       padding: 0 0.5em 0 0.5em;
     }
   }
+}
+
+footer {
+  height: 2.5rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .flex-container {
