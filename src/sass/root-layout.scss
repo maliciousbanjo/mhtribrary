@@ -1,0 +1,87 @@
+@import './abstracts';
+
+$navbarHeight: 50px;
+$sideMenuTransition: 0.3s;
+
+.warning-banner {
+  color: red;
+  text-align: center;
+}
+
+.navigation {
+  &__header {
+    gap: 1em;
+  }
+
+  .top-navbar {
+    height: $navbarHeight;
+
+    // Hide menu buttons for desktop sizes
+    @media (min-width: $mediaMobileWidth) {
+      .menu-button {
+        display: none;
+      }
+    }
+    // Hide navbar buttons for mobile sizes
+    @media (max-width: $mediaMobileWidth) {
+      &__page-buttons,
+      &__extra {
+        display: none;
+      }
+    }
+  }
+
+  .sidenav {
+    height: 100%;
+    width: 0px;
+    position: fixed;
+    z-index: 10000;
+    top: $navbarHeight;
+    left: 0;
+    transition: $sideMenuTransition;
+    background-color: #ffffff;
+    overflow-x: hidden;
+
+    &__button {
+      width: 100%;
+      text-wrap: nowrap;
+      justify-content: left;
+    }
+    .sidenav__content {
+      width: 100%;
+      z-index: -1;
+    }
+  }
+
+  .sidenav.sidenav--open {
+    width: 180px;
+    transition: $sideMenuTransition;
+  }
+}
+
+// Main body
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 4rem; // Footer height + some padding
+
+  @media screen and (max-width: $mediaMobileWidth) {
+    #content {
+      padding: 0 0.5em 0 0.5em;
+    }
+  }
+}
+
+footer {
+  height: 2.5rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.flex-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
