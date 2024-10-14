@@ -2,7 +2,6 @@ import { Button, Classes, Navbar } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import React from 'react';
-import billybobjho from '../../assets/billybobjho.png';
 
 export function NavigationBar() {
   const [sideNavOpen, setSideNavOpen] = React.useState(false);
@@ -29,7 +28,11 @@ export function NavigationBar() {
               gap: '0.2em'
             }}
           >
-            <img src={billybobjho} alt="Deviljho holding raw meat"></img>
+            <img
+              src={'/billybobjho_lg.png'}
+              width={50}
+              alt="Deviljho holding raw meat"
+            ></img>
             MH Tribrary
           </Navbar.Heading>
         </Navbar.Group>
