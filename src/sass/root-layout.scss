@@ -34,7 +34,7 @@ $sideMenuTransition: 0.3s;
   .sidenav {
     height: 100%;
     width: 0px;
-    position: fixed;
+    position: absolute;
     z-index: 10000;
     top: $navbarHeight;
     left: 0;
