@@ -47,15 +47,31 @@ $sideMenuTransition: 0.3s;
       text-wrap: nowrap;
       justify-content: left;
     }
-    .sidenav__content {
+
+    &__content {
       width: 100%;
-      z-index: -1;
+    }
+
+    &__overlay {
+      display: none;
+      width: 100%;
+      height: 100%;
+      background-color: grey;
+      opacity: 0.5;
+      z-index: 9999;
+      position: absolute;
+      top: $navbarHeight;
+      left: 0;
     }
   }
 
   .sidenav.sidenav--open {
     width: 180px;
     transition: $sideMenuTransition;
+  }
+
+  .sidenav__overlay.sidenav--open {
+    display: block;
   }
 }
 

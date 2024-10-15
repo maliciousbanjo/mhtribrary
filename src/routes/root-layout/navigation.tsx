@@ -76,6 +76,13 @@ export function NavigationBar() {
           </Link>
         </div>
       </div>
+      <div
+        className={classNames([
+          'sidenav__overlay',
+          { 'sidenav--open': sideNavOpen }
+        ])}
+        onClick={onMenuClick}
+      />
       <div className="warning-banner">
         This site is in beta. Please contact the developer with issues.
       </div>
