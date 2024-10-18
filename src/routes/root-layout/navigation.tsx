@@ -1,9 +1,14 @@
-import { Button, Classes, Navbar } from '@blueprintjs/core';
-import { Link } from 'react-router-dom';
+import { Alignment, Button, Classes, Navbar, Switch } from '@blueprintjs/core';
 import classNames from 'classnames';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export function NavigationBar() {
+interface NavigationBarProps {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export function NavigationBar({ darkMode, setDarkMode }: NavigationBarProps) {
   const [sideNavOpen, setSideNavOpen] = React.useState(false);
 
   const onMenuClick = React.useCallback(() => {
@@ -42,6 +47,15 @@ export function NavigationBar() {
             <Button minimal icon="calculator" text="Damage" />
           </Link>
         </Navbar.Group>
+        <Navbar.Group className="top-navbar__theme" align="right">
+          <Switch
+            label="Dark Mode"
+            style={{ marginBottom: 0 }}
+            alignIndicator={Alignment.RIGHT}
+            checked={darkMode}
+            onChange={() => setDarkMode(prev => !prev)}
+          />
+        </Navbar.Group>
         <Navbar.Group className="top-navbar__extra" align="right">
           <Link to="/about">
             <Button minimal icon="help" text="About/FAQ" />
@@ -56,9 +70,15 @@ export function NavigationBar() {
         ])}
       >
         <div className="sidenav__content">
+          {/* <Switch
+            alignIndicator="right"
+            label="Dark Mode"
+            checked={darkMode}
+            onChange={() => setDarkMode(prev => !prev)}
+          /> */}
           <Link to="/blade-damage">
             <Button
-              className="sidenav__button"
+              className="sidenav__item"
               minimal
               icon="calculator"
               text="Damage"
@@ -67,7 +87,7 @@ export function NavigationBar() {
           </Link>
           <Link to="/about">
             <Button
-              className="sidenav__button"
+              className="sidenav__item"
               minimal
               icon="help"
               text="About/FAQ"
