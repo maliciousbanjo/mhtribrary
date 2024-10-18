@@ -4,58 +4,36 @@ import { WeaponClass } from 'mh3-data/weapons';
 import React from 'react';
 import { capitalize } from '../../../utils/format-utils';
 import { UniqueWeaponSelectors } from './unique-weapon-selectors';
+import { WeaponProps } from './weapon';
 import {
   getWeaponAttackOptions,
-  greatSwordOptions,
-  hammerOptions,
-  lanceOptions,
-  longswordOptions,
-  switchAxeOptions,
-  swordAndShieldOptions,
+  getWeaponSelectOptions,
   weaponClassOptions
 } from './weapon-options';
-import { WeaponArgReducerActions, WeaponArgsState } from './weapon-reducer';
-
-export interface WeaponSelectorsProps {
-  weaponArgs: WeaponArgsState;
-  dispatchWeaponArgs: React.Dispatch<WeaponArgReducerActions>;
-}
 
 export function WeaponSelectors({
   weaponArgs,
   dispatchWeaponArgs
-}: WeaponSelectorsProps) {
-  const weaponSelectOptions = React.useMemo<OptionProps<number>[]>(() => {
-    switch (weaponArgs.weaponClass) {
-      case 'Great Sword':
-        return greatSwordOptions;
-      case 'Hammer':
-        return hammerOptions;
-      case 'Lance':
-        return lanceOptions;
-      case 'Longsword':
-        return longswordOptions;
-      case 'Switch Axe':
-        return switchAxeOptions;
-      case 'Sword and Shield':
-        return swordAndShieldOptions;
-      default:
-        throw new Error(`Invalid weapon selection ${weaponArgs.weaponClass}`);
-    }
-  }, [weaponArgs.weaponClass]);
+}: WeaponProps) {
+  const weaponSelectOptions = React.useMemo(
+    () => getWeaponSelectOptions(weaponArgs.weaponClass),
+    [weaponArgs.weaponClass]
+  );
+
+  const selectedWeapon = React.useMemo(
+    () => Weapons.getWeapon(weaponArgs.weaponClass, weaponArgs.weaponId),
+    [weaponArgs.weaponClass, weaponArgs.weaponId]
+  );
 
   /**
    * Set dynamically based on the available sharpness of {@link selectedWeaponId}
    */
   const sharpnessOptions = React.useMemo(() => {
-    const weapon = Weapons.getWeapon(
-      weaponArgs.weaponClass,
-      weaponArgs.weaponId
-    );
-    return weapon.sharpnessUp.map<OptionProps<number>>(
+    return selectedWeapon.sharpnessUp.map<OptionProps<number>>(
       (_sharpnessTicks, index) => {
         // If this index is not part of the base sharpness list then it must be an extra level
-        const requiresSharpnessUp = weapon.sharpness[index] === undefined;
+        const requiresSharpnessUp =
+          selectedWeapon.sharpness[index] === undefined;
         const label = capitalize(
           Weapons.sharpnessAsString(index as Weapons.Sharpness)
         );
@@ -65,7 +43,7 @@ export function WeaponSelectors({
         };
       }
     );
-  }, [weaponArgs.weaponClass, weaponArgs.weaponId]);
+  }, [selectedWeapon.sharpness, selectedWeapon.sharpnessUp]);
 
   /**
    * Also sets the default weapon ID and weapon attack to first index
@@ -143,51 +121,48 @@ export function WeaponSelectors({
   const selectStyle: React.CSSProperties = { display: 'flex', gap: '1em' };
 
   return (
-    <div className="weapon">
-      <h3>Weapon</h3>
-      <div className="weapon--selectors">
-        <div style={selectStyle}>
-          <FormGroup label="Class">
-            <HTMLSelect
-              className="select select-weapon-class"
-              options={weaponClassOptions}
-              value={weaponArgs.weaponClass}
-              onChange={onChangeWeaponClass}
-            />
-          </FormGroup>
-          <FormGroup label="Weapon">
-            <HTMLSelect
-              className="select select-weapon"
-              options={weaponSelectOptions}
-              value={weaponArgs.weaponId}
-              onChange={onChangeWeapon}
-            />
-          </FormGroup>
-        </div>
-
-        <div style={selectStyle}>
-          <FormGroup label="Sharpness">
-            <HTMLSelect
-              className="select select-weapon-sharpness"
-              options={sharpnessOptions}
-              value={weaponArgs.sharpness}
-              onChange={onChangeSharpness}
-            />
-          </FormGroup>
-          <FormGroup label="Attack">
-            <HTMLSelect
-              className="select select-weapon-attack"
-              options={weaponAttackOptions}
-              value={weaponArgs.attackName}
-              onChange={onChangeWeaponAttack}
-            />
-          </FormGroup>
-        </div>
-        <UniqueWeaponSelectors
-          weaponArgs={weaponArgs}
-          dispatchWeaponArgs={dispatchWeaponArgs}
-        />
+    <div className="weapon--selectors">
+      <div style={selectStyle}>
+        <FormGroup label="Class">
+          <HTMLSelect
+            className="select select-weapon-class"
+            options={weaponClassOptions}
+            value={weaponArgs.weaponClass}
+            onChange={onChangeWeaponClass}
+          />
+        </FormGroup>
+        <FormGroup label="Weapon">
+          <HTMLSelect
+            className="select select-weapon"
+            options={weaponSelectOptions}
+            value={weaponArgs.weaponId}
+            onChange={onChangeWeapon}
+          />
+        </FormGroup>
       </div>
+
+      <div style={selectStyle}>
+        <FormGroup label="Sharpness">
+          <HTMLSelect
+            className="select select-weapon-sharpness"
+            options={sharpnessOptions}
+            value={weaponArgs.sharpness}
+            onChange={onChangeSharpness}
+          />
+        </FormGroup>
+        <FormGroup label="Attack">
+          <HTMLSelect
+            className="select select-weapon-attack"
+            options={weaponAttackOptions}
+            value={weaponArgs.attackName}
+            onChange={onChangeWeaponAttack}
+          />
+        </FormGroup>
+      </div>
+      <UniqueWeaponSelectors
+        weaponArgs={weaponArgs}
+        dispatchWeaponArgs={dispatchWeaponArgs}
+      />
     </div>
   );
 }
