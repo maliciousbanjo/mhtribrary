@@ -35,13 +35,13 @@ footer {
     height: $navbarHeight;
 
     // Hide menu buttons for desktop sizes
-    @media (min-width: $mediaMobileWidth) {
+    @media (min-width: $media-mobile-width) {
       .menu-button {
         display: none;
       }
     }
     // Hide navbar buttons for mobile sizes
-    @media (max-width: $mediaMobileWidth) {
+    @media (max-width: $media-mobile-width) {
       &__page-buttons,
       &__extra {
         display: none;
