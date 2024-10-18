@@ -24,6 +24,9 @@
   .table-row {
     &--selected {
       background-color: $selectionColor;
+      td {
+        color: white;
+      }
     }
   }
 }
