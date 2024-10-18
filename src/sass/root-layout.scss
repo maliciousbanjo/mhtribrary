@@ -112,7 +112,9 @@ footer {
 }
 
 .flex-container {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  @include flex-container();
+}
+
+.flex-container-wrap {
+  @include flex-container-wrap();
 }

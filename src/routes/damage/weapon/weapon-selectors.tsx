@@ -10,6 +10,7 @@ import {
   getWeaponSelectOptions,
   weaponClassOptions
 } from './weapon-options';
+import { WeaponInfo } from './weapon-info';
 
 export function WeaponSelectors({
   weaponArgs,
@@ -118,11 +119,9 @@ export function WeaponSelectors({
     weaponArgs.weaponMultipliers.swordAndShieldMode
   ]);
 
-  const selectStyle: React.CSSProperties = { display: 'flex', gap: '1em' };
-
   return (
     <div className="weapon--selectors">
-      <div style={selectStyle}>
+      <div className="flex-container">
         <FormGroup label="Class">
           <HTMLSelect
             className="select select-weapon-class"
@@ -140,8 +139,9 @@ export function WeaponSelectors({
           />
         </FormGroup>
       </div>
+      <WeaponInfo weapon={selectedWeapon} />
 
-      <div style={selectStyle}>
+      <div className="flex-container">
         <FormGroup label="Sharpness">
           <HTMLSelect
             className="select select-weapon-sharpness"

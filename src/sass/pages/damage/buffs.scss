@@ -1,6 +1,7 @@
 @import '../../abstracts/';
 
 .attack-buffs {
+  @include flex-container-wrap();
   column-gap: 3em;
 
   .bp5-control-group,

@@ -37,7 +37,7 @@ export function BuffSelectors({
   return (
     <div>
       <h3>Buffs</h3>
-      <div className="flex-container attack-buffs">
+      <div className="attack-buffs">
         <ControlGroup vertical>
           <span>
             <Checkbox
