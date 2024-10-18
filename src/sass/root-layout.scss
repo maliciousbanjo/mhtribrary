@@ -98,10 +98,8 @@ footer {
   justify-content: center;
   padding-bottom: 4rem; // Footer height + some padding
 
-  @media screen and (max-width: $mediaMobileWidth) {
-    #content {
-      padding: 0 0.5em 0 0.5em;
-    }
+  #content {
+    padding: 0 0.5em 0 0.5em;
   }
 }
 
