@@ -1,3 +1,9 @@
-@mixin indented-block {
-  margin: 0 0.5em 0.9em 0.5em;
+@mixin flex-container {
+  display: flex;
+  gap: 1rem;
+}
+
+@mixin flex-container-wrap {
+  @include flex-container();
+  flex-wrap: wrap;
 }
