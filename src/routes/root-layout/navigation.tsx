@@ -2,6 +2,7 @@ import { Alignment, Button, Classes, Navbar, Switch } from '@blueprintjs/core';
 import classNames from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { updateDarkModePreference } from '../../utils/theme-utils';
 
 interface NavigationBarProps {
   darkMode: boolean;
@@ -14,6 +15,13 @@ export function NavigationBar({ darkMode, setDarkMode }: NavigationBarProps) {
   const onMenuClick = React.useCallback(() => {
     setSideNavOpen(prev => !prev);
   }, []);
+
+  const onSetDarkMode = React.useCallback(() => {
+    setDarkMode(prev => {
+      updateDarkModePreference(!prev);
+      return !prev;
+    });
+  }, [setDarkMode]);
 
   return (
     <div className="navigation">
@@ -50,10 +58,10 @@ export function NavigationBar({ darkMode, setDarkMode }: NavigationBarProps) {
         <Navbar.Group className="top-navbar__theme" align="right">
           <Switch
             label="Dark Mode"
-            style={{ marginBottom: 0 }}
+            style={{ margin: '0px 0px 0px 10px' }}
             alignIndicator={Alignment.RIGHT}
             checked={darkMode}
-            onChange={() => setDarkMode(prev => !prev)}
+            onChange={onSetDarkMode}
           />
         </Navbar.Group>
         <Navbar.Group className="top-navbar__extra" align="right">
@@ -70,12 +78,6 @@ export function NavigationBar({ darkMode, setDarkMode }: NavigationBarProps) {
         ])}
       >
         <div className="sidenav__content">
-          {/* <Switch
-            alignIndicator="right"
-            label="Dark Mode"
-            checked={darkMode}
-            onChange={() => setDarkMode(prev => !prev)}
-          /> */}
           <Link to="/blade-damage">
             <Button
               className="sidenav__item"
