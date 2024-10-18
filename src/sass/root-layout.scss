@@ -1,7 +1,25 @@
+@import '@blueprintjs/core/lib/scss/variables';
 @import './abstracts';
 
 $navbarHeight: 50px;
 $sideMenuTransition: 0.3s;
+
+.root-layout {
+  min-height: 100vh;
+  position: relative;
+}
+
+.root-layout,
+.sidenav,
+footer {
+  background-color: $pt-app-background-color;
+}
+
+.root-layout.bp5-dark,
+.bp5-dark footer,
+.bp5-dark .sidenav {
+  background-color: $pt-dark-app-background-color;
+}
 
 .warning-banner {
   color: red;
@@ -39,10 +57,9 @@ $sideMenuTransition: 0.3s;
     top: $navbarHeight;
     left: 0;
     transition: $sideMenuTransition;
-    background-color: #ffffff;
     overflow-x: hidden;
 
-    &__button {
+    &__item {
       width: 100%;
       text-wrap: nowrap;
       justify-content: left;

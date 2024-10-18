@@ -3,11 +3,6 @@
 @import './sass/blueprint-overrides.scss';
 @import './sass';
 
-#root {
-  min-height: 100vh;
-  position: relative;
-}
-
 body {
   min-width: $min-width;
 }

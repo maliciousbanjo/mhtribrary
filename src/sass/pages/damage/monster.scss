@@ -15,10 +15,6 @@
     padding: 0.35em;
   }
 
-  tr.table-row:nth-child(even):not(.table-row--selected) {
-    background-color: #e0dfdf;
-  }
-
   th,
   td {
     text-align: center;
@@ -27,7 +23,7 @@
 
   .table-row {
     &--selected {
-      background-color: powderblue;
+      background-color: $selectionColor;
     }
   }
 }
