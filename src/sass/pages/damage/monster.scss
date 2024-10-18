@@ -1,7 +1,7 @@
 @import '../../abstracts/';
 
 .monster {
-  max-width: $mediaMobileWidth;
+  max-width: $media-mobile-width;
   &--selectors {
     display: flex;
     gap: 1em;
@@ -23,7 +23,7 @@
 
   .table-row {
     &--selected {
-      background-color: $selectionColor;
+      background-color: $selection-color;
       td {
         color: white;
       }
@@ -31,7 +31,7 @@
   }
 }
 
-@media screen and (max-width: $mediaMobileWidth) {
+@media screen and (max-width: $media-mobile-width) {
   .hitzone-table {
     border: 0;
     thead {

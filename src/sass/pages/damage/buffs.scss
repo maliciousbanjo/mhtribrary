@@ -1,5 +1,12 @@
+@import '../../abstracts/';
+
 .attack-buffs {
-  justify-content: space-between;
+  column-gap: 3em;
+
+  .bp5-control-group,
+  .bp5-radio-group {
+    min-width: calc($min-width / 3);
+  }
 
   .bp5-control-group.bp5-vertical {
     justify-content: space-between;

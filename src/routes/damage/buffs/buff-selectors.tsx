@@ -89,18 +89,6 @@ export function BuffSelectors({
           }}
         />
         <RadioGroup
-          key="demondrug"
-          label="Demondrug"
-          options={demondrugOptions}
-          selectedValue={weaponClassArgs.demondrug}
-          onChange={event => {
-            dispatchWeaponClassArgs({
-              type: 'DEMONDRUG',
-              payload: event.currentTarget.value as WeaponClassArgs['demondrug']
-            });
-          }}
-        />
-        <RadioGroup
           key="might"
           label="Might"
           options={mightOptions}
@@ -109,6 +97,18 @@ export function BuffSelectors({
             dispatchWeaponClassArgs({
               type: 'MIGHT',
               payload: event.currentTarget.value as WeaponClassArgs['might']
+            });
+          }}
+        />
+        <RadioGroup
+          key="demondrug"
+          label="Demondrug"
+          options={demondrugOptions}
+          selectedValue={weaponClassArgs.demondrug}
+          onChange={event => {
+            dispatchWeaponClassArgs({
+              type: 'DEMONDRUG',
+              payload: event.currentTarget.value as WeaponClassArgs['demondrug']
             });
           }}
         />
