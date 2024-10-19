@@ -1,10 +1,3 @@
-@mixin flex-container {
-  display: flex;
-  column-gap: 1em;
-}
-
-@mixin flex-container-wrap {
-  @include flex-container();
-  column-gap: 4em;
-  flex-wrap: wrap;
+@mixin indented-block {
+  margin: 0 0.5em 0.9em 0.5em;
 }

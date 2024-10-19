@@ -25,62 +25,43 @@ export const weaponClassOptions: OptionProps<WeaponClass>[] = [
   { value: WeaponClass.SWORD_AND_SHIELD }
 ];
 
-const greatSwordOptions = GreatSword.GreatSwords.map<OptionProps<number>>(
-  gs => ({
-    label: gs.name,
-    value: gs.id
-  })
-);
+export const greatSwordOptions = GreatSword.GreatSwords.map<
+  OptionProps<number>
+>(gs => ({
+  label: gs.name,
+  value: gs.id
+}));
 
-const hammerOptions = Hammer.Hammers.map<OptionProps<number>>(hm => ({
+export const hammerOptions = Hammer.Hammers.map<OptionProps<number>>(hm => ({
   label: hm.name,
   value: hm.id
 }));
 
-const lanceOptions = Lance.Lances.map<OptionProps<number>>(lnc => ({
+export const lanceOptions = Lance.Lances.map<OptionProps<number>>(lnc => ({
   label: lnc.name,
   value: lnc.id
 }));
 
-const longswordOptions = Longsword.Longswords.map<OptionProps<number>>(ls => ({
-  label: ls.name,
-  value: ls.id
-}));
+export const longswordOptions = Longsword.Longswords.map<OptionProps<number>>(
+  ls => ({
+    label: ls.name,
+    value: ls.id
+  })
+);
 
-const switchAxeOptions = SwitchAxe.SwitchAxes.map<OptionProps<number>>(
+export const switchAxeOptions = SwitchAxe.SwitchAxes.map<OptionProps<number>>(
   swaxe => ({
     label: swaxe.name,
     value: swaxe.id
   })
 );
 
-const swordAndShieldOptions = SwordAndShield.SwordAndShields.map<
+export const swordAndShieldOptions = SwordAndShield.SwordAndShields.map<
   OptionProps<number>
 >(sns => ({
   label: sns.name,
   value: sns.id
 }));
-
-export function getWeaponSelectOptions(
-  weaponClass: WeaponClass
-): OptionProps<number>[] {
-  switch (weaponClass) {
-    case 'Great Sword':
-      return greatSwordOptions;
-    case 'Hammer':
-      return hammerOptions;
-    case 'Lance':
-      return lanceOptions;
-    case 'Longsword':
-      return longswordOptions;
-    case 'Switch Axe':
-      return switchAxeOptions;
-    case 'Sword and Shield':
-      return swordAndShieldOptions;
-    default:
-      throw new Error(`Invalid weapon selection ${weaponClass}`);
-  }
-}
 
 // WEAPON ATTACK NAMES
 const greatSwordAttackOptions =

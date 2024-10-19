@@ -1,16 +1,11 @@
-@import '../../abstracts/';
-@import '@blueprintjs/core/lib/scss/variables';
-
 .attack-buffs {
-  @include flex-container-wrap();
-  column-gap: 3em;
-
-  .bp5-control-group,
-  .bp5-radio-group {
-    min-width: calc($min-width / 3);
-  }
+  justify-content: space-between;
 
   .bp5-control-group.bp5-vertical {
     justify-content: space-between;
   }
+}
+
+.negative-skill {
+  color: red;
 }

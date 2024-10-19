@@ -15,7 +15,11 @@ import {
   monsterArgsReducer,
   MonsterSelectors
 } from './monster';
-import { WEAPON_ARGS_INITIAL_STATE, weaponArgsReducer, Weapon } from './weapon';
+import {
+  WEAPON_ARGS_INITIAL_STATE,
+  weaponArgsReducer,
+  WeaponSelectors
+} from './weapon';
 
 /**
  * Top-level page for damage calculations
@@ -110,8 +114,8 @@ export function DamagePage() {
 
   return (
     <div className="damage">
-      <div className="flex-container-wrap">
-        <Weapon
+      <div className="flex-container">
+        <WeaponSelectors
           weaponArgs={weaponArgs}
           dispatchWeaponArgs={dispatchWeaponArgs}
         />

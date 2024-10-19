@@ -37,7 +37,7 @@ export function BuffSelectors({
   return (
     <div>
       <h3>Buffs</h3>
-      <div className="attack-buffs">
+      <div className="flex-container attack-buffs">
         <ControlGroup vertical>
           <span>
             <Checkbox
@@ -89,18 +89,6 @@ export function BuffSelectors({
           }}
         />
         <RadioGroup
-          key="might"
-          label="Might"
-          options={mightOptions}
-          selectedValue={weaponClassArgs.might}
-          onChange={event => {
-            dispatchWeaponClassArgs({
-              type: 'MIGHT',
-              payload: event.currentTarget.value as WeaponClassArgs['might']
-            });
-          }}
-        />
-        <RadioGroup
           key="demondrug"
           label="Demondrug"
           options={demondrugOptions}
@@ -109,6 +97,18 @@ export function BuffSelectors({
             dispatchWeaponClassArgs({
               type: 'DEMONDRUG',
               payload: event.currentTarget.value as WeaponClassArgs['demondrug']
+            });
+          }}
+        />
+        <RadioGroup
+          key="might"
+          label="Might"
+          options={mightOptions}
+          selectedValue={weaponClassArgs.might}
+          onChange={event => {
+            dispatchWeaponClassArgs({
+              type: 'MIGHT',
+              payload: event.currentTarget.value as WeaponClassArgs['might']
             });
           }}
         />
