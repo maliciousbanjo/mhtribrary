@@ -22,6 +22,7 @@ footer {
 }
 
 .warning-banner {
+  color: red;
   text-align: center;
 }
 
@@ -34,13 +35,13 @@ footer {
     height: $navbarHeight;
 
     // Hide menu buttons for desktop sizes
-    @media (min-width: $media-mobile-width) {
+    @media (min-width: $mediaMobileWidth) {
       .menu-button {
         display: none;
       }
     }
     // Hide navbar buttons for mobile sizes
-    @media (max-width: $media-mobile-width) {
+    @media (max-width: $mediaMobileWidth) {
       &__page-buttons,
       &__extra {
         display: none;
@@ -111,17 +112,7 @@ footer {
 }
 
 .flex-container {
-  @include flex-container();
-}
-
-.flex-container-wrap {
-  @include flex-container-wrap();
-}
-
-.danger-text {
-  color: red;
-}
-
-.bp5-dark .danger-text {
-  color: $pt-intent-danger;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
