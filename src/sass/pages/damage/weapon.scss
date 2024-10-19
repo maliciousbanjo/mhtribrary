@@ -53,6 +53,17 @@
     label {
       font-weight: bold;
     }
+
+    .element-type {
+      font-size: 8pt;
+      text-transform: uppercase;
+    }
+
+    .slots {
+      display: flex;
+      align-items: center;
+      gap: 0.2em;
+    }
   }
 }
 

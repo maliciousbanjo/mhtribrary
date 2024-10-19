@@ -22,7 +22,6 @@ footer {
 }
 
 .warning-banner {
-  color: red;
   text-align: center;
 }
 
@@ -117,4 +116,12 @@ footer {
 
 .flex-container-wrap {
   @include flex-container-wrap();
+}
+
+.danger-text {
+  color: red;
+}
+
+.bp5-dark .danger-text {
+  color: $pt-intent-danger;
 }
