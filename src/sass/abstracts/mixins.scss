@@ -1,9 +1,10 @@
 @mixin flex-container {
   display: flex;
-  gap: 1rem;
+  column-gap: 1em;
 }
 
 @mixin flex-container-wrap {
   @include flex-container();
+  column-gap: 4em;
   flex-wrap: wrap;
 }
