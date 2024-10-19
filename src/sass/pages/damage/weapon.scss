@@ -1,14 +1,72 @@
+@import '../../abstracts/';
+
 .weapon {
   &--selectors {
-    display: flex;
+    @include flex-container();
     flex-direction: column;
-    gap: 1em;
-    /* // TODO: This space is for the sharpness graph/weapon stats */
-    // min-height: 350px;
   }
 }
+
+.bp5-dark .weapon-info__sharpness {
+  border: 1px solid white;
+}
+
+.weapon-info {
+  @include flex-container();
+
+  &__sharpness {
+    border: 1px solid black;
+    background-color: #333333;
+    height: 1.2em;
+    width: 210px;
+    padding: 1px;
+    margin-bottom: 0.5em;
+    .sharpness-cell {
+      height: 100%;
+      float: left;
+    }
+    .sharp0 {
+      background-color: $sharpness-red;
+    }
+    .sharp1 {
+      background-color: $sharpness-orange;
+    }
+    .sharp2 {
+      background-color: $sharpness-yellow;
+    }
+    .sharp3 {
+      background-color: $sharpness-green;
+    }
+    .sharp4 {
+      background-color: $sharpness-blue;
+    }
+    .sharp5 {
+      background-color: $sharpness-white;
+    }
+    .sharp6 {
+      background-color: $sharpness-purple;
+    }
+  }
+
+  &__stats {
+    label {
+      font-weight: bold;
+    }
+
+    .element-type {
+      font-size: 8pt;
+      text-transform: uppercase;
+    }
+
+    .slots {
+      display: flex;
+      align-items: center;
+      gap: 0.2em;
+    }
+  }
+}
+
 .unique-weapon-selectors {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5em;
+  @include flex-container();
+  column-gap: 1.5em;
 }
