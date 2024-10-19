@@ -2,3 +2,9 @@
 @forward './monster.scss';
 @forward './buffs.scss';
 @forward './damage-results.scss';
+@import '../../abstracts/';
+
+.weapon-and-monster {
+  @include flex-container-wrap();
+  column-gap: 4em;
+}

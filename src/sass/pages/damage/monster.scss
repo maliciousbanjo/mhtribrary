@@ -3,13 +3,24 @@
 .monster {
   max-width: $media-mobile-width;
   &--selectors {
-    @include flex-container();
+    @include flex-container-wrap();
+
+    .multiplier-labels {
+      justify-content: space-between;
+    }
+
+    .multiplier {
+      text-indent: 0.5em;
+      font-size: 8pt;
+      label {
+        text-transform: uppercase;
+      }
+    }
   }
 }
 
 .hitzone-table {
   table-layout: fixed;
-  width: 100%;
   tr.table-row {
     padding: 0.35em;
   }
@@ -33,6 +44,7 @@
 @media screen and (max-width: $media-mobile-width) {
   .hitzone-table {
     border: 0;
+    width: 100%;
     thead {
       clip: rect(0 0 0 0);
       height: 1px;
