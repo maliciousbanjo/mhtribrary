@@ -21,17 +21,17 @@ export const armorSkillOptions: OptionProps<WeaponClassArgs['armor']>[] = [
   {
     value: 'attackDownSmall',
     label: 'Attack Down Small',
-    className: 'negative-skill'
+    className: 'danger-text'
   },
   {
     value: 'attackDownMedium',
     label: 'Attack Down Medium',
-    className: 'negative-skill'
+    className: 'danger-text'
   },
   {
     value: 'attackDownLarge',
     label: 'Attack Down Large',
-    className: 'negative-skill'
+    className: 'danger-text'
   }
 ];
 
@@ -48,7 +48,7 @@ export const elementAttackOptions: OptionProps<ElementArgs['elementAttack']>[] =
     {
       value: 'down',
       label: 'Element Attack Down',
-      className: 'negative-skill'
+      className: 'danger-text'
     }
   ];
 
@@ -64,7 +64,7 @@ export const criticalHitOptions: OptionProps<RawArgs['criticalHit']>[] = [
   {
     value: 'negative',
     label: 'Negative',
-    className: 'negative-skill'
+    className: 'danger-text'
   }
 ];
 

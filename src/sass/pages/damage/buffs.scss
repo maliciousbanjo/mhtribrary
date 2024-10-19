@@ -1,4 +1,5 @@
 @import '../../abstracts/';
+@import '@blueprintjs/core/lib/scss/variables';
 
 .attack-buffs {
   @include flex-container-wrap();
@@ -12,8 +13,4 @@
   .bp5-control-group.bp5-vertical {
     justify-content: space-between;
   }
-}
-
-.negative-skill {
-  color: red;
 }
