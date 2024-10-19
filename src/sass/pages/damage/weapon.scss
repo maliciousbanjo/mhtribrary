@@ -2,9 +2,8 @@
 
 .weapon {
   &--selectors {
-    display: flex;
+    @include flex-container();
     flex-direction: column;
-    gap: 1em;
   }
 }
 
@@ -68,7 +67,6 @@
 }
 
 .unique-weapon-selectors {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5em;
+  @include flex-container();
+  column-gap: 1.5em;
 }
