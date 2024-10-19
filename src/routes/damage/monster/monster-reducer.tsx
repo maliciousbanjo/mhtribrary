@@ -46,7 +46,7 @@ export function monsterArgsReducer(
     case 'MONSTER_NAME': {
       const newMonster = Monsters.getMonster(action.payload);
       const quests = Quests.getQuestsWithLargeMonster(newMonster.id, 'Both');
-      const newQuestId = quests.length > 0 ? quests[0].id : 0x0;
+      const newQuestId = quests.length > 0 ? quests[0].id : undefined;
       return {
         ...MONSTER_ARGS_INITIAL_STATE,
         monsterName: action.payload,

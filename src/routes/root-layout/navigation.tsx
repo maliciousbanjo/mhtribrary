@@ -1,4 +1,4 @@
-import { Alignment, Button, Classes, Navbar, Switch } from '@blueprintjs/core';
+import { Button, Classes, Icon, Navbar, Switch } from '@blueprintjs/core';
 import classNames from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -56,10 +56,13 @@ export function NavigationBar({ darkMode, setDarkMode }: NavigationBarProps) {
           </Link>
         </Navbar.Group>
         <Navbar.Group className="top-navbar__theme" align="right">
+          {darkMode ? (
+            <Icon icon="flash" size={16} style={{ marginBottom: '2px' }} />
+          ) : (
+            <Icon icon="moon" size={16} style={{ marginBottom: '2px' }} />
+          )}
           <Switch
-            label="Dark Mode"
             style={{ margin: '0px 0px 0px 10px' }}
-            alignIndicator={Alignment.RIGHT}
             checked={darkMode}
             onChange={onSetDarkMode}
           />

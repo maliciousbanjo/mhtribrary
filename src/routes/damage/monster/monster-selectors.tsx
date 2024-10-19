@@ -1,5 +1,12 @@
 import { FormGroup, HTMLSelect, OptionProps } from '@blueprintjs/core';
-import { DamageTypes, Monsters, MonsterTypes, Quests } from 'mh3-data';
+import {
+  DamageTypes,
+  MonsterLevels,
+  MonsterLevelTypes,
+  Monsters,
+  MonsterTypes,
+  Quests
+} from 'mh3-data';
 import React from 'react';
 import { HitzoneTable } from '../hitzone-table';
 import { monsterOptions } from './constants';
@@ -79,13 +86,25 @@ export function MonsterSelectors({
     [dispatchMonsterArgs]
   );
 
+  const multipliers: MonsterLevelTypes.MonsterLevelMultipliers =
+    monsterArgs.questId !== undefined
+      ? MonsterLevels.getMonsterMultipliersForQuest(
+          monsterArgs.monsterName,
+          monsterArgs.questId
+        )
+      : {
+          health: [1],
+          defense: 1,
+          stagger: 1
+        };
+
   return (
     <div className="monster">
       <h3>Monster</h3>
       <div className="monster--selectors">
         <FormGroup label="Monster">
           <HTMLSelect
-            className="select select-monster"
+            id="select-monster"
             options={monsterOptions}
             value={monsterArgs.monsterName}
             onChange={onChangeMonsterName}
@@ -95,7 +114,7 @@ export function MonsterSelectors({
         {monsterStates.length > 1 && (
           <FormGroup label="State">
             <HTMLSelect
-              className="select select-monster-state"
+              id="select-monster-state"
               options={monsterStates}
               value={monsterArgs.monsterStateIndex}
               onChange={onChangeMonsterState}
@@ -104,19 +123,31 @@ export function MonsterSelectors({
         )}
 
         {questOptions.length !== 0 && (
-          <FormGroup label="Quest">
-            <HTMLSelect
-              className="select select-quest"
-              options={questOptions}
-              onChange={onChangeQuest}
-              disabled={questOptions.length < 2}
-            />
-          </FormGroup>
+          <>
+            <FormGroup label="Quest">
+              <HTMLSelect
+                id="select-quest"
+                options={questOptions}
+                onChange={onChangeQuest}
+                disabled={questOptions.length < 2}
+              />
+            </FormGroup>
+
+            <FormGroup className="multiplier-labels" label="Multipliers">
+              <div className="multiplier">
+                <label>Defense:</label> {multipliers.defense}
+              </div>
+              <div className="multiplier">
+                <label>Stagger:</label> {multipliers.stagger}
+              </div>
+            </FormGroup>
+          </>
         )}
       </div>
       <HitzoneTable
         monsterArgs={monsterArgs}
         dispatchMonsterArgs={dispatchMonsterArgs}
+        monsterMultipliers={multipliers}
       />
       {/* // TODO: Display read-only defense/stagger multipliers */}
     </div>

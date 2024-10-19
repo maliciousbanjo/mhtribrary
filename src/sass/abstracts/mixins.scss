@@ -5,6 +5,5 @@
 
 @mixin flex-container-wrap {
   @include flex-container();
-  column-gap: 4em;
   flex-wrap: wrap;
 }

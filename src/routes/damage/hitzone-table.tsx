@@ -1,17 +1,20 @@
 import { HTMLTable } from '@blueprintjs/core';
 import classNames from 'classnames';
-import { DamageTypes, Monsters } from 'mh3-data';
+import { DamageTypes, MonsterLevelTypes, Monsters } from 'mh3-data';
 import React from 'react';
 import { MonsterArgReducerAction } from './monster';
 
 interface HitzoneTableProps {
   monsterArgs: DamageTypes.MonsterArgs;
   dispatchMonsterArgs: React.Dispatch<MonsterArgReducerAction>;
+
+  monsterMultipliers: MonsterLevelTypes.MonsterLevelMultipliers;
 }
 
 export function HitzoneTable({
   monsterArgs,
-  dispatchMonsterArgs
+  dispatchMonsterArgs,
+  monsterMultipliers
 }: HitzoneTableProps) {
   const monster = Monsters.getMonster(monsterArgs.monsterName);
   const hitzoneGroup = monster.monsterStates[monsterArgs.monsterStateIndex];
@@ -61,11 +64,16 @@ export function HitzoneTable({
           {hitzone.values.dragon}
         </td>
         <td className="cell" data-label="Stagger">
-          {hitzone.values.stagger} HP
+          {Math.floor(hitzone.values.stagger * monsterMultipliers.stagger)} HP
         </td>
       </tr>
     ));
-  }, [handleRowClick, hitzoneGroup.hitzones, monsterArgs.hitzoneIndex]);
+  }, [
+    handleRowClick,
+    hitzoneGroup.hitzones,
+    monsterArgs.hitzoneIndex,
+    monsterMultipliers.stagger
+  ]);
 
   return (
     <div className="hitzones">

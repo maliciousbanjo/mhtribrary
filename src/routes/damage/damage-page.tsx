@@ -110,7 +110,7 @@ export function DamagePage() {
 
   return (
     <div className="damage">
-      <div className="flex-container-wrap">
+      <div className="weapon-and-monster">
         <Weapon
           weaponArgs={weaponArgs}
           dispatchWeaponArgs={dispatchWeaponArgs}

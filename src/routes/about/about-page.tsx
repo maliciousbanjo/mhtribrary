@@ -52,8 +52,8 @@ export function AboutPage() {
               website.
             </li>
             <li>
-              A proper understanding of monster HP was discovered Discord user
-              Ze Spyro, a developer of the MH3SP project.
+              A proper understanding of monster HP was discovered by Discord
+              user Ze Spyro, a developer of the MH3SP project.
             </li>
           </ul>
         </div>
