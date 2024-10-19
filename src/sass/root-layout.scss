@@ -9,16 +9,21 @@ $sideMenuTransition: 0.3s;
   position: relative;
 }
 
+// THEMING - LIGHT MODE
 .root-layout,
 .sidenav,
 footer {
   background-color: $pt-app-background-color;
 }
 
+// THEMING - DARK MODE
 .root-layout.bp5-dark,
 .bp5-dark footer,
 .bp5-dark .sidenav {
   background-color: $pt-dark-app-background-color;
+}
+.bp5-dark .danger-text {
+  color: $pt-intent-danger;
 }
 
 .warning-banner {
@@ -120,8 +125,4 @@ footer {
 
 .danger-text {
   color: red;
-}
-
-.bp5-dark .danger-text {
-  color: $pt-intent-danger;
 }
