@@ -6,5 +6,5 @@
 
 .weapon-and-monster {
   @include flex-container-wrap();
-  column-gap: 4em;
+  justify-content: space-between;
 }

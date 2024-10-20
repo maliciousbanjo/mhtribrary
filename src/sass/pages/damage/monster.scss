@@ -19,6 +19,14 @@
   }
 }
 
+.quest-select {
+  &__popover {
+    .quest-menu-text {
+      margin-right: 2em;
+    }
+  }
+}
+
 .hitzone-table {
   table-layout: fixed;
   tr.table-row {
