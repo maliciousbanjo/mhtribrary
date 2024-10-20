@@ -28,7 +28,13 @@ export function WeaponInfo({ weapon }: WeaponInfoProps) {
     const result: JSX.Element[] = [];
     for (let i = 0; i < slots; i++) {
       result.push(
-        <Icon tagName={'span'} className="slot-icon" icon="circle" size={13} />
+        <Icon
+          key={`slot-${i + 1}`}
+          tagName={'span'}
+          className="slot-icon"
+          icon="circle"
+          size={13}
+        />
       );
     }
 

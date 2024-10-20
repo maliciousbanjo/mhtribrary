@@ -121,7 +121,7 @@ export function weaponArgsReducer(
         state.weaponId
       );
       // Validate sharpness
-      if (action.payload > currentWeapon.sharpnessUp.length) {
+      if (action.payload > currentWeapon.sharpnessUp.length - 1) {
         throw new Error(
           `${currentWeapon.name} cannot reach ${Weapons.sharpnessAsString(action.payload)} sharpness`
         );
