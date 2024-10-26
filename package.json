@@ -13,9 +13,10 @@
     "@blueprintjs/core": "^5.13.0",
     "@blueprintjs/select": "^5.2.5",
     "classnames": "^2.5.1",
-    "mh3-data": "^0.9.6",
+    "mh3-data": "file:../mh3-data",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-responsive": "^10.0.0",
     "react-router-dom": "^6.26.2",
     "uuid": "^10.0.0"
   },
