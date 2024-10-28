@@ -8,17 +8,17 @@ import {
 } from '@blueprintjs/select';
 import { Quests, QuestTypes } from 'mh3-data';
 import React from 'react';
-import { MonsterSelectorsProps } from '../monster-selectors';
 import { getQuestGroups } from './util';
+import { QuestSelectorProps } from '.';
 
 /**
  * Quest selector for desktop screen sizes
  */
 export function QuestSelectorDesktop({
-  monsterArgs,
   quests,
+  selectedQuest,
   dispatchMonsterArgs
-}: MonsterSelectorsProps & { quests: QuestTypes.Quest[] }) {
+}: QuestSelectorProps) {
   const onSelectQuest = React.useCallback(
     (quest: Quests.QuestTypes.Quest) => {
       dispatchMonsterArgs({
@@ -28,10 +28,6 @@ export function QuestSelectorDesktop({
     },
     [dispatchMonsterArgs]
   );
-
-  const selectedQuest = React.useMemo(() => {
-    return quests.find(quest => quest.id === monsterArgs.questId) ?? quests[0];
-  }, [monsterArgs.questId, quests]);
 
   const itemRenderer = React.useCallback<ItemRenderer<QuestTypes.Quest>>(
     (

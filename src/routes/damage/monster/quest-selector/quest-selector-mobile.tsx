@@ -1,7 +1,6 @@
 import { HTMLSelect } from '@blueprintjs/core';
-import { QuestTypes } from 'mh3-data';
 import React from 'react';
-import { MonsterSelectorsProps } from '../monster-selectors';
+import { QuestSelectorProps } from '.';
 import { getQuestGroups } from './util';
 
 /**
@@ -9,10 +8,9 @@ import { getQuestGroups } from './util';
  */
 export function QuestSelectorMobile({
   quests,
+  selectedQuest,
   dispatchMonsterArgs
-}: Pick<MonsterSelectorsProps, 'dispatchMonsterArgs'> & {
-  quests: QuestTypes.Quest[];
-}) {
+}: QuestSelectorProps) {
   const onChangeQuest = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
@@ -43,6 +41,7 @@ export function QuestSelectorMobile({
   return (
     <HTMLSelect
       id="select-quest"
+      value={selectedQuest.id}
       onChange={onChangeQuest}
       disabled={quests.length < 2}
     >
