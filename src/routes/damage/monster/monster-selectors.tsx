@@ -11,8 +11,9 @@ import React from 'react';
 import { HitzoneTable } from '../hitzone-table';
 import { monsterOptions } from './constants';
 import { MonsterArgReducerAction } from './monster-reducer';
+import { QuestSelector } from './quest-selector';
 
-interface MonsterSelectorsProps {
+export interface MonsterSelectorsProps {
   monsterArgs: DamageTypes.MonsterArgs;
   dispatchMonsterArgs: React.Dispatch<MonsterArgReducerAction>;
 }
@@ -75,17 +76,6 @@ export function MonsterSelectors({
     });
   }, [monsterArgs.monsterName]);
 
-  const onChangeQuest = React.useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const { target } = event;
-      dispatchMonsterArgs({
-        type: 'QUEST_ID',
-        payload: parseInt(target.value)
-      });
-    },
-    [dispatchMonsterArgs]
-  );
-
   const multipliers: MonsterLevelTypes.MonsterLevelMultipliers =
     monsterArgs.questId !== undefined
       ? MonsterLevels.getMonsterMultipliersForQuest(
@@ -125,11 +115,9 @@ export function MonsterSelectors({
         {questOptions.length !== 0 && (
           <>
             <FormGroup label="Quest">
-              <HTMLSelect
-                id="select-quest"
-                options={questOptions}
-                onChange={onChangeQuest}
-                disabled={questOptions.length < 2}
+              <QuestSelector
+                monsterArgs={monsterArgs}
+                dispatchMonsterArgs={dispatchMonsterArgs}
               />
             </FormGroup>
 
@@ -149,7 +137,6 @@ export function MonsterSelectors({
         dispatchMonsterArgs={dispatchMonsterArgs}
         monsterMultipliers={multipliers}
       />
-      {/* // TODO: Display read-only defense/stagger multipliers */}
     </div>
   );
 }
