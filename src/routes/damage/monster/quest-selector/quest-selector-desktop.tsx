@@ -42,7 +42,7 @@ export function QuestSelectorDesktop({
       <MenuItem
         key={quest.id}
         ref={ref}
-        textClassName="quest-menu-text"
+        textClassName="select-quest-item" // TODO: Not needed?
         onClick={handleClick}
         onFocus={handleFocus}
         disabled={modifiers.disabled}
@@ -71,7 +71,7 @@ export function QuestSelectorDesktop({
 
     return (
       <Menu
-        className="quest-select__menu"
+        className="select-quest__menu"
         role="listbox"
         {...listProps.menuProps}
       >
@@ -82,16 +82,16 @@ export function QuestSelectorDesktop({
 
   return (
     <Select<QuestTypes.Quest>
-      className="quest-select"
-      filterable={false}
       fill
+      className="select-quest"
+      popoverProps={{ minimal: true }}
+      popoverContentProps={{ className: 'select-quest__popover' }}
+      filterable={false}
       items={quests}
       disabled={quests.length < 2}
+      onItemSelect={onSelectQuest}
       itemRenderer={itemRenderer}
       itemListRenderer={groupedItemRenderer}
-      onItemSelect={onSelectQuest}
-      popoverProps={{ minimal: true }}
-      popoverContentProps={{ className: 'quest-select__popover' }}
     >
       <Button text={selectedQuest.name} disabled={quests.length < 2} />
     </Select>

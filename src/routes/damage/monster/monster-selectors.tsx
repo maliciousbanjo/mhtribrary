@@ -4,13 +4,12 @@ import {
   MonsterLevels,
   MonsterLevelTypes,
   Monsters,
-  MonsterTypes,
   Quests
 } from 'mh3-data';
 import React from 'react';
 import { HitzoneTable } from '../hitzone-table';
-import { monsterOptions } from './constants';
 import { MonsterArgReducerAction } from './monster-reducer';
+import { MonsterSelector } from './monster-selector';
 import { QuestSelector } from './quest-selector';
 
 export interface MonsterSelectorsProps {
@@ -22,21 +21,6 @@ export function MonsterSelectors({
   monsterArgs,
   dispatchMonsterArgs
 }: MonsterSelectorsProps) {
-  /**
-   * Change handler for selected monster
-   * Resets {@link selectedMonsterHitzoneGroup} and {@link selectedQuestId} when changed
-   */
-  const onChangeMonsterName = React.useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const { target } = event;
-      dispatchMonsterArgs({
-        type: 'MONSTER_NAME',
-        payload: target.value as MonsterTypes.MonsterName
-      });
-    },
-    [dispatchMonsterArgs]
-  );
-
   /**
    * Different hitzoneGroups based on monster state (flying, muddy, enraged, etc)
    */
@@ -93,11 +77,9 @@ export function MonsterSelectors({
       <h3>Monster</h3>
       <div className="monster--selectors">
         <FormGroup label="Monster">
-          <HTMLSelect
-            id="select-monster"
-            options={monsterOptions}
-            value={monsterArgs.monsterName}
-            onChange={onChangeMonsterName}
+          <MonsterSelector
+            monsterArgs={monsterArgs}
+            dispatchMonsterArgs={dispatchMonsterArgs}
           />
         </FormGroup>
 

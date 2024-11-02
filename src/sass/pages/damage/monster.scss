@@ -19,10 +19,11 @@
   }
 }
 
-.quest-select {
+.select-quest {
+  // TODO: Shared rules? Mixin?
   &__popover {
-    .quest-menu-text {
-      margin-right: 2em;
+    .select-quest-item {
+      // margin-right: 2em;
     }
   }
   &__menu.bp5-menu {

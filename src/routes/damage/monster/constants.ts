@@ -1,6 +1,7 @@
 import { OptionProps } from '@blueprintjs/core';
-import { Monsters } from 'mh3-data';
+import { Monsters, MonsterTypes } from 'mh3-data';
 
+// TODO: Delete?
 export const monsterOptions = Monsters.LargeMonsterData.map<
   OptionProps<string>
 >(mon => ({
@@ -10,3 +11,6 @@ export const monsterOptions = Monsters.LargeMonsterData.map<
     value: mon.name
   }))
 );
+
+export const allMonsters: MonsterTypes.Monster[] =
+  Monsters.SmallMonsterData.concat(Monsters.LargeMonsterData);
