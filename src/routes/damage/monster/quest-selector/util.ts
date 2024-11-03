@@ -8,7 +8,7 @@ export interface QuestListGroup {
 /**
  * @returns quest grouping of Village, Low or High Rank
  */
-export function getGroup(quest: QuestTypes.Quest) {
+export function getQuestGroup(quest: QuestTypes.Quest) {
   switch (quest.region) {
     case 'Village':
       return 'Village';
@@ -25,7 +25,7 @@ export function getGroup(quest: QuestTypes.Quest) {
  */
 export function getQuestGroups(quests: QuestTypes.Quest[]) {
   return quests.reduce<QuestListGroup[]>((groups, quest) => {
-    const group = getGroup(quest);
+    const group = getQuestGroup(quest);
     const existingGroup = groups.find(g => g.groupName === group);
     if (existingGroup && existingGroup.groupName === group) {
       existingGroup.quests.push(quest);

@@ -10,6 +10,7 @@ import { MonsterTypes } from 'mh3-data';
 import React from 'react';
 import { MonsterSelectorProps } from '.';
 import { allMonsters } from '../constants';
+import { getMonsterGroups } from './util';
 
 /**
  * Monster selector for desktop screen sizes
@@ -41,7 +42,7 @@ export function MonsterSelectorDesktop({
       <MenuItem
         key={monster.id}
         ref={ref}
-        textClassName="select-monster-item" // TODO: not needed, unified convention?
+        textClassName="select__item select-monster"
         onClick={handleClick}
         onFocus={handleFocus}
         disabled={modifiers.disabled}
@@ -54,21 +55,28 @@ export function MonsterSelectorDesktop({
     [selectedMonsterName]
   );
 
-  // TODO: Group monsters
   const groupedItemRenderer = React.useCallback<
     ItemListRenderer<MonsterTypes.Monster>
   >((listProps: ItemListRendererProps<MonsterTypes.Monster>) => {
-    const content = listProps.items.map(monster =>
-      listProps.renderItem(monster, monster.id)
-    );
+    const groupedMonsters = getMonsterGroups(listProps.items);
+
+    const content = groupedMonsters.map(listGroup => {
+      return (
+        <React.Fragment key={listGroup.groupName}>
+          <MenuDivider title={listGroup.groupName} />
+          {listGroup.monsters.map(monster =>
+            listProps.renderItem(monster, monster.id)
+          )}
+        </React.Fragment>
+      );
+    });
 
     return (
       <Menu
-        className="select-monster__menu"
+        className="select__menu select-monster"
         role="listbox"
         {...listProps.menuProps}
       >
-        <MenuDivider title={'TESTING'} />
         {content}
       </Menu>
     );
@@ -79,7 +87,6 @@ export function MonsterSelectorDesktop({
       fill
       className="select-monster"
       popoverProps={{ minimal: true }}
-      popoverContentProps={{ className: 'select-monster__popover' }}
       filterable={false}
       items={allMonsters}
       onItemSelect={onSelectMonsterName}

@@ -14,8 +14,28 @@ export function isLargeMonster(
   return (monster as MonsterTypes.LargeMonster).hp !== undefined;
 }
 
+export function getMonsterGroup(
+  monster: MonsterTypes.Monster
+): 'Large' | 'Small' {
+  if (isLargeMonster(monster)) return 'Large';
+  return 'Small';
+}
+
+/**
+ * Parses a list of monsters into their Large/Small groups
+ */
 export function getMonsterGroups(monsters: MonsterTypes.Monster[]) {
-  monsters.reduce<MonsterListGroup[]>((groups, monster) => {
-    const isLarge = isLargeMonster(monster);
+  return monsters.reduce<MonsterListGroup[]>((groups, monster) => {
+    const group = getMonsterGroup(monster);
+    const existingGroup = groups.find(g => g.groupName === group);
+    if (existingGroup && existingGroup.groupName === group) {
+      existingGroup.monsters.push(monster);
+    } else {
+      groups.push({
+        groupName: group,
+        monsters: [monster]
+      });
+    }
+    return groups;
   }, []);
 }

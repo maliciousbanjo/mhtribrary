@@ -42,7 +42,7 @@ export function QuestSelectorDesktop({
       <MenuItem
         key={quest.id}
         ref={ref}
-        textClassName="select-quest-item" // TODO: Not needed?
+        textClassName="select__item select-quest"
         onClick={handleClick}
         onFocus={handleFocus}
         disabled={modifiers.disabled}
@@ -71,7 +71,7 @@ export function QuestSelectorDesktop({
 
     return (
       <Menu
-        className="select-quest__menu"
+        className="select__menu select-quest"
         role="listbox"
         {...listProps.menuProps}
       >
@@ -85,7 +85,6 @@ export function QuestSelectorDesktop({
       fill
       className="select-quest"
       popoverProps={{ minimal: true }}
-      popoverContentProps={{ className: 'select-quest__popover' }}
       filterable={false}
       items={quests}
       disabled={quests.length < 2}

@@ -19,18 +19,6 @@
   }
 }
 
-.select-quest {
-  // TODO: Shared rules? Mixin?
-  &__popover {
-    .select-quest-item {
-      // margin-right: 2em;
-    }
-  }
-  &__menu.bp5-menu {
-    max-height: 400px;
-  }
-}
-
 .hitzone-table {
   table-layout: fixed;
   tr.table-row {

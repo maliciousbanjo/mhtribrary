@@ -14,7 +14,6 @@ export function MonsterSelector({
   dispatchMonsterArgs
 }: MonsterSelectorsProps) {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
-
   return isMobile ? (
     <MonsterSelectorMobile
       selectedMonsterName={monsterArgs.monsterName}

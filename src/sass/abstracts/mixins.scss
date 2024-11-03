@@ -1,9 +1,9 @@
-@mixin flex-container {
+@mixin flex-container($column-gap: 1em) {
   display: flex;
-  column-gap: 1em;
+  column-gap: $column-gap;
 }
 
-@mixin flex-container-wrap {
-  @include flex-container();
+@mixin flex-container-wrap($column-gap: 1em) {
+  @include flex-container($column-gap);
   flex-wrap: wrap;
 }
