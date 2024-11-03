@@ -37,7 +37,11 @@ export function QuestSelectorDesktop({
       isSelectedCallback={isQuestSelected}
       getGroupCallback={getQuestGroup}
     >
-      <Button text={selectedQuest.name} disabled={quests.length < 2} />
+      <Button
+        text={selectedQuest.name}
+        disabled={quests.length < 2}
+        rightIcon="double-caret-vertical"
+      />
     </Selector>
   );
 }

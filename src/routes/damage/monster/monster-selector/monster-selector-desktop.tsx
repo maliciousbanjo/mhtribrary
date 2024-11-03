@@ -35,7 +35,7 @@ export function MonsterSelectorDesktop({
       isSelectedCallback={isMonsterSelected}
       getGroupCallback={getMonsterGroup}
     >
-      <Button text={selectedMonsterName} />
+      <Button text={selectedMonsterName} rightIcon="double-caret-vertical" />
     </Selector>
   );
 }
