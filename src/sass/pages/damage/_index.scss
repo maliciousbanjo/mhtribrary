@@ -5,6 +5,5 @@
 @import '../../abstracts/';
 
 .weapon-and-monster {
-  @include flex-container-wrap();
-  justify-content: space-between;
+  @include flex-container-wrap(25%);
 }
