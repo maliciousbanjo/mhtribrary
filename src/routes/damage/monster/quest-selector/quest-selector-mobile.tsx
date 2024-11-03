@@ -1,7 +1,8 @@
 import { HTMLSelect } from '@blueprintjs/core';
 import React from 'react';
 import { QuestSelectorProps } from '.';
-import { getQuestGroups } from './util';
+import { getListGroups } from '../../../../ui/selector';
+import { getQuestGroup } from './util';
 
 /**
  * Quest selector for mobile screen sizes
@@ -23,12 +24,12 @@ export function QuestSelectorMobile({
   );
 
   const questOptionGroups = React.useMemo(() => {
-    const groupedQuests = getQuestGroups(quests);
+    const groupedQuests = getListGroups(quests, getQuestGroup);
 
     return groupedQuests.map<JSX.Element>(listGroup => (
       <React.Fragment key={listGroup.groupName}>
         <optgroup label={listGroup.groupName}>
-          {listGroup.quests.map(quest => (
+          {listGroup.items.map(quest => (
             <option key={quest.id} label={quest.name}>
               {quest.id}
             </option>
