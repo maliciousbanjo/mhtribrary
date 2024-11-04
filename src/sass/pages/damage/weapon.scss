@@ -67,6 +67,42 @@
 }
 
 .unique-weapon-selectors {
-  @include flex-container();
-  column-gap: 1.5em;
+  @include flex-container(1.5em);
+}
+
+// Segmented control sharpness colors
+.select-sharpness
+  > .sharp0.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
+  background-color: $sharpness-red;
+  color: $pt-dark-text-color;
+}
+.select-sharpness
+  > .sharp1.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
+  background-color: $sharpness-orange;
+  color: $pt-dark-text-color;
+}
+.select-sharpness
+  > .sharp2.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
+  background-color: $sharpness-yellow;
+  color: $pt-text-color;
+}
+.select-sharpness
+  > .sharp3.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
+  background-color: $sharpness-green;
+  color: $pt-text-color;
+}
+.select-sharpness
+  > .sharp4.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
+  background-color: $sharpness-blue;
+  color: $pt-dark-text-color;
+}
+.select-sharpness
+  > .sharp5.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
+  background-color: $sharpness-white;
+  color: $pt-text-color;
+}
+.select-sharpness
+  > .sharp6.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
+  background-color: $sharpness-purple;
+  color: $pt-text-color;
 }

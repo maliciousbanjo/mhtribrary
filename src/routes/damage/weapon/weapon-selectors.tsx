@@ -1,16 +1,21 @@
-import { FormGroup, HTMLSelect, OptionProps } from '@blueprintjs/core';
+import {
+  FormGroup,
+  HTMLSelect,
+  OptionProps,
+  SegmentedControl
+} from '@blueprintjs/core';
 import { Weapons } from 'mh3-data';
 import { WeaponClass } from 'mh3-data/weapons';
 import React from 'react';
 import { capitalize } from '../../../utils/format-utils';
 import { UniqueWeaponSelectors } from './unique-weapon-selectors';
 import { WeaponProps } from './weapon';
+import { WeaponInfo } from './weapon-info';
 import {
   getWeaponAttackOptions,
   getWeaponSelectOptions,
   weaponClassOptions
 } from './weapon-options';
-import { WeaponInfo } from './weapon-info';
 
 export function WeaponSelectors({
   weaponArgs,
@@ -30,7 +35,7 @@ export function WeaponSelectors({
    * Set dynamically based on the available sharpness of {@link selectedWeaponId}
    */
   const sharpnessOptions = React.useMemo(() => {
-    return selectedWeapon.sharpnessUp.map<OptionProps<number>>(
+    return selectedWeapon.sharpnessUp.map<OptionProps<string>>(
       (_sharpnessTicks, index) => {
         // If this index is not part of the base sharpness list then it must be an extra level
         const requiresSharpnessUp =
@@ -39,12 +44,23 @@ export function WeaponSelectors({
           Weapons.sharpnessAsString(index as Weapons.Sharpness)
         );
         return {
-          value: index,
+          className: `sharp${index}`,
+          value: label.toUpperCase(),
           label: requiresSharpnessUp ? `(${label})` : label
         };
       }
     );
   }, [selectedWeapon.sharpness, selectedWeapon.sharpnessUp]);
+
+  const onSelectSharpness = React.useCallback(
+    (value: string) => {
+      dispatchWeaponArgs({
+        type: 'SHARPNESS',
+        payload: Weapons.Sharpness[value as keyof typeof Weapons.Sharpness]
+      });
+    },
+    [dispatchWeaponArgs]
+  );
 
   /**
    * Also sets the default weapon ID and weapon attack to first index
@@ -72,17 +88,6 @@ export function WeaponSelectors({
       dispatchWeaponArgs({
         type: 'WEAPON_ID',
         payload: newWeaponId
-      });
-    },
-    [dispatchWeaponArgs]
-  );
-
-  const onChangeSharpness = React.useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const { target } = event;
-      dispatchWeaponArgs({
-        type: 'SHARPNESS',
-        payload: parseInt(target.value)
       });
     },
     [dispatchWeaponArgs]
@@ -138,18 +143,6 @@ export function WeaponSelectors({
             onChange={onChangeWeapon}
           />
         </FormGroup>
-      </div>
-      <WeaponInfo weapon={selectedWeapon} />
-
-      <div className="flex-container">
-        <FormGroup label="Sharpness">
-          <HTMLSelect
-            className="select select-weapon-sharpness"
-            options={sharpnessOptions}
-            value={weaponArgs.sharpness}
-            onChange={onChangeSharpness}
-          />
-        </FormGroup>
         <FormGroup label="Attack">
           <HTMLSelect
             className="select select-weapon-attack"
@@ -159,6 +152,18 @@ export function WeaponSelectors({
           />
         </FormGroup>
       </div>
+      <WeaponInfo weapon={selectedWeapon} />
+
+      <FormGroup label="Sharpness">
+        <SegmentedControl
+          fill
+          small
+          options={sharpnessOptions}
+          className="select-sharpness"
+          value={Weapons.sharpnessAsString(weaponArgs.sharpness).toUpperCase()}
+          onValueChange={onSelectSharpness}
+        />
+      </FormGroup>
       <UniqueWeaponSelectors
         weaponArgs={weaponArgs}
         dispatchWeaponArgs={dispatchWeaponArgs}
