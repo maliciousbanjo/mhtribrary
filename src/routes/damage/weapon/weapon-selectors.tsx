@@ -157,7 +157,6 @@ export function WeaponSelectors({
       <FormGroup label="Sharpness">
         <SegmentedControl
           fill
-          small
           options={sharpnessOptions}
           className="select-sharpness"
           value={Weapons.sharpnessAsString(weaponArgs.sharpness).toUpperCase()}

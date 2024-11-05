@@ -70,39 +70,37 @@
   @include flex-container(1.5em);
 }
 
+@mixin sharpnessSelectButton($color, $text-color: $pt-text-color) {
+  border-radius: 0px;
+  border-bottom: 3px solid $color;
+  &.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
+    box-shadow: none;
+    background-color: $color;
+    color: $text-color;
+  }
+}
+
 // Segmented control sharpness colors
-.select-sharpness
-  > .sharp0.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
-  background-color: $sharpness-red;
-  color: $pt-dark-text-color;
-}
-.select-sharpness
-  > .sharp1.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
-  background-color: $sharpness-orange;
-  color: $pt-dark-text-color;
-}
-.select-sharpness
-  > .sharp2.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
-  background-color: $sharpness-yellow;
-  color: $pt-text-color;
-}
-.select-sharpness
-  > .sharp3.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
-  background-color: $sharpness-green;
-  color: $pt-text-color;
-}
-.select-sharpness
-  > .sharp4.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
-  background-color: $sharpness-blue;
-  color: $pt-dark-text-color;
-}
-.select-sharpness
-  > .sharp5.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
-  background-color: $sharpness-white;
-  color: $pt-text-color;
-}
-.select-sharpness
-  > .sharp6.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
-  background-color: $sharpness-purple;
-  color: $pt-text-color;
+.select-sharpness {
+  .sharp0 {
+    @include sharpnessSelectButton($sharpness-red, $pt-dark-text-color);
+  }
+  .sharp1 {
+    @include sharpnessSelectButton($sharpness-orange, $pt-dark-text-color);
+  }
+  .sharp2 {
+    @include sharpnessSelectButton($sharpness-yellow, $pt-text-color);
+  }
+  .sharp3 {
+    @include sharpnessSelectButton($sharpness-green, $pt-text-color);
+  }
+  .sharp4 {
+    @include sharpnessSelectButton($sharpness-blue, $pt-dark-text-color);
+  }
+  .sharp5 {
+    @include sharpnessSelectButton($sharpness-white, $pt-text-color);
+  }
+  .sharp6 {
+    @include sharpnessSelectButton($sharpness-purple, $pt-text-color);
+  }
 }
