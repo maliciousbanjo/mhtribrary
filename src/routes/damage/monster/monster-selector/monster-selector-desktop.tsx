@@ -5,6 +5,7 @@ import { MonsterSelectorProps } from '.';
 import { Selector } from '../../../../ui/selector';
 import { allMonsters } from '../constants';
 import { getMonsterGroup } from './util';
+import { ItemListPredicate, ItemPredicate } from '@blueprintjs/select';
 
 /**
  * Monster selector for desktop screen sizes
@@ -28,12 +29,30 @@ export function MonsterSelectorDesktop({
     [selectedMonsterName]
   );
 
+  const filterMonsters: ItemPredicate<MonsterTypes.Monster> = React.useCallback(
+    (query, monster): boolean => {
+      const normalizedMonsterName = monster.name.toLowerCase();
+      const normalizedQuery = query.toLowerCase();
+      return normalizedMonsterName.indexOf(normalizedQuery) >= 0;
+    },
+    []
+  );
+
+  const itemListPredicate: ItemListPredicate<MonsterTypes.Monster> =
+    React.useCallback(
+      (query, monsters) => {
+        return monsters.filter(monster => filterMonsters(query, monster));
+      },
+      [filterMonsters]
+    );
+
   return (
     <Selector<MonsterTypes.Monster>
       items={allMonsters}
       onItemSelect={onSelectMonsterName}
-      isSelectedCallback={isMonsterSelected}
+      isSelectedPredicate={isMonsterSelected}
       getGroupCallback={getMonsterGroup}
+      itemListPredicate={itemListPredicate}
     >
       <Button text={selectedMonsterName} rightIcon="double-caret-vertical" />
     </Selector>

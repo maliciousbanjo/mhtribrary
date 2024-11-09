@@ -1,5 +1,6 @@
 import { Button } from '@blueprintjs/core';
-import { Quests, QuestTypes } from 'mh3-data';
+import { ItemListPredicate, ItemPredicate } from '@blueprintjs/select';
+import { QuestTypes } from 'mh3-data';
 import React from 'react';
 import { QuestSelectorProps } from '.';
 import { Selector } from '../../../../ui/selector';
@@ -14,7 +15,7 @@ export function QuestSelectorDesktop({
   dispatchMonsterArgs
 }: QuestSelectorProps) {
   const onSelectQuest = React.useCallback(
-    (quest: Quests.QuestTypes.Quest) => {
+    (quest: QuestTypes.Quest) => {
       dispatchMonsterArgs({
         type: 'QUEST_ID',
         payload: quest.id
@@ -28,14 +29,33 @@ export function QuestSelectorDesktop({
     [selectedQuest.id]
   );
 
+  const filterQuests: ItemPredicate<QuestTypes.Quest> = React.useCallback(
+    (query, quest) => {
+      const normalizedQuestName = quest.name.toLowerCase();
+      const normalizedQuery = query.toLowerCase();
+
+      return normalizedQuestName.indexOf(normalizedQuery) >= 0;
+    },
+    []
+  );
+
+  const itemListPredicate: ItemListPredicate<QuestTypes.Quest> =
+    React.useCallback(
+      (query, quests) => {
+        return quests.filter(quest => filterQuests(query, quest));
+      },
+      [filterQuests]
+    );
+
   return (
     <Selector<QuestTypes.Quest>
       className="select-quest"
       items={quests}
       disabled={quests.length < 2}
       onItemSelect={onSelectQuest}
-      isSelectedCallback={isQuestSelected}
+      isSelectedPredicate={isQuestSelected}
       getGroupCallback={getQuestGroup}
+      itemListPredicate={itemListPredicate}
     >
       <Button
         text={selectedQuest.name}
