@@ -68,13 +68,6 @@
   }
 }
 
-.sharpness-and-attack {
-  @include flex-container();
-  @media (min-width: $media-mobile-width) {
-    flex-direction: column;
-  }
-}
-
 .unique-weapon-selectors {
   @include flex-container(1.5em);
 }
