@@ -6,15 +6,11 @@ import { defaultItemListRenderer, defaultItemRenderer } from './util';
 import React from 'react';
 
 export interface SelectorProps<T extends SelectItem>
-  extends Omit<
-    SelectProps<T>,
-    'fill' | 'popoverProps' | 'itemRenderer' | 'filterable'
-  > {
+  extends Omit<SelectProps<T>, 'fill' | 'popoverProps' | 'itemRenderer'> {
   /** Should be referentially stable */
-  isSelectedCallback: SelectedPredicate<T>;
+  isSelectedPredicate: SelectedPredicate<T>;
   /** If provided, items will be grouped according to this function */
   getGroupCallback?: GetGroupFunction<T>;
-
   /** Will use a default itemRenderer if not provided */
   itemRenderer?: ItemRenderer<T>;
 }
@@ -28,15 +24,15 @@ export function Selector<T extends SelectItem>({
   className,
   items,
   onItemSelect,
-  isSelectedCallback,
+  isSelectedPredicate,
   itemRenderer,
   getGroupCallback,
   itemListRenderer,
   ...rest
 }: PropsWithChildren<SelectorProps<T>>) {
   const internalItemRenderer = React.useMemo(() => {
-    return itemRenderer ?? defaultItemRenderer(isSelectedCallback);
-  }, [isSelectedCallback, itemRenderer]);
+    return itemRenderer ?? defaultItemRenderer(isSelectedPredicate);
+  }, [isSelectedPredicate, itemRenderer]);
 
   const internalItemListRenderer = React.useMemo(() => {
     if (!getGroupCallback) return undefined;
@@ -49,7 +45,6 @@ export function Selector<T extends SelectItem>({
     <Select<T>
       {...rest}
       fill
-      filterable={false} // TODO: Allow filtering
       className={classNames(['selector', className])}
       popoverProps={{ minimal: true }}
       items={items}

@@ -56,17 +56,18 @@ export function defaultItemRenderer<T extends SelectItem>(
       ref
     }: ItemRendererProps<HTMLLIElement>
   ) => {
+    if (!modifiers.matchesPredicate) return null;
     return (
       <MenuItem
         key={item.id}
         ref={ref}
         textClassName="selector__item"
-        onClick={handleClick}
-        onFocus={handleFocus}
         disabled={modifiers.disabled}
         active={modifiers.active}
         roleStructure="listoption"
         text={item.name}
+        onClick={handleClick}
+        onFocus={handleFocus}
         selected={selectedPredicate(item)}
       />
     );
@@ -84,7 +85,10 @@ export function defaultItemListRenderer<T extends SelectItem>(
   className?: string | undefined
 ): ItemListRenderer<T> {
   return (listProps: ItemListRendererProps<T>) => {
-    const listGroups = getListGroups<T>(listProps.items, getGroupCallback);
+    const listGroups = getListGroups<T>(
+      listProps.filteredItems,
+      getGroupCallback
+    );
 
     const content = listGroups.map(listGroup => {
       return (
@@ -99,9 +103,9 @@ export function defaultItemListRenderer<T extends SelectItem>(
 
     return (
       <Menu
+        {...listProps.menuProps}
         className={classNames(['selector__menu', className ?? ''])}
         role="listbox"
-        {...listProps.menuProps}
       >
         {content}
       </Menu>
