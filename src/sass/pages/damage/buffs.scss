@@ -2,8 +2,7 @@
 @import '@blueprintjs/core/lib/scss/variables';
 
 .attack-buffs {
-  @include flex-container-wrap();
-  column-gap: 3em;
+  @include flex-container-wrap(3em);
 
   .bp5-control-group,
   .bp5-radio-group {

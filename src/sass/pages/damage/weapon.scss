@@ -1,9 +1,11 @@
+@use 'sass:color';
 @import '../../abstracts/';
 
 .weapon {
   &--selectors {
     @include flex-container();
     flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -16,7 +18,7 @@
 
   &__sharpness {
     border: 1px solid black;
-    background-color: #333333;
+    background-color: $dark-gray4; // Same color as Select elements
     height: 1.2em;
     width: 210px;
     padding: 1px;
@@ -66,7 +68,78 @@
   }
 }
 
-.unique-weapon-selectors {
+.sharpness-and-attack {
   @include flex-container();
-  column-gap: 1.5em;
+  @media (min-width: $media-mobile-width) {
+    flex-direction: column;
+  }
+}
+
+.unique-weapon-selectors {
+  @include flex-container(1.5em);
+}
+
+/* Applies a border */
+@mixin sharpness-select($color) {
+  border-bottom: 3px solid $color;
+}
+
+@mixin sharpness-select-button($color, $text-color: $pt-text-color) {
+  @include sharpness-select($color);
+  border-radius: 0px;
+  width: 65px;
+  &.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
+    box-shadow: none;
+    background-color: $color;
+    color: $text-color;
+  }
+}
+
+// Segmented control sharpness colors
+.select-sharpness {
+  &__mobile {
+    &.sharp0 {
+      @include sharpness-select($sharpness-red);
+    }
+    &.sharp1 {
+      @include sharpness-select($sharpness-orange);
+    }
+    &.sharp2 {
+      @include sharpness-select($sharpness-yellow);
+    }
+    &.sharp3 {
+      @include sharpness-select($sharpness-green);
+    }
+    &.sharp4 {
+      @include sharpness-select($sharpness-blue);
+    }
+    &.sharp5 {
+      @include sharpness-select($sharpness-white);
+    }
+    &.sharp6 {
+      @include sharpness-select($sharpness-purple);
+    }
+  }
+
+  .sharp0 {
+    @include sharpness-select-button($sharpness-red, $pt-dark-text-color);
+  }
+  .sharp1 {
+    @include sharpness-select-button($sharpness-orange, $pt-dark-text-color);
+  }
+  .sharp2 {
+    @include sharpness-select-button($sharpness-yellow, $pt-text-color);
+  }
+  .sharp3 {
+    @include sharpness-select-button($sharpness-green, $pt-text-color);
+  }
+  .sharp4 {
+    @include sharpness-select-button($sharpness-blue, $pt-dark-text-color);
+  }
+  .sharp5 {
+    @include sharpness-select-button($sharpness-white, $pt-text-color);
+  }
+  .sharp6 {
+    @include sharpness-select-button($sharpness-purple, $pt-text-color);
+  }
 }

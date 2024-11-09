@@ -1,3 +1,5 @@
+@import './abstracts/';
+
 .bp5-radio-group .bp5-label {
   font-weight: bold;
 }
@@ -12,4 +14,8 @@ label.bp5-checkbox {
 
 .bp5-dark .bp5-navbar {
   box-shadow: none;
+}
+
+.bp5-segmented-control > .bp5-button.bp5-minimal {
+  color: $pt-text-color;
 }
