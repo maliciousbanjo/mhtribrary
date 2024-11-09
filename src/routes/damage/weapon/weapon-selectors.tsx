@@ -90,10 +90,10 @@ export function WeaponSelectors({
 
   return (
     <div className="weapon--selectors">
-      <div className="flex-container">
+      <div className="flex-container-wrap">
         <FormGroup label="Class">
           <HTMLSelect
-            className="select select-weapon-class"
+            className="select-weapon-class"
             options={weaponClassOptions}
             value={weaponArgs.weaponClass}
             onChange={onChangeWeaponClass}
@@ -101,32 +101,30 @@ export function WeaponSelectors({
         </FormGroup>
         <FormGroup label="Weapon">
           <HTMLSelect
-            className="select select-weapon"
+            className="select-weapon"
             options={weaponSelectOptions}
             value={weaponArgs.weaponId}
             onChange={onChangeWeapon}
           />
         </FormGroup>
-      </div>
-      <WeaponInfo weapon={selectedWeapon} />
-
-      <div className="sharpness-and-attack">
-        <FormGroup label="Sharpness">
-          <SharpnessSelector
-            selectedWeapon={selectedWeapon}
-            selectedSharpness={weaponArgs.sharpness}
-            dispatchWeaponArgs={dispatchWeaponArgs}
-          />
-        </FormGroup>
         <FormGroup label="Attack">
           <HTMLSelect
-            className="select select-weapon-attack"
+            className="select-weapon-attack"
             options={weaponAttackOptions}
             value={weaponArgs.attackName}
             onChange={onChangeWeaponAttack}
           />
         </FormGroup>
       </div>
+      <WeaponInfo weapon={selectedWeapon} />
+
+      <FormGroup label="Sharpness">
+        <SharpnessSelector
+          selectedWeapon={selectedWeapon}
+          selectedSharpness={weaponArgs.sharpness}
+          dispatchWeaponArgs={dispatchWeaponArgs}
+        />
+      </FormGroup>
       <UniqueWeaponSelectors
         weaponArgs={weaponArgs}
         dispatchWeaponArgs={dispatchWeaponArgs}
