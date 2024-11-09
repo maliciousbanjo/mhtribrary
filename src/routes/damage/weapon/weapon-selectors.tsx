@@ -107,6 +107,17 @@ export function WeaponSelectors({
             onChange={onChangeWeapon}
           />
         </FormGroup>
+      </div>
+      <WeaponInfo weapon={selectedWeapon} />
+
+      <div className="sharpness-and-attack">
+        <FormGroup label="Sharpness">
+          <SharpnessSelector
+            selectedWeapon={selectedWeapon}
+            selectedSharpness={weaponArgs.sharpness}
+            dispatchWeaponArgs={dispatchWeaponArgs}
+          />
+        </FormGroup>
         <FormGroup label="Attack">
           <HTMLSelect
             className="select select-weapon-attack"
@@ -116,15 +127,6 @@ export function WeaponSelectors({
           />
         </FormGroup>
       </div>
-      <WeaponInfo weapon={selectedWeapon} />
-
-      <FormGroup label="Sharpness">
-        <SharpnessSelector
-          selectedWeapon={selectedWeapon}
-          selectedSharpness={weaponArgs.sharpness}
-          dispatchWeaponArgs={dispatchWeaponArgs}
-        />
-      </FormGroup>
       <UniqueWeaponSelectors
         weaponArgs={weaponArgs}
         dispatchWeaponArgs={dispatchWeaponArgs}

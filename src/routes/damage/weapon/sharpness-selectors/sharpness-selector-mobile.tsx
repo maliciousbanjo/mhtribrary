@@ -2,6 +2,7 @@ import { HTMLSelect } from '@blueprintjs/core';
 import { SharpnessSelectorInternalProps } from '.';
 import React from 'react';
 import { Weapons } from 'mh3-data';
+import classNames from 'classnames';
 
 export function SharpnessSelectorMobile({
   sharpnessOptions,
@@ -16,11 +17,17 @@ export function SharpnessSelectorMobile({
     [onSelectSharpness]
   );
 
+  const value = Weapons.sharpnessAsString(selectedSharpness).toUpperCase();
+
+  const sharpnessClass = sharpnessOptions.find(
+    opt => opt.value === value
+  )?.className;
+
   return (
     <HTMLSelect
-      className="select select-weapon-sharpness"
+      className={classNames(['select-sharpness__mobile', sharpnessClass ?? ''])}
       options={sharpnessOptions}
-      value={Weapons.sharpnessAsString(selectedSharpness).toUpperCase()}
+      value={value}
       onChange={onChange}
     />
   );
