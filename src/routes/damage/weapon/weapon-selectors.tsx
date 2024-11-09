@@ -1,13 +1,8 @@
-import {
-  FormGroup,
-  HTMLSelect,
-  OptionProps,
-  SegmentedControl
-} from '@blueprintjs/core';
+import { FormGroup, HTMLSelect } from '@blueprintjs/core';
 import { Weapons } from 'mh3-data';
 import { WeaponClass } from 'mh3-data/weapons';
 import React from 'react';
-import { capitalize } from '../../../utils/format-utils';
+import { SharpnessSelector } from './sharpness-selectors';
 import { UniqueWeaponSelectors } from './unique-weapon-selectors';
 import { WeaponProps } from './weapon';
 import { WeaponInfo } from './weapon-info';
@@ -29,37 +24,6 @@ export function WeaponSelectors({
   const selectedWeapon = React.useMemo(
     () => Weapons.getWeapon(weaponArgs.weaponClass, weaponArgs.weaponId),
     [weaponArgs.weaponClass, weaponArgs.weaponId]
-  );
-
-  /**
-   * Set dynamically based on the available sharpness of {@link selectedWeaponId}
-   */
-  const sharpnessOptions = React.useMemo(() => {
-    return selectedWeapon.sharpnessUp.map<OptionProps<string>>(
-      (_sharpnessTicks, index) => {
-        // If this index is not part of the base sharpness list then it must be an extra level
-        const requiresSharpnessUp =
-          selectedWeapon.sharpness[index] === undefined;
-        const label = capitalize(
-          Weapons.sharpnessAsString(index as Weapons.Sharpness)
-        );
-        return {
-          className: `sharp${index}`,
-          value: label.toUpperCase(),
-          label: requiresSharpnessUp ? `(${label})` : label
-        };
-      }
-    );
-  }, [selectedWeapon.sharpness, selectedWeapon.sharpnessUp]);
-
-  const onSelectSharpness = React.useCallback(
-    (value: string) => {
-      dispatchWeaponArgs({
-        type: 'SHARPNESS',
-        payload: Weapons.Sharpness[value as keyof typeof Weapons.Sharpness]
-      });
-    },
-    [dispatchWeaponArgs]
   );
 
   /**
@@ -155,12 +119,10 @@ export function WeaponSelectors({
       <WeaponInfo weapon={selectedWeapon} />
 
       <FormGroup label="Sharpness">
-        <SegmentedControl
-          fill
-          options={sharpnessOptions}
-          className="select-sharpness"
-          value={Weapons.sharpnessAsString(weaponArgs.sharpness).toUpperCase()}
-          onValueChange={onSelectSharpness}
+        <SharpnessSelector
+          selectedWeapon={selectedWeapon}
+          selectedSharpness={weaponArgs.sharpness}
+          dispatchWeaponArgs={dispatchWeaponArgs}
         />
       </FormGroup>
       <UniqueWeaponSelectors
