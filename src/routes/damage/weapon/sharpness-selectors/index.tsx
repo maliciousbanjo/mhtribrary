@@ -16,9 +16,9 @@ interface SharpnessSelectorProps {
 /**
  * Props used by the internal desktop/mobile selector components
  */
-export interface SharpnessSelectorInternalProps {
+export interface SharpnessSelectorInternalProps
+  extends Pick<SharpnessSelectorProps, 'selectedSharpness'> {
   sharpnessOptions: OptionProps<string>[];
-  selectedSharpness: DamageTypes.WeaponArgs['sharpness'];
   onSelectSharpness: (value: string) => void;
 }
 

@@ -2,6 +2,9 @@ import { Classes, SegmentedControl } from '@blueprintjs/core';
 import { SharpnessSelectorInternalProps } from '.';
 import { Weapons } from 'mh3-data';
 
+/**
+ * Sharpness selector for desktop screen sizes
+ */
 export function SharpnessSelectorDesktop({
   sharpnessOptions,
   selectedSharpness,

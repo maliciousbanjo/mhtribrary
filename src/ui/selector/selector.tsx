@@ -42,9 +42,9 @@ export function Selector<T extends SelectItem>({
   }, [className, getGroupCallback, itemListRenderer]);
 
   return (
-    <Select<T>
+    <Select<Readonly<T>>
       {...rest}
-      fill
+      // fill
       className={classNames(['selector', className])}
       popoverProps={{ minimal: true }}
       items={items}
