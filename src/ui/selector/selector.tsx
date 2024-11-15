@@ -42,7 +42,7 @@ export function Selector<T extends SelectItem>({
   }, [className, getGroupCallback, itemListRenderer]);
 
   return (
-    <Select<T>
+    <Select<Readonly<T>>
       {...rest}
       fill
       className={classNames(['selector', className])}

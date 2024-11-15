@@ -41,7 +41,7 @@ export function QuestSelectorMobile({
 
   return (
     <HTMLSelect
-      id="select-quest"
+      id="select-quest__mobile"
       value={selectedQuest.id}
       onChange={onChangeQuest}
       disabled={quests.length < 2}

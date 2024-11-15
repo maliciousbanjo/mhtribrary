@@ -48,6 +48,7 @@ export function MonsterSelectorDesktop({
 
   return (
     <Selector<MonsterTypes.Monster>
+      className="select-monster"
       items={allMonsters}
       onItemSelect={onSelectMonsterName}
       isSelectedPredicate={isMonsterSelected}

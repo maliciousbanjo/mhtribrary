@@ -4,6 +4,9 @@ import React from 'react';
 import { Weapons } from 'mh3-data';
 import classNames from 'classnames';
 
+/**
+ * Sharpness selector for mobile screen sizes
+ */
 export function SharpnessSelectorMobile({
   sharpnessOptions,
   selectedSharpness,

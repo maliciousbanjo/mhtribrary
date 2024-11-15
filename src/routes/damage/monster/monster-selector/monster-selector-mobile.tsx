@@ -42,7 +42,7 @@ export function MonsterSelectorMobile({
 
   return (
     <HTMLSelect
-      id="select-monster"
+      id="select-monster__mobile"
       value={selectedMonsterName}
       onChange={onChangeMonsterName}
     >

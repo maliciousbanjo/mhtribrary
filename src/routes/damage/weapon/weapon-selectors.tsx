@@ -6,21 +6,13 @@ import { SharpnessSelector } from './sharpness-selectors';
 import { UniqueWeaponSelectors } from './unique-weapon-selectors';
 import { WeaponProps } from './weapon';
 import { WeaponInfo } from './weapon-info';
-import {
-  getWeaponAttackOptions,
-  getWeaponSelectOptions,
-  weaponClassOptions
-} from './weapon-options';
+import { getWeaponAttackOptions, weaponClassOptions } from './weapon-options';
+import { WeaponSelector } from './weapon-selector';
 
 export function WeaponSelectors({
   weaponArgs,
   dispatchWeaponArgs
 }: WeaponProps) {
-  const weaponSelectOptions = React.useMemo(
-    () => getWeaponSelectOptions(weaponArgs.weaponClass),
-    [weaponArgs.weaponClass]
-  );
-
   const selectedWeapon = React.useMemo(
     () => Weapons.getWeapon(weaponArgs.weaponClass, weaponArgs.weaponId),
     [weaponArgs.weaponClass, weaponArgs.weaponId]
@@ -36,22 +28,6 @@ export function WeaponSelectors({
       dispatchWeaponArgs({
         type: 'WEAPON_CLASS',
         payload: newWeaponClass
-      });
-    },
-    [dispatchWeaponArgs]
-  );
-
-  /**
-   * Also sets sharpness to the max possible non-sharpness+1 value of the
-   * particular weapon
-   */
-  const onChangeWeapon = React.useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const { target } = event;
-      const newWeaponId = parseInt(target.value);
-      dispatchWeaponArgs({
-        type: 'WEAPON_ID',
-        payload: newWeaponId
       });
     },
     [dispatchWeaponArgs]
@@ -100,11 +76,10 @@ export function WeaponSelectors({
           />
         </FormGroup>
         <FormGroup label="Weapon">
-          <HTMLSelect
-            className="select-weapon"
-            options={weaponSelectOptions}
-            value={weaponArgs.weaponId}
-            onChange={onChangeWeapon}
+          <WeaponSelector
+            selectedWeaponClass={weaponArgs.weaponClass}
+            selectedWeaponId={weaponArgs.weaponId}
+            dispatchWeaponArgs={dispatchWeaponArgs}
           />
         </FormGroup>
         <FormGroup label="Attack">
