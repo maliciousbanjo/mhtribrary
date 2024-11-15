@@ -1,6 +1,7 @@
 import { DamageTypes } from 'mh3-data';
 import { MonsterArgReducerAction } from './monster-reducer';
 import { MonsterSelectors } from './monster-selectors';
+import { Section, SectionCard } from '@blueprintjs/core';
 
 export interface MonsterProps {
   monsterArgs: DamageTypes.MonsterArgs;
@@ -9,12 +10,13 @@ export interface MonsterProps {
 
 export function Monster({ monsterArgs, dispatchMonsterArgs }: MonsterProps) {
   return (
-    <div className="monster">
-      <h3>Monster</h3>
-      <MonsterSelectors
-        monsterArgs={monsterArgs}
-        dispatchMonsterArgs={dispatchMonsterArgs}
-      />
-    </div>
+    <Section compact title="Monster" className="monster">
+      <SectionCard>
+        <MonsterSelectors
+          monsterArgs={monsterArgs}
+          dispatchMonsterArgs={dispatchMonsterArgs}
+        />
+      </SectionCard>
+    </Section>
   );
 }

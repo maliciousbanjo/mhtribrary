@@ -2,6 +2,8 @@
 @import '../../abstracts/';
 
 .weapon {
+  flex: 1 1 500px;
+
   &--selectors {
     @include flex-container();
     flex-direction: column;

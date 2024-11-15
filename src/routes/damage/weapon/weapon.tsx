@@ -1,6 +1,7 @@
 import React from 'react';
 import { WeaponArgReducerActions, WeaponArgsState } from './weapon-reducer';
 import { WeaponSelectors } from './weapon-selectors';
+import { Section, SectionCard } from '@blueprintjs/core';
 
 export interface WeaponProps {
   weaponArgs: WeaponArgsState;
@@ -12,12 +13,13 @@ export interface WeaponProps {
  */
 export function Weapon({ weaponArgs, dispatchWeaponArgs }: WeaponProps) {
   return (
-    <div className="weapon">
-      <h3>Weapon</h3>
-      <WeaponSelectors
-        weaponArgs={weaponArgs}
-        dispatchWeaponArgs={dispatchWeaponArgs}
-      />
-    </div>
+    <Section compact title="Weapon" className="weapon">
+      <SectionCard>
+        <WeaponSelectors
+          weaponArgs={weaponArgs}
+          dispatchWeaponArgs={dispatchWeaponArgs}
+        />
+      </SectionCard>
+    </Section>
   );
 }

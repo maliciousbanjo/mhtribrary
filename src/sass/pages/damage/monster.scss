@@ -1,7 +1,8 @@
 @import '../../abstracts/';
 
 .monster {
-  max-width: $media-mobile-width;
+  // max-width: $media-mobile-width;
+  flex: 1 1 500px;
   &--selectors {
     @include flex-container-wrap();
 

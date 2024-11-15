@@ -16,6 +16,7 @@ import {
   monsterArgsReducer
 } from './monster';
 import { Weapon, WEAPON_ARGS_INITIAL_STATE, weaponArgsReducer } from './weapon';
+import { Section, SectionCard } from '@blueprintjs/core';
 
 /**
  * Top-level page for damage calculations
@@ -91,16 +92,18 @@ export function DamagePage() {
 
       return (
         <>
-          <h3>Results</h3>
-          <div className="damage-results-content">
-            {hitJsx}
-            Total Damage: <b>{totalDamage.dmg} </b>
-            {totalDamage.ko !== 0 && (
-              <>
-                and <b>{totalDamage.ko}</b> KO
-              </>
-            )}
-          </div>
+          {/* <h3>Results</h3> */}
+          <SectionCard>
+            <div className="damage-results-content">
+              {hitJsx}
+              Total Damage: <b>{totalDamage.dmg} </b>
+              {totalDamage.ko !== 0 && (
+                <>
+                  and <b>{totalDamage.ko}</b> KO
+                </>
+              )}
+            </div>
+          </SectionCard>
         </>
       );
     } catch (error) {
@@ -128,7 +131,9 @@ export function DamagePage() {
         weaponClassArgs={weaponClassArgs}
         dispatchWeaponClassArgs={dispatchWeaponClassArgs}
       />
-      <div className="damage-results">{renderDamage()}</div>
+      <Section compact title="Results" className="damage-results">
+        {renderDamage()}
+      </Section>
     </div>
   );
 }
