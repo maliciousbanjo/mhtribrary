@@ -8,7 +8,7 @@ import { WeaponArgReducerActions } from '../weapon-reducer';
 import { SharpnessSelectorMobile } from './sharpness-selector-mobile';
 
 interface SharpnessSelectorProps {
-  selectedWeapon: Weapons.WeaponTypes.Weapon<Weapons.WeaponClass>;
+  selectedWeapon: Weapons.WeaponTypes.Weapon;
   selectedSharpness: DamageTypes.WeaponArgs['sharpness'];
   dispatchWeaponArgs: (value: WeaponArgReducerActions) => void;
 }

@@ -1,10 +1,10 @@
 import { Icon } from '@blueprintjs/core';
-import { Weapons, WeaponTypes } from 'mh3-data';
+import { WeaponTypes } from 'mh3-data';
 import React from 'react';
 import { SharpnessGraph } from './sharpness-graph';
 
 interface WeaponInfoProps {
-  weapon: WeaponTypes.Weapon<Weapons.WeaponClass>;
+  weapon: WeaponTypes.Weapon;
 }
 
 export function WeaponInfo({ weapon }: WeaponInfoProps) {
