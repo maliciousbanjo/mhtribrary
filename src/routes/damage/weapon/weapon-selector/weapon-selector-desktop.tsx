@@ -23,7 +23,7 @@ export function WeaponSelectorDesktop({
     selectedWeaponId
   );
 
-  const weaponItems = React.useMemo<WeaponTypes.Weapon[]>(() => {
+  const weaponItems = React.useMemo(() => {
     switch (selectedWeaponClass) {
       case 'Great Sword':
         return GreatSword.GreatSwords;
@@ -69,7 +69,7 @@ export function WeaponSelectorDesktop({
   return (
     <Selector<WeaponTypes.Weapon>
       isSelectedPredicate={isWeaponSelected}
-      items={weaponItems}
+      items={weaponItems as WeaponTypes.Weapon[]}
       onItemSelect={onSelectWeapon}
       itemPredicate={filterWeapons}
     >
