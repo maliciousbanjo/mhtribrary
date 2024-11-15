@@ -11,11 +11,11 @@ import {
   weaponClassArgsReducer
 } from './buffs';
 import {
+  Monster,
   MONSTER_ARGS_INITIAL_STATE,
-  monsterArgsReducer,
-  MonsterSelectors
+  monsterArgsReducer
 } from './monster';
-import { WEAPON_ARGS_INITIAL_STATE, weaponArgsReducer, Weapon } from './weapon';
+import { Weapon, WEAPON_ARGS_INITIAL_STATE, weaponArgsReducer } from './weapon';
 
 /**
  * Top-level page for damage calculations
@@ -115,7 +115,7 @@ export function DamagePage() {
           weaponArgs={weaponArgs}
           dispatchWeaponArgs={dispatchWeaponArgs}
         />
-        <MonsterSelectors
+        <Monster
           monsterArgs={monsterArgs}
           dispatchMonsterArgs={dispatchMonsterArgs}
         />
