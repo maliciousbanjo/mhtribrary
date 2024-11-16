@@ -1,7 +1,6 @@
 @import '../../abstracts/';
 
 .monster {
-  // max-width: $media-mobile-width;
   flex: 1 1 600px;
   &--selectors {
     @include flex-container-wrap();
@@ -25,6 +24,10 @@
   table-layout: fixed;
   tr.table-row {
     padding: 0.35em;
+  }
+
+  tr.table-row:nth-child(even):not(.table-row--selected) {
+    background-color: $light-gray1;
   }
 
   th,

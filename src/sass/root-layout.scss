@@ -22,6 +22,12 @@ footer {
 .bp5-dark .sidenav {
   background-color: $pt-dark-app-background-color;
 }
+.bp5-dark tr.table-row:nth-child(even):not(.table-row--selected) {
+  td {
+    color: $pt-text-color;
+  }
+}
+
 .bp5-dark .danger-text {
   color: $pt-intent-danger;
 }
