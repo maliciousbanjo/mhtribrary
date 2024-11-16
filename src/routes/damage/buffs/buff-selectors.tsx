@@ -41,10 +41,9 @@ export function BuffSelectors({
   dispatchWeaponClassArgs
 }: BuffSelectorsProps) {
   return (
-    <Section compact title="Buffs">
-      {/* <h3>Buffs</h3> */}
+    <Section compact title="Buffs" className="buffs">
       <SectionCard>
-        <div className="attack-buffs">
+        <div className="buffs--selectors">
           <ControlGroup vertical>
             <span>
               <Checkbox
@@ -132,8 +131,20 @@ export function BuffSelectors({
               });
             }}
           />
-          <span>
-            <ControlGroup vertical>
+          <RadioGroup
+            key="fortify"
+            label="Fortify"
+            options={fortifyOptions}
+            selectedValue={rawArgs.fortify}
+            onChange={event => {
+              dispatchRawArgs({
+                type: 'FORTIFY',
+                payload: event.currentTarget.value as RawArgs['fortify']
+              });
+            }}
+          />
+          <ControlGroup vertical>
+            <span>
               <RadioGroup
                 key="element-attack"
                 label="Element Attack"
@@ -158,20 +169,8 @@ export function BuffSelectors({
                   });
                 }}
               />
-            </ControlGroup>
-          </span>
-          <RadioGroup
-            key="fortify"
-            label="Fortify"
-            options={fortifyOptions}
-            selectedValue={rawArgs.fortify}
-            onChange={event => {
-              dispatchRawArgs({
-                type: 'FORTIFY',
-                payload: event.currentTarget.value as RawArgs['fortify']
-              });
-            }}
-          />
+            </span>
+          </ControlGroup>
         </div>
       </SectionCard>
     </Section>

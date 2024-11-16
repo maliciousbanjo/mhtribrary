@@ -2,7 +2,7 @@
 
 .monster {
   // max-width: $media-mobile-width;
-  flex: 1 1 500px;
+  flex: 1 1 600px;
   &--selectors {
     @include flex-container-wrap();
 
@@ -21,6 +21,7 @@
 }
 
 .hitzone-table {
+  text-wrap: nowrap;
   table-layout: fixed;
   tr.table-row {
     padding: 0.35em;

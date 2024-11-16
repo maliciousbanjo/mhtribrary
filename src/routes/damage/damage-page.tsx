@@ -53,16 +53,18 @@ export function DamagePage() {
 
   return (
     <div className="damage">
-      <div className="weapon-and-monster">
-        <Weapon
-          weaponArgs={weaponArgs}
-          dispatchWeaponArgs={dispatchWeaponArgs}
-        />
-        <Monster
-          monsterArgs={monsterArgs}
-          dispatchMonsterArgs={dispatchMonsterArgs}
-        />
-      </div>
+      <Weapon weaponArgs={weaponArgs} dispatchWeaponArgs={dispatchWeaponArgs} />
+      <DamageResults
+        weaponArgs={weaponArgs}
+        monsterArgs={monsterArgs}
+        rawArgs={rawArgs}
+        elementArgs={elementArgs}
+        weaponClassArgs={weaponClassArgs}
+      />
+      <Monster
+        monsterArgs={monsterArgs}
+        dispatchMonsterArgs={dispatchMonsterArgs}
+      />
       <BuffSelectors
         rawArgs={rawArgs}
         dispatchRawArgs={dispatchRawArgs}
@@ -70,13 +72,6 @@ export function DamagePage() {
         dispatchElementArgs={dispatchElementArgs}
         weaponClassArgs={weaponClassArgs}
         dispatchWeaponClassArgs={dispatchWeaponClassArgs}
-      />
-      <DamageResults
-        weaponArgs={weaponArgs}
-        monsterArgs={monsterArgs}
-        rawArgs={rawArgs}
-        elementArgs={elementArgs}
-        weaponClassArgs={weaponClassArgs}
       />
     </div>
   );
