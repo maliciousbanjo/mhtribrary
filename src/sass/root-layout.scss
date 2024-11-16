@@ -22,14 +22,24 @@ footer {
 .bp5-dark .sidenav {
   background-color: $pt-dark-app-background-color;
 }
-.bp5-dark tr.table-row:nth-child(even):not(.table-row--selected) {
-  td {
-    color: $pt-text-color;
-  }
-}
 
 .bp5-dark .danger-text {
   color: $pt-intent-danger;
+}
+
+// TABLE
+
+// Dark theme zebra-striping
+.bp5-dark tr.table-row:nth-child(even):not(.table-row--selected) {
+  background-color: $gray3;
+}
+
+// Zebra-striping
+tr.table-row:nth-child(even):not(.table-row--selected) {
+  background-color: $light-gray1;
+  td {
+    color: $pt-text-color;
+  }
 }
 
 .warning-banner {

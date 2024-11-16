@@ -26,10 +26,6 @@
     padding: 0.35em;
   }
 
-  tr.table-row:nth-child(even):not(.table-row--selected) {
-    background-color: $light-gray1;
-  }
-
   th,
   td {
     text-align: center;
