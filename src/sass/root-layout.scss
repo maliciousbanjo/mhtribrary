@@ -31,7 +31,10 @@ footer {
 
 // Dark theme zebra-striping
 .bp5-dark tr.table-row:nth-child(even):not(.table-row--selected) {
-  background-color: $gray3;
+  background-color: $dark-gray5;
+  td {
+    color: $pt-dark-text-color;
+  }
 }
 
 // Zebra-striping
