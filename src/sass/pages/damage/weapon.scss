@@ -2,7 +2,8 @@
 @import '../../abstracts/';
 
 .weapon {
-  flex: 1 1 500px;
+  min-height: 345px;
+  flex: 1 1 450px;
 
   &--selectors {
     @include flex-container();

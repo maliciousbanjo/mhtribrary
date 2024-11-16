@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BuffSelectors,
+  Buffs,
   ELEMENTAL_ARGS_INITIAL_STATE,
   elementArgsReducer,
   RAW_ARGS_INITIAL_STATE,
@@ -65,7 +65,7 @@ export function DamagePage() {
         monsterArgs={monsterArgs}
         dispatchMonsterArgs={dispatchMonsterArgs}
       />
-      <BuffSelectors
+      <Buffs
         rawArgs={rawArgs}
         dispatchRawArgs={dispatchRawArgs}
         elementArgs={elementArgs}
