@@ -1,4 +1,4 @@
-import { HTMLTable } from '@blueprintjs/core';
+import { Classes, HTMLTable } from '@blueprintjs/core';
 import classNames from 'classnames';
 import { DamageTypes, MonsterLevelTypes, Monsters } from 'mh3-data';
 import React from 'react';
@@ -78,18 +78,23 @@ export function HitzoneTable({
   return (
     <div className="hitzones">
       <h3>Hitzone (click to select)</h3>
-      <HTMLTable className={'hitzone-table'} compact interactive bordered>
+      <HTMLTable
+        className={`${Classes.ELEVATION_1} hitzone-table`}
+        compact
+        interactive
+        bordered
+      >
         <thead>
           <tr className="table-row">
-            <th scope="col">Hitzone</th>
-            <th scope="col">Cut</th>
-            <th scope="col">Impact</th>
-            <th scope="col">Fire</th>
-            <th scope="col">Water</th>
-            <th scope="col">Thunder</th>
-            <th scope="col">Ice</th>
-            <th scope="col">Dragon</th>
-            <th scope="col">Stagger</th>
+            <th>Hitzone</th>
+            <th>Cut</th>
+            <th>Impact</th>
+            <th>Fire</th>
+            <th>Water</th>
+            <th>Thunder</th>
+            <th>Ice</th>
+            <th>Dragon</th>
+            <th>Stagger</th>
           </tr>
         </thead>
         <tbody>{buildHitzoneRow()}</tbody>

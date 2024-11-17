@@ -73,8 +73,7 @@ export function MonsterSelectors({
         };
 
   return (
-    <div className="monster">
-      <h3>Monster</h3>
+    <>
       <div className="monster--selectors">
         <FormGroup label="Monster">
           <MonsterSelector
@@ -119,6 +118,6 @@ export function MonsterSelectors({
         dispatchMonsterArgs={dispatchMonsterArgs}
         monsterMultipliers={multipliers}
       />
-    </div>
+    </>
   );
 }

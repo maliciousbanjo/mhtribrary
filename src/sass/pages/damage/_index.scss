@@ -4,6 +4,7 @@
 @forward './damage-results.scss';
 @import '../../abstracts/';
 
-.weapon-and-monster {
-  @include flex-container-wrap(15%);
+.damage {
+  @include flex-container-wrap();
+  gap: 1em;
 }

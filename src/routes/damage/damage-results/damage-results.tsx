@@ -3,6 +3,7 @@ import { v3 as uuidv3 } from 'uuid';
 import React from 'react';
 import { WeaponArgsState } from '../weapon';
 import { RawArgs, ElementArgs, WeaponClassArgs } from '../buffs';
+import { Section, SectionCard } from '@blueprintjs/core';
 
 interface DamageResultsProps {
   weaponArgs: WeaponArgsState;
@@ -43,29 +44,33 @@ export function DamageResults({
   );
 
   return (
-    <div className="damage-results">
-      <h3>Results</h3>
-      <div className="damage-results-content">
-        {damage.map<JSX.Element>((damageResult, index) => {
-          const key = uuidv3(JSON.stringify(damageResult) + index, uuidv3.URL);
-          return (
-            <p key={key}>
-              Hit {index + 1}: <b>{damageResult.totalDamage} </b>
-              {damageResult.koDamage !== undefined && (
-                <>
-                  and <b>{damageResult.koDamage}</b> KO
-                </>
-              )}
-            </p>
-          );
-        })}
-        Total Damage: <b>{totalDamage.dmg} </b>
-        {totalDamage.ko !== 0 && (
-          <>
-            and <b>{totalDamage.ko}</b> KO
-          </>
-        )}
-      </div>
-    </div>
+    <Section compact title="Results" className="damage-results">
+      <SectionCard>
+        <div className="damage-results-content">
+          {damage.map<JSX.Element>((damageResult, index) => {
+            const key = uuidv3(
+              JSON.stringify(damageResult) + index,
+              uuidv3.URL
+            );
+            return (
+              <p key={key}>
+                Hit {index + 1}: <b>{damageResult.totalDamage} </b>
+                {damageResult.koDamage !== undefined && (
+                  <>
+                    and <b>{damageResult.koDamage}</b> KO
+                  </>
+                )}
+              </p>
+            );
+          })}
+          Total Damage: <b>{totalDamage.dmg} </b>
+          {totalDamage.ko !== 0 && (
+            <>
+              and <b>{totalDamage.ko}</b> KO
+            </>
+          )}
+        </div>
+      </SectionCard>
+    </Section>
   );
 }
