@@ -5,7 +5,7 @@ export function AboutPage() {
   /**
    * 1. Why make this?
    * 2. Sources/Credit
-   * 3.
+   * 3. Library reference
    */
   return (
     <div className="about">
@@ -57,6 +57,20 @@ export function AboutPage() {
             </li>
           </ul>
         </div>
+      </div>
+
+      <div className="libraries">
+        <h1>MH3 Data Library</h1>
+        <p>
+          The data used for this application has been separately packaged and is
+          available under the MIT license. Check it out if you have a project
+          idea of your own!
+        </p>
+        <ul>
+          <li>
+            <a href="https://www.npmjs.com/package/mh3-data">mh3-data on npm</a>
+          </li>
+        </ul>
       </div>
     </div>
   );

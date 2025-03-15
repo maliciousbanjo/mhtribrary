@@ -108,9 +108,6 @@ export function NavigationBar({ darkMode, setDarkMode }: NavigationBarProps) {
         ])}
         onClick={onMenuClick}
       />
-      <div className="warning-banner danger-text">
-        This site is in beta. Please contact the developer with issues.
-      </div>
     </div>
   );
 }
