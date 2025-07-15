@@ -1,25 +1,21 @@
 @import './abstracts/';
 
-.bp5-radio-group .bp5-label {
+.bp6-radio-group .bp6-label {
   font-weight: bold;
 }
 
-.bp5-form-group .bp5-label {
+.bp6-form-group .bp6-label {
   font-weight: bold;
 }
 
-label.bp5-checkbox {
+label.bp6-checkbox {
   font-weight: bold;
 }
 
-.bp5-dark .bp5-navbar {
+.bp6-dark .bp6-navbar {
   box-shadow: none;
 }
 
-.bp5-segmented-control > .bp5-button.bp5-minimal {
+.bp6-segmented-control > .bp6-button.bp6-minimal {
   color: $pt-text-color;
 }
-
-// div.bp5-section {
-//   margin-bottom: 10px;
-// }

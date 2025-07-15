@@ -12,7 +12,7 @@
   }
 }
 
-.bp5-dark .weapon-info__sharpness {
+.bp6-dark .weapon-info__sharpness {
   border: 1px solid white;
 }
 
@@ -84,7 +84,7 @@
   @include sharpness-select($color);
   border-radius: 0px;
   width: 65px;
-  &.bp5-button:not(.bp5-minimal):not(.bp5-intent-primary) {
+  &.bp6-button:not(.bp6-minimal):not(.bp6-intent-primary) {
     box-shadow: none;
     background-color: $color;
     color: $text-color;

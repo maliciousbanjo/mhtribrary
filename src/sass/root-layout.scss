@@ -17,20 +17,20 @@ footer {
 }
 
 // THEMING - DARK MODE
-.root-layout.bp5-dark,
-.bp5-dark footer,
-.bp5-dark .sidenav {
+.root-layout.bp6-dark,
+.bp6-dark footer,
+.bp6-dark .sidenav {
   background-color: $pt-dark-app-background-color;
 }
 
-.bp5-dark .danger-text {
+.bp6-dark .danger-text {
   color: $pt-intent-danger;
 }
 
 // TABLE
 
 // Dark theme zebra-striping
-.bp5-dark tr.table-row:nth-child(even):not(.table-row--selected) {
+.bp6-dark tr.table-row:nth-child(even):not(.table-row--selected) {
   background-color: $dark-gray5;
   td {
     color: $pt-dark-text-color;
