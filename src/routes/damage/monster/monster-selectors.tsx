@@ -1,22 +1,21 @@
 import {
   FormGroup,
   HTMLSelect,
-  InputGroup,
   NumericInput,
   OptionProps
 } from '@blueprintjs/core';
 import { Monsters, Quests } from 'mh3-data';
+import { getMonsterStatMultipliers } from 'mh3-data/monsterLevels';
+import { getMonster, isLargeMonster } from 'mh3-data/monsters';
 import React from 'react';
 import { HitzoneTable } from '../hitzone-table';
+import { LevelSelector } from './level-selector';
 import {
-  MonsterParametersReducerAction,
-  MonsterParameters
+  MonsterParameters,
+  MonsterParametersReducerAction
 } from './monster-reducer';
 import { MonsterSelector } from './monster-selector';
 import { QuestSelector } from './quest-selector';
-import { LevelSelector } from './level-selector';
-import { getMonsterStatMultipliers } from 'mh3-data/monsterLevels';
-import { getMonster, isLargeMonster } from 'mh3-data/monsters';
 
 export interface MonsterSelectorsProps {
   monsterParameters: MonsterParameters;
