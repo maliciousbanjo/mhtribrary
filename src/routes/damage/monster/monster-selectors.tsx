@@ -1,31 +1,36 @@
-import { FormGroup, HTMLSelect, OptionProps } from '@blueprintjs/core';
 import {
-  DamageTypes,
-  MonsterLevels,
-  MonsterLevelTypes,
-  Monsters,
-  Quests
-} from 'mh3-data';
+  FormGroup,
+  HTMLSelect,
+  NumericInput,
+  OptionProps
+} from '@blueprintjs/core';
+import { Monsters, Quests } from 'mh3-data';
+import { getMonsterStatMultipliers } from 'mh3-data/monsterLevels';
+import { getMonster, isLargeMonster } from 'mh3-data/monsters';
 import React from 'react';
 import { HitzoneTable } from '../hitzone-table';
-import { MonsterArgReducerAction } from './monster-reducer';
+import { LevelSelector } from './level-selector';
+import {
+  MonsterParameters,
+  MonsterParametersReducerAction
+} from './monster-reducer';
 import { MonsterSelector } from './monster-selector';
 import { QuestSelector } from './quest-selector';
 
 export interface MonsterSelectorsProps {
-  monsterArgs: DamageTypes.MonsterArgs;
-  dispatchMonsterArgs: React.Dispatch<MonsterArgReducerAction>;
+  monsterParameters: MonsterParameters;
+  dispatchMonsterParameters: React.Dispatch<MonsterParametersReducerAction>;
 }
 
 export function MonsterSelectors({
-  monsterArgs,
-  dispatchMonsterArgs
+  monsterParameters,
+  dispatchMonsterParameters
 }: MonsterSelectorsProps) {
   /**
    * Different hitzoneGroups based on monster state (flying, muddy, enraged, etc)
    */
   const monsterStates = React.useMemo(() => {
-    const selectedMonster = Monsters.getMonster(monsterArgs.monsterName);
+    const selectedMonster = Monsters.getMonster(monsterParameters.monsterName);
 
     return (
       selectedMonster?.monsterStates.map<OptionProps<number>>(
@@ -35,21 +40,25 @@ export function MonsterSelectors({
         })
       ) ?? []
     );
-  }, [monsterArgs.monsterName]);
+  }, [monsterParameters.monsterName]);
+
+  const monster = React.useMemo(() => {
+    return getMonster(monsterParameters.monsterName);
+  }, [monsterParameters.monsterName]);
 
   const onChangeMonsterState = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
-      dispatchMonsterArgs({
+      dispatchMonsterParameters({
         type: 'MONSTER_STATE_INDEX',
         payload: parseInt(target.value)
       });
     },
-    [dispatchMonsterArgs]
+    [dispatchMonsterParameters]
   );
 
   const questOptions = React.useMemo(() => {
-    const selectedMonster = Monsters.getMonster(monsterArgs.monsterName);
+    const selectedMonster = Monsters.getMonster(monsterParameters.monsterName);
     return Quests.getQuestsWithLargeMonster(selectedMonster.id, 'Both').map<
       OptionProps<number>
     >(quest => {
@@ -58,27 +67,20 @@ export function MonsterSelectors({
         value: quest.id
       };
     });
-  }, [monsterArgs.monsterName]);
+  }, [monsterParameters.monsterName]);
 
-  const multipliers: MonsterLevelTypes.MonsterLevelMultipliers =
-    monsterArgs.questId !== undefined
-      ? MonsterLevels.getMonsterMultipliersForQuest(
-          monsterArgs.monsterName,
-          monsterArgs.questId
-        )
-      : {
-          health: [1],
-          defense: 1,
-          stagger: 1
-        };
+  const multipliers = getMonsterStatMultipliers(
+    monsterParameters.monsterName,
+    monsterParameters.monsterLevel
+  );
 
   return (
     <>
       <div className="monster--selectors">
         <FormGroup label="Monster">
           <MonsterSelector
-            monsterArgs={monsterArgs}
-            dispatchMonsterArgs={dispatchMonsterArgs}
+            monsterParameters={monsterParameters}
+            dispatchMonsterParameters={dispatchMonsterParameters}
           />
         </FormGroup>
 
@@ -87,7 +89,7 @@ export function MonsterSelectors({
             <HTMLSelect
               id="select-monster-state"
               options={monsterStates}
-              value={monsterArgs.monsterStateIndex}
+              value={monsterParameters.monsterStateIndex}
               onChange={onChangeMonsterState}
             />
           </FormGroup>
@@ -97,25 +99,51 @@ export function MonsterSelectors({
           <>
             <FormGroup label="Quest">
               <QuestSelector
-                monsterArgs={monsterArgs}
-                dispatchMonsterArgs={dispatchMonsterArgs}
+                monsterParameters={monsterParameters}
+                dispatchMonsterParameters={dispatchMonsterParameters}
               />
             </FormGroup>
 
+            <FormGroup label="Level">
+              <LevelSelector
+                monsterParameters={monsterParameters}
+                dispatchMonsterParameters={dispatchMonsterParameters}
+              />
+            </FormGroup>
+
+            {isLargeMonster(monster) && (
+              <FormGroup label="Health">
+                <NumericInput
+                  value={monster.hp * multipliers.health}
+                  readOnly
+                  buttonPosition="none"
+                  style={{
+                    width: '70px',
+                    backgroundColor: 'inherit',
+                    boxShadow: 'none'
+                  }}
+                />
+              </FormGroup>
+            )}
+
             <FormGroup className="multiplier-labels" label="Multipliers">
+              <div className="multiplier">
+                <label>HP:</label> {multipliers.health}
+              </div>
               <div className="multiplier">
                 <label>Defense:</label> {multipliers.defense}
               </div>
               <div className="multiplier">
-                <label>Stagger:</label> {multipliers.stagger}
+                <label>Stagger:</label>
+                {multipliers.stagger}
               </div>
             </FormGroup>
           </>
         )}
       </div>
       <HitzoneTable
-        monsterArgs={monsterArgs}
-        dispatchMonsterArgs={dispatchMonsterArgs}
+        monsterParameters={monsterParameters}
+        dispatchMonsterParameters={dispatchMonsterParameters}
         monsterMultipliers={multipliers}
       />
     </>

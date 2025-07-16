@@ -123,7 +123,7 @@ export function weaponArgsReducer(
       // Validate sharpness
       if (action.payload > currentWeapon.sharpnessUp.length - 1) {
         throw new Error(
-          `${currentWeapon.name} cannot reach ${Weapons.sharpnessAsString(action.payload)} sharpness`
+          `'${currentWeapon.name}' cannot reach '${Weapons.sharpnessAsString(action.payload)} 'sharpness`
         );
       }
       return {
@@ -155,7 +155,7 @@ export function weaponArgsReducer(
       // Validate
       if (!weaponAttacks.some(atk => atk.name === action.payload)) {
         throw new Error(
-          `${action.payload} is not a valid ${state.weaponClass} attack`
+          `'${action.payload}' is not a valid '${state.weaponClass}' attack`
         );
       }
       return {

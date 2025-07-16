@@ -4,10 +4,12 @@ import React from 'react';
 import { WeaponArgsState } from '../weapon';
 import { RawArgs, ElementArgs, WeaponClassArgs } from '../buffs';
 import { Section, SectionCard } from '@blueprintjs/core';
+import { MonsterParameters } from '../monster';
+import { getMonsterStatMultipliers } from 'mh3-data/monsterLevels';
 
 interface DamageResultsProps {
   weaponArgs: WeaponArgsState;
-  monsterArgs: DamageTypes.MonsterArgs;
+  monsterParameters: MonsterParameters;
   rawArgs: RawArgs;
   elementArgs: ElementArgs;
   weaponClassArgs: WeaponClassArgs;
@@ -15,20 +17,35 @@ interface DamageResultsProps {
 
 export function DamageResults({
   weaponArgs,
-  monsterArgs,
+  monsterParameters,
   rawArgs,
   elementArgs,
   weaponClassArgs
 }: Readonly<DamageResultsProps>) {
-  const damage = React.useMemo<DamageTypes.Damage[]>(
-    () =>
-      Damage.calculateDamage(weaponArgs, monsterArgs, {
+  const damage = React.useMemo<DamageTypes.Damage[]>(() => {
+    const { monsterName, hitzoneIndex, monsterLevel, monsterStateIndex } =
+      monsterParameters;
+
+    const monsterStatMultipliers = getMonsterStatMultipliers(
+      monsterName,
+      monsterLevel
+    );
+
+    return Damage.calculateDamage(
+      weaponArgs,
+      {
+        monsterName,
+        hitzoneIndex,
+        monsterStateIndex,
+        monsterStatMultipliers
+      },
+      {
         rawArgs,
         elementArgs,
         weaponClassArgs
-      }),
-    [elementArgs, monsterArgs, rawArgs, weaponArgs, weaponClassArgs]
-  );
+      }
+    );
+  }, [elementArgs, monsterParameters, rawArgs, weaponArgs, weaponClassArgs]);
 
   const totalDamage = damage.reduce<{
     dmg: number;

@@ -38,7 +38,7 @@ export function WeaponSelectorDesktop({
       case 'Sword and Shield':
         return SwordAndShield.SwordAndShields;
       default:
-        throw new Error(`Invalid weapon selection ${selectedWeaponClass}`);
+        throw new Error(`Invalid weapon selection '${selectedWeaponClass}'`);
     }
   }, [selectedWeaponClass]);
 
@@ -73,7 +73,7 @@ export function WeaponSelectorDesktop({
       onItemSelect={onSelectWeapon}
       itemPredicate={filterWeapons}
     >
-      <Button text={selectedWeapon.name} rightIcon="double-caret-vertical" />
+      <Button text={selectedWeapon.name} endIcon="double-caret-vertical" />
     </Selector>
   );
 }

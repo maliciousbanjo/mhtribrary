@@ -1,20 +1,25 @@
-import { DamageTypes } from 'mh3-data';
-import { MonsterArgReducerAction } from './monster-reducer';
-import { MonsterSelectors } from './monster-selectors';
 import { Section, SectionCard } from '@blueprintjs/core';
+import {
+  MonsterParameters,
+  MonsterParametersReducerAction
+} from './monster-reducer';
+import { MonsterSelectors } from './monster-selectors';
 
 export interface MonsterProps {
-  monsterArgs: DamageTypes.MonsterArgs;
-  dispatchMonsterArgs: React.Dispatch<MonsterArgReducerAction>;
+  monsterParameters: MonsterParameters;
+  dispatchMonsterParameters: React.Dispatch<MonsterParametersReducerAction>;
 }
 
-export function Monster({ monsterArgs, dispatchMonsterArgs }: MonsterProps) {
+export function Monster({
+  monsterParameters,
+  dispatchMonsterParameters
+}: MonsterProps) {
   return (
     <Section compact title="Monster" className="monster">
       <SectionCard>
         <MonsterSelectors
-          monsterArgs={monsterArgs}
-          dispatchMonsterArgs={dispatchMonsterArgs}
+          monsterParameters={monsterParameters}
+          dispatchMonsterParameters={dispatchMonsterParameters}
         />
       </SectionCard>
     </Section>

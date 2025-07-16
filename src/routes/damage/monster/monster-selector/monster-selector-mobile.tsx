@@ -8,17 +8,17 @@ import { MonsterSelectorProps } from '.';
  */
 export function MonsterSelectorMobile({
   selectedMonsterName,
-  dispatchMonsterArgs
+  dispatchMonsterParameters
 }: MonsterSelectorProps) {
   const onChangeMonsterName = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
-      dispatchMonsterArgs({
+      dispatchMonsterParameters({
         type: 'MONSTER_NAME',
         payload: target.value as MonsterTypes.MonsterName
       });
     },
-    [dispatchMonsterArgs]
+    [dispatchMonsterParameters]
   );
 
   const groupedMonsters = React.useMemo(() => {

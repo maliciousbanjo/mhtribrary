@@ -12,16 +12,16 @@ import { ItemListPredicate, ItemPredicate } from '@blueprintjs/select';
  */
 export function MonsterSelectorDesktop({
   selectedMonsterName,
-  dispatchMonsterArgs
+  dispatchMonsterParameters
 }: MonsterSelectorProps) {
   const onSelectMonsterName = React.useCallback(
     (monster: MonsterTypes.Monster) => {
-      dispatchMonsterArgs({
+      dispatchMonsterParameters({
         type: 'MONSTER_NAME',
         payload: monster.name
       });
     },
-    [dispatchMonsterArgs]
+    [dispatchMonsterParameters]
   );
 
   const isMonsterSelected = React.useCallback(
@@ -55,7 +55,7 @@ export function MonsterSelectorDesktop({
       getGroupCallback={getMonsterGroup}
       itemListPredicate={itemListPredicate}
     >
-      <Button text={selectedMonsterName} rightIcon="double-caret-vertical" />
+      <Button text={selectedMonsterName} endIcon="double-caret-vertical" />
     </Selector>
   );
 }
