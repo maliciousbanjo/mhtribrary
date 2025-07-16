@@ -12,16 +12,16 @@ import { getQuestGroup } from './util';
 export function QuestSelectorDesktop({
   quests,
   selectedQuest,
-  dispatchMonsterArgs
+  dispatchMonsterParameters
 }: QuestSelectorProps) {
   const onSelectQuest = React.useCallback(
     (quest: QuestTypes.Quest) => {
-      dispatchMonsterArgs({
+      dispatchMonsterParameters({
         type: 'QUEST_ID',
         payload: quest.id
       });
     },
-    [dispatchMonsterArgs]
+    [dispatchMonsterParameters]
   );
 
   const isQuestSelected = React.useCallback(
@@ -60,7 +60,7 @@ export function QuestSelectorDesktop({
       <Button
         text={selectedQuest.name}
         disabled={quests.length < 2}
-        rightIcon="double-caret-vertical"
+        endIcon="double-caret-vertical"
       />
     </Selector>
   );

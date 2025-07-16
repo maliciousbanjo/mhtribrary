@@ -73,7 +73,7 @@ export function WeaponSelectorDesktop({
       onItemSelect={onSelectWeapon}
       itemPredicate={filterWeapons}
     >
-      <Button text={selectedWeapon.name} rightIcon="double-caret-vertical" />
+      <Button text={selectedWeapon.name} endIcon="double-caret-vertical" />
     </Selector>
   );
 }

@@ -10,17 +10,17 @@ import { getQuestGroup } from './util';
 export function QuestSelectorMobile({
   quests,
   selectedQuest,
-  dispatchMonsterArgs
+  dispatchMonsterParameters
 }: QuestSelectorProps) {
   const onChangeQuest = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
-      dispatchMonsterArgs({
+      dispatchMonsterParameters({
         type: 'QUEST_ID',
         payload: parseInt(target.value)
       });
     },
-    [dispatchMonsterArgs]
+    [dispatchMonsterParameters]
   );
 
   const questOptionGroups = React.useMemo(() => {

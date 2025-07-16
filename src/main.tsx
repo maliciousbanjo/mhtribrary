@@ -1,11 +1,11 @@
+import { FocusStyleManager } from '@blueprintjs/core';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { FocusStyleManager } from '@blueprintjs/core';
-import './main.scss';
 import { RouterProvider, createHashRouter } from 'react-router-dom';
+import './main.scss';
+import { AboutPage } from './routes/about/about-page.tsx';
 import { DamagePage } from './routes/damage/damage-page.tsx';
 import { RootLayout } from './routes/root-layout';
-import { AboutPage } from './routes/about/about-page.tsx';
 
 FocusStyleManager.onlyShowFocusOnTabs();
 

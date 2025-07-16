@@ -1,32 +1,30 @@
 import { Classes, HTMLTable } from '@blueprintjs/core';
 import classNames from 'classnames';
-import { DamageTypes, MonsterLevelTypes, Monsters } from 'mh3-data';
+import { MonsterLevelTypes, Monsters } from 'mh3-data';
 import React from 'react';
-import { MonsterArgReducerAction } from './monster';
+import { MonsterSelectorsProps } from './monster/monster-selectors';
 
-interface HitzoneTableProps {
-  monsterArgs: DamageTypes.MonsterArgs;
-  dispatchMonsterArgs: React.Dispatch<MonsterArgReducerAction>;
-
-  monsterMultipliers: MonsterLevelTypes.MonsterLevelMultipliers;
+interface HitzoneTableProps extends MonsterSelectorsProps {
+  monsterMultipliers: MonsterLevelTypes.MonsterStatMultipliers;
 }
 
 export function HitzoneTable({
-  monsterArgs,
-  dispatchMonsterArgs,
+  monsterParameters,
+  dispatchMonsterParameters,
   monsterMultipliers
 }: HitzoneTableProps) {
-  const monster = Monsters.getMonster(monsterArgs.monsterName);
-  const hitzoneGroup = monster.monsterStates[monsterArgs.monsterStateIndex];
+  const monster = Monsters.getMonster(monsterParameters.monsterName);
+  const hitzoneGroup =
+    monster.monsterStates[monsterParameters.monsterStateIndex];
 
   const handleRowClick = React.useCallback(
     (hitzoneIndex: number) => {
-      dispatchMonsterArgs({
+      dispatchMonsterParameters({
         type: 'HITZONE_INDEX',
         payload: hitzoneIndex
       });
     },
-    [dispatchMonsterArgs]
+    [dispatchMonsterParameters]
   );
 
   const buildHitzoneRow = React.useCallback(() => {
@@ -35,7 +33,7 @@ export function HitzoneTable({
         key={hitzone.name}
         className={classNames({
           'table-row': true,
-          'table-row--selected': monsterArgs.hitzoneIndex === index
+          'table-row--selected': monsterParameters.hitzoneIndex === index
         })}
         onClick={() => handleRowClick(index)}
       >
@@ -71,7 +69,7 @@ export function HitzoneTable({
   }, [
     handleRowClick,
     hitzoneGroup.hitzones,
-    monsterArgs.hitzoneIndex,
+    monsterParameters.hitzoneIndex,
     monsterMultipliers.stagger
   ]);
 

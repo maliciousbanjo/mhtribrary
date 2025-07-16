@@ -11,8 +11,8 @@ import {
 import { DamageResults } from './damage-results';
 import {
   Monster,
-  MONSTER_ARGS_INITIAL_STATE,
-  monsterArgsReducer
+  MONSTER_PARAMETERS_INITIAL_STATE,
+  monsterParametersReducer
 } from './monster';
 import { Weapon, WEAPON_ARGS_INITIAL_STATE, weaponArgsReducer } from './weapon';
 
@@ -27,9 +27,9 @@ export function DamagePage() {
   );
 
   // MONSTER STATE
-  const [monsterArgs, dispatchMonsterArgs] = React.useReducer(
-    monsterArgsReducer,
-    MONSTER_ARGS_INITIAL_STATE
+  const [monsterParameters, dispatchMonsterParameters] = React.useReducer(
+    monsterParametersReducer,
+    MONSTER_PARAMETERS_INITIAL_STATE
   );
 
   // BUFF STATE
@@ -56,14 +56,14 @@ export function DamagePage() {
       <Weapon weaponArgs={weaponArgs} dispatchWeaponArgs={dispatchWeaponArgs} />
       <DamageResults
         weaponArgs={weaponArgs}
-        monsterArgs={monsterArgs}
+        monsterParameters={monsterParameters}
         rawArgs={rawArgs}
         elementArgs={elementArgs}
         weaponClassArgs={weaponClassArgs}
       />
       <Monster
-        monsterArgs={monsterArgs}
-        dispatchMonsterArgs={dispatchMonsterArgs}
+        monsterParameters={monsterParameters}
+        dispatchMonsterParameters={dispatchMonsterParameters}
       />
       <Buffs
         rawArgs={rawArgs}

@@ -5,24 +5,24 @@ import { DamageTypes } from 'mh3-data';
 import { MonsterSelectorDesktop } from './monster-selector-desktop';
 
 export interface MonsterSelectorProps
-  extends Pick<MonsterSelectorsProps, 'dispatchMonsterArgs'> {
+  extends Pick<MonsterSelectorsProps, 'dispatchMonsterParameters'> {
   selectedMonsterName: DamageTypes.MonsterArgs['monsterName'];
 }
 
 export function MonsterSelector({
-  monsterArgs,
-  dispatchMonsterArgs
+  monsterParameters,
+  dispatchMonsterParameters
 }: MonsterSelectorsProps) {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   return isMobile ? (
     <MonsterSelectorMobile
-      selectedMonsterName={monsterArgs.monsterName}
-      dispatchMonsterArgs={dispatchMonsterArgs}
+      selectedMonsterName={monsterParameters.monsterName}
+      dispatchMonsterParameters={dispatchMonsterParameters}
     />
   ) : (
     <MonsterSelectorDesktop
-      selectedMonsterName={monsterArgs.monsterName}
-      dispatchMonsterArgs={dispatchMonsterArgs}
+      selectedMonsterName={monsterParameters.monsterName}
+      dispatchMonsterParameters={dispatchMonsterParameters}
     />
   );
 }

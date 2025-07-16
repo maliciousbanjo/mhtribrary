@@ -6,7 +6,7 @@ import { QuestSelectorDesktop } from './quest-selector-desktop';
 import { Monsters, Quests, QuestTypes } from 'mh3-data';
 
 export interface QuestSelectorProps
-  extends Pick<MonsterSelectorsProps, 'dispatchMonsterArgs'> {
+  extends Pick<MonsterSelectorsProps, 'dispatchMonsterParameters'> {
   selectedQuest: Quests.QuestTypes.Quest;
   quests: Quests.QuestTypes.Quest[];
 }
@@ -16,31 +16,33 @@ export interface QuestSelectorProps
  * depending on device size
  */
 export function QuestSelector({
-  monsterArgs,
-  dispatchMonsterArgs
+  monsterParameters,
+  dispatchMonsterParameters
 }: MonsterSelectorsProps) {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   const quests = React.useMemo<QuestTypes.Quest[]>(() => {
-    const selectedMonster = Monsters.getMonster(monsterArgs.monsterName);
+    const selectedMonster = Monsters.getMonster(monsterParameters.monsterName);
     return Quests.getQuestsWithLargeMonster(selectedMonster.id, 'Both');
-  }, [monsterArgs.monsterName]);
+  }, [monsterParameters.monsterName]);
 
   const selectedQuest = React.useMemo(() => {
-    return quests.find(quest => quest.id === monsterArgs.questId) ?? quests[0];
-  }, [monsterArgs.questId, quests]);
+    return (
+      quests.find(quest => quest.id === monsterParameters.questId) ?? quests[0]
+    );
+  }, [monsterParameters.questId, quests]);
 
   return isMobile ? (
     <QuestSelectorMobile
       selectedQuest={selectedQuest}
       quests={quests}
-      dispatchMonsterArgs={dispatchMonsterArgs}
+      dispatchMonsterParameters={dispatchMonsterParameters}
     />
   ) : (
     <QuestSelectorDesktop
       selectedQuest={selectedQuest}
       quests={quests}
-      dispatchMonsterArgs={dispatchMonsterArgs}
+      dispatchMonsterParameters={dispatchMonsterParameters}
     />
   );
 }
