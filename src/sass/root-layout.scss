@@ -129,6 +129,27 @@ tr.table-row:nth-child(even):not(.table-row--selected) {
   }
 }
 
+// Error page
+#error-page {
+  background-color: $gray3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 1em;
+
+  #error-content {
+    max-width: 1000px;
+  }
+
+  .bp6-code-block {
+    background-color: inherit;
+    color: inherit;
+    box-shadow: none;
+    border: none;
+  }
+}
+
 footer {
   position: absolute;
   bottom: 10px;

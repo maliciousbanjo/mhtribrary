@@ -1,4 +1,10 @@
-import { FormGroup, HTMLSelect, OptionProps } from '@blueprintjs/core';
+import {
+  FormGroup,
+  HTMLSelect,
+  InputGroup,
+  NumericInput,
+  OptionProps
+} from '@blueprintjs/core';
 import { Monsters, Quests } from 'mh3-data';
 import React from 'react';
 import { HitzoneTable } from '../hitzone-table';
@@ -10,6 +16,7 @@ import { MonsterSelector } from './monster-selector';
 import { QuestSelector } from './quest-selector';
 import { LevelSelector } from './level-selector';
 import { getMonsterStatMultipliers } from 'mh3-data/monsterLevels';
+import { getMonster, isLargeMonster } from 'mh3-data/monsters';
 
 export interface MonsterSelectorsProps {
   monsterParameters: MonsterParameters;
@@ -36,6 +43,10 @@ export function MonsterSelectors({
     );
   }, [monsterParameters.monsterName]);
 
+  const monster = React.useMemo(() => {
+    return getMonster(monsterParameters.monsterName);
+  }, [monsterParameters.monsterName]);
+
   const onChangeMonsterState = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
@@ -58,18 +69,6 @@ export function MonsterSelectors({
       };
     });
   }, [monsterParameters.monsterName]);
-
-  // const multipliers: MonsterLevelTypes.MonsterStatMultipliers =
-  //   monsterParameters.questId !== undefined
-  //     ? MonsterLevels.getMonsterMultipliersForQuest(
-  //         monsterParameters.monsterName,
-  //         monsterParameters.questId
-  //       )
-  //     : {
-  //         health: 1,
-  //         defense: 1,
-  //         stagger: 1
-  //       };
 
   const multipliers = getMonsterStatMultipliers(
     monsterParameters.monsterName,
@@ -113,10 +112,25 @@ export function MonsterSelectors({
               />
             </FormGroup>
 
-            {/*
-             * This goes away (for now), but it can display the multipliers of the currently-selected level
-             */}
+            {isLargeMonster(monster) && (
+              <FormGroup label="Health">
+                <NumericInput
+                  value={monster.hp * multipliers.health}
+                  readOnly
+                  buttonPosition="none"
+                  style={{
+                    width: '70px',
+                    backgroundColor: 'inherit',
+                    boxShadow: 'none'
+                  }}
+                />
+              </FormGroup>
+            )}
+
             <FormGroup className="multiplier-labels" label="Multipliers">
+              <div className="multiplier">
+                <label>HP:</label> {multipliers.health}
+              </div>
               <div className="multiplier">
                 <label>Defense:</label> {multipliers.defense}
               </div>

@@ -6,12 +6,15 @@ import './main.scss';
 import { AboutPage } from './routes/about/about-page.tsx';
 import { DamagePage } from './routes/damage/damage-page.tsx';
 import { RootLayout } from './routes/root-layout';
+import { ErrorPage } from './routes/error/index.ts';
 
 FocusStyleManager.onlyShowFocusOnTabs();
 
 const router = createHashRouter([
   {
+    path: '/',
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         // TODO: Create a home page?

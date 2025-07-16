@@ -78,7 +78,7 @@ export function getWeaponSelectOptions(
     case 'Sword and Shield':
       return swordAndShieldOptions;
     default:
-      throw new Error(`Invalid weapon selection ${weaponClass}`);
+      throw new Error(`Invalid weapon selection '${weaponClass}'`);
   }
 }
 
@@ -151,17 +151,19 @@ export function getWeaponAttackOptions(
     case 'Longsword':
       return longswordAttackOptions;
     case 'Switch Axe': {
-      if (!mode) throw Error(`Attack mode must be provided for ${weaponClass}`);
+      if (!mode)
+        throw new Error(`Attack mode must be provided for '${weaponClass}'`);
       return mode === 'axe' ? switchAxeAxeAttacks : switchAxeSwordAttacks;
     }
     case 'Sword and Shield': {
-      if (!mode) throw Error(`Attack mode must be provided for ${weaponClass}`);
+      if (!mode)
+        throw new Error(`Attack mode must be provided for '${weaponClass}'`);
       return mode === 'land'
         ? swordAndShieldLandAttacks
         : swordAndShieldWaterAttacks;
     }
     default:
-      throw new Error(`Invalid weapon selection ${weaponClass}`);
+      throw new Error(`Invalid weapon selection '${weaponClass}'`);
   }
 }
 

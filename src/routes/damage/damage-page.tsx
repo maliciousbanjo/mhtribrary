@@ -52,7 +52,7 @@ export function DamagePage() {
   );
 
   return (
-    <div className="damage">
+    <div id="damage-page" className="damage">
       <Weapon weaponArgs={weaponArgs} dispatchWeaponArgs={dispatchWeaponArgs} />
       <DamageResults
         weaponArgs={weaponArgs}

@@ -13,6 +13,6 @@ export function getQuestGroup(
       return quest.rank === 'Low' ? 'Low Rank' : 'High Rank';
     }
     default:
-      throw new Error(`Invalid quest region ${quest.region}`);
+      throw new Error(`Invalid quest region '${quest.region}'`);
   }
 }

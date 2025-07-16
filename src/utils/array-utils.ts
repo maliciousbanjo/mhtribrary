@@ -18,7 +18,7 @@ export function findOrThrow<T>(list: T[], predicate: FindPredicate<T>) {
  */
 export function atOrThrow<T>(list: T[], index: number) {
   const result = list.at(index);
-  if (!result) throw new Error(`No item exists at index ${index}`);
+  if (!result) throw new Error(`No item exists at index '${index}'`);
 
   return result;
 }
@@ -37,7 +37,7 @@ export function getMedianMonsterLevel(
 
   if (length !== 1 && length !== 3 && length !== 5) {
     throw new Error(
-      `Expected monsterLevels list to be length 1, 3, or 5 but received ${length}`
+      `Expected monsterLevels list to be length 1, 3, or 5 but received '${length}'`
     );
   }
 
