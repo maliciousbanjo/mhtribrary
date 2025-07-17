@@ -8,7 +8,7 @@ type FindPredicate<T> = Parameters<Array<T>['find']>[0];
  */
 export function findOrThrow<T>(list: T[], predicate: FindPredicate<T>) {
   const result = list.find(predicate);
-  if (!result) throw new Error('Could not find item in list');
+  if (result === undefined) throw new Error('Could not find item in list');
 
   return result;
 }
@@ -18,7 +18,8 @@ export function findOrThrow<T>(list: T[], predicate: FindPredicate<T>) {
  */
 export function atOrThrow<T>(list: T[], index: number) {
   const result = list.at(index);
-  if (!result) throw new Error(`No item exists at index '${index}'`);
+  if (result === undefined)
+    throw new Error(`No item exists at index '${index}'`);
 
   return result;
 }
