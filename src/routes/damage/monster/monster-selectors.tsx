@@ -16,6 +16,7 @@ import {
 } from './monster-reducer';
 import { MonsterSelector } from './monster-selector';
 import { QuestSelector } from './quest-selector';
+import { MonsterIcon } from './monster-icon/monster-icon';
 
 export interface MonsterSelectorsProps {
   monsterParameters: MonsterParameters;
@@ -77,6 +78,7 @@ export function MonsterSelectors({
   return (
     <>
       <div className="monster--selectors">
+        <MonsterIcon monsterName={monsterParameters.monsterName} />
         <FormGroup label="Monster">
           <MonsterSelector
             monsterParameters={monsterParameters}
