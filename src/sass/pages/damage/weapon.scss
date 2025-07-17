@@ -4,7 +4,9 @@
 
 .weapon-pane {
   min-height: 345px;
-  flex: 1 1 450px;
+  flex: 1 1 0;
+  min-width: 410px;
+  width: 700px;
 
   &__selectors {
     @include abstracts.flex-container();

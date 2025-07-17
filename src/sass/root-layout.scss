@@ -27,24 +27,6 @@ footer {
   color: bp.$pt-intent-danger;
 }
 
-// TABLE
-
-// Dark theme zebra-striping
-.bp6-dark tr.table-row:nth-child(even):not(.table-row--selected) {
-  background-color: bp.$dark-gray5;
-  td {
-    color: bp.$pt-dark-text-color;
-  }
-}
-
-// Zebra-striping
-tr.table-row:nth-child(even):not(.table-row--selected) {
-  background-color: bp.$light-gray1;
-  td {
-    color: bp.$pt-text-color;
-  }
-}
-
 .warning-banner {
   text-align: center;
 }

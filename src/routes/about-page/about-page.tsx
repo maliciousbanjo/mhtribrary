@@ -8,7 +8,7 @@ export function AboutPage() {
    * 3. Library reference
    */
   return (
-    <div id="about-page" className="about">
+    <div id="about-page">
       <div className="faqs">
         <h1>Frequently Asked Questions</h1>
         {faqs.map(faq => (

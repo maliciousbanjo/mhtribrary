@@ -1,14 +1,6 @@
-import {
-  FormGroup,
-  HTMLSelect,
-  NumericInput,
-  OptionProps
-} from '@blueprintjs/core';
+import { FormGroup, HTMLSelect, OptionProps } from '@blueprintjs/core';
 import { Monsters, Quests } from 'mh3-data';
-import { getMonsterStatMultipliers } from 'mh3-data/monsterLevels';
-import { getMonster, isLargeMonster } from 'mh3-data/monsters';
 import React from 'react';
-import { HitzoneTable } from '../hitzone-table';
 import { LevelSelector } from './level-selector';
 import {
   MonsterParameters,
@@ -16,7 +8,6 @@ import {
 } from './monster-reducer';
 import { MonsterSelector } from './monster-selector';
 import { QuestSelector } from './quest-selector';
-import { MonsterIcon } from './monster-icon/monster-icon';
 
 export interface MonsterSelectorsProps {
   monsterParameters: MonsterParameters;
@@ -43,10 +34,6 @@ export function MonsterSelectors({
     );
   }, [monsterParameters.monsterName]);
 
-  const monster = React.useMemo(() => {
-    return getMonster(monsterParameters.monsterName);
-  }, [monsterParameters.monsterName]);
-
   const onChangeMonsterState = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
@@ -70,32 +57,28 @@ export function MonsterSelectors({
     });
   }, [monsterParameters.monsterName]);
 
-  const multipliers = getMonsterStatMultipliers(
-    monsterParameters.monsterName,
-    monsterParameters.monsterLevel
-  );
-
   return (
     <>
       <div className="monster-pane__selectors">
-        <MonsterIcon monsterName={monsterParameters.monsterName} />
-        <FormGroup label="Monster">
-          <MonsterSelector
-            monsterParameters={monsterParameters}
-            dispatchMonsterParameters={dispatchMonsterParameters}
-          />
-        </FormGroup>
-
-        {monsterStates.length > 1 && (
-          <FormGroup label="State">
-            <HTMLSelect
-              id="select-monster-state"
-              options={monsterStates}
-              value={monsterParameters.monsterStateIndex}
-              onChange={onChangeMonsterState}
+        <div className="flex-container-wrap">
+          <FormGroup label="Monster">
+            <MonsterSelector
+              monsterParameters={monsterParameters}
+              dispatchMonsterParameters={dispatchMonsterParameters}
             />
           </FormGroup>
-        )}
+
+          {monsterStates.length > 1 && (
+            <FormGroup label="State">
+              <HTMLSelect
+                id="select-monster-state"
+                options={monsterStates}
+                value={monsterParameters.monsterStateIndex}
+                onChange={onChangeMonsterState}
+              />
+            </FormGroup>
+          )}
+        </div>
 
         {questOptions.length !== 0 && (
           <>
@@ -105,49 +88,15 @@ export function MonsterSelectors({
                 dispatchMonsterParameters={dispatchMonsterParameters}
               />
             </FormGroup>
-
             <FormGroup label="Level">
               <LevelSelector
                 monsterParameters={monsterParameters}
                 dispatchMonsterParameters={dispatchMonsterParameters}
               />
             </FormGroup>
-
-            {isLargeMonster(monster) && (
-              <FormGroup label="Health">
-                <NumericInput
-                  value={monster.hp * multipliers.health}
-                  readOnly
-                  buttonPosition="none"
-                  style={{
-                    width: '70px',
-                    backgroundColor: 'inherit',
-                    boxShadow: 'none'
-                  }}
-                />
-              </FormGroup>
-            )}
-
-            <FormGroup className="multiplier-labels" label="Multipliers">
-              <div className="multiplier">
-                <label>HP:</label> {multipliers.health}
-              </div>
-              <div className="multiplier">
-                <label>Defense:</label> {multipliers.defense}
-              </div>
-              <div className="multiplier">
-                <label>Stagger:</label>
-                {multipliers.stagger}
-              </div>
-            </FormGroup>
           </>
         )}
       </div>
-      <HitzoneTable
-        monsterParameters={monsterParameters}
-        dispatchMonsterParameters={dispatchMonsterParameters}
-        monsterMultipliers={multipliers}
-      />
     </>
   );
 }

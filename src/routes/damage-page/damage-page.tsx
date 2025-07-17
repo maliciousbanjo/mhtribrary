@@ -56,30 +56,32 @@ export function DamagePage() {
   );
 
   return (
-    <div id="damage-page" className="damage">
+    <div id="damage-page">
       <WeaponPane
         weaponArgs={weaponArgs}
         dispatchWeaponArgs={dispatchWeaponArgs}
       />
-      <DamageResultsPane
-        weaponArgs={weaponArgs}
-        monsterParameters={monsterParameters}
-        rawArgs={rawArgs}
-        elementArgs={elementArgs}
-        weaponClassArgs={weaponClassArgs}
-      />
+      {/* <BuffsPane
+          rawArgs={rawArgs}
+          dispatchRawArgs={dispatchRawArgs}
+          elementArgs={elementArgs}
+          dispatchElementArgs={dispatchElementArgs}
+          weaponClassArgs={weaponClassArgs}
+          dispatchWeaponClassArgs={dispatchWeaponClassArgs}
+        /> */}
       <MonsterPane
         monsterParameters={monsterParameters}
         dispatchMonsterParameters={dispatchMonsterParameters}
       />
-      <BuffsPane
-        rawArgs={rawArgs}
-        dispatchRawArgs={dispatchRawArgs}
-        elementArgs={elementArgs}
-        dispatchElementArgs={dispatchElementArgs}
-        weaponClassArgs={weaponClassArgs}
-        dispatchWeaponClassArgs={dispatchWeaponClassArgs}
-      />
+      {/*
+        // TODO: Put this back later
+        <DamageResultsPane
+          weaponArgs={weaponArgs}
+          monsterParameters={monsterParameters}
+          rawArgs={rawArgs}
+          elementArgs={elementArgs}
+          weaponClassArgs={weaponClassArgs}
+        /> */}
     </div>
   );
 }
