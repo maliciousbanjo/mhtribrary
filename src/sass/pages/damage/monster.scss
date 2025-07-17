@@ -1,9 +1,9 @@
-@import '../../abstracts/';
+@use '../../abstracts' as abstracts;
 
 .monster {
   flex: 1 1 600px;
   &--selectors {
-    @include flex-container-wrap();
+    @include abstracts.flex-container-wrap();
 
     .multiplier {
       text-indent: 0.5em;
@@ -30,7 +30,7 @@
 
   .table-row {
     &--selected {
-      background-color: $selection-color;
+      background-color: abstracts.$selection-color;
       td {
         color: white;
       }
@@ -38,7 +38,7 @@
   }
 }
 
-@media screen and (max-width: $media-mobile-width) {
+@media screen and (max-width: abstracts.$media-mobile-width) {
   .hitzone-table {
     border: 0;
     width: 100%;

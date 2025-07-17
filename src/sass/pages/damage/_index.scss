@@ -2,9 +2,9 @@
 @forward './monster.scss';
 @forward './buffs.scss';
 @forward './damage-results.scss';
-@import '../../abstracts/';
+@use '../../abstracts/' as abstracts;
 
 .damage {
-  @include flex-container-wrap();
+  @include abstracts.flex-container-wrap();
   gap: 1em;
 }

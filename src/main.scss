@@ -1,9 +1,9 @@
-@import 'normalize.css';
-@import '@blueprintjs/core/lib/css/blueprint.css';
-@import '@blueprintjs/select/lib/css/blueprint-select.css';
-@import './sass/blueprint-overrides.scss';
-@import './sass';
+@use 'normalize.css';
+@use '@blueprintjs/core/lib/css/blueprint.css';
+@use '@blueprintjs/select/lib/css/blueprint-select.css';
+@use './sass/blueprint-overrides.scss';
+@use './sass/index' as appSass;
 
 body {
-  min-width: $min-width;
+  min-width: appSass.$min-width;
 }

@@ -1,12 +1,13 @@
+@use '@blueprintjs/core/lib/scss/variables' as bp;
 @use 'sass:color';
-@import '../../abstracts/';
+@use '../../abstracts' as abstracts;
 
 .weapon {
   min-height: 345px;
   flex: 1 1 450px;
 
   &--selectors {
-    @include flex-container();
+    @include abstracts.flex-container();
     flex-direction: column;
     align-items: flex-start;
   }
@@ -17,11 +18,11 @@
 }
 
 .weapon-info {
-  @include flex-container();
+  @include abstracts.flex-container();
 
   &__sharpness {
     border: 1px solid black;
-    background-color: $dark-gray4; // Same color as Select elements
+    background-color: bp.$dark-gray4; // Same color as Select elements
     height: 1.2em;
     width: 210px;
     padding: 1px;
@@ -31,25 +32,25 @@
       float: left;
     }
     .sharp0 {
-      background-color: $sharpness-red;
+      background-color: abstracts.$sharpness-red;
     }
     .sharp1 {
-      background-color: $sharpness-orange;
+      background-color: abstracts.$sharpness-orange;
     }
     .sharp2 {
-      background-color: $sharpness-yellow;
+      background-color: abstracts.$sharpness-yellow;
     }
     .sharp3 {
-      background-color: $sharpness-green;
+      background-color: abstracts.$sharpness-green;
     }
     .sharp4 {
-      background-color: $sharpness-blue;
+      background-color: abstracts.$sharpness-blue;
     }
     .sharp5 {
-      background-color: $sharpness-white;
+      background-color: abstracts.$sharpness-white;
     }
     .sharp6 {
-      background-color: $sharpness-purple;
+      background-color: abstracts.$sharpness-purple;
     }
   }
 
@@ -72,7 +73,7 @@
 }
 
 .unique-weapon-selectors {
-  @include flex-container(1.5em);
+  @include abstracts.flex-container(1.5em);
 }
 
 /* Applies a border */
@@ -95,47 +96,68 @@
 .select-sharpness {
   &__mobile {
     &.sharp0 {
-      @include sharpness-select($sharpness-red);
+      @include sharpness-select(abstracts.$sharpness-red);
     }
     &.sharp1 {
-      @include sharpness-select($sharpness-orange);
+      @include sharpness-select(abstracts.$sharpness-orange);
     }
     &.sharp2 {
-      @include sharpness-select($sharpness-yellow);
+      @include sharpness-select(abstracts.$sharpness-yellow);
     }
     &.sharp3 {
-      @include sharpness-select($sharpness-green);
+      @include sharpness-select(abstracts.$sharpness-green);
     }
     &.sharp4 {
-      @include sharpness-select($sharpness-blue);
+      @include sharpness-select(abstracts.$sharpness-blue);
     }
     &.sharp5 {
-      @include sharpness-select($sharpness-white);
+      @include sharpness-select(abstracts.$sharpness-white);
     }
     &.sharp6 {
-      @include sharpness-select($sharpness-purple);
+      @include sharpness-select(abstracts.$sharpness-purple);
     }
   }
 
   .sharp0 {
-    @include sharpness-select-button($sharpness-red, $pt-dark-text-color);
+    @include sharpness-select-button(
+      abstracts.$sharpness-red,
+      bp.$pt-dark-text-color
+    );
   }
   .sharp1 {
-    @include sharpness-select-button($sharpness-orange, $pt-dark-text-color);
+    @include sharpness-select-button(
+      abstracts.$sharpness-orange,
+      bp.$pt-dark-text-color
+    );
   }
   .sharp2 {
-    @include sharpness-select-button($sharpness-yellow, $pt-text-color);
+    @include sharpness-select-button(
+      abstracts.$sharpness-yellow,
+      bp.$pt-text-color
+    );
   }
   .sharp3 {
-    @include sharpness-select-button($sharpness-green, $pt-text-color);
+    @include sharpness-select-button(
+      abstracts.$sharpness-green,
+      bp.$pt-text-color
+    );
   }
   .sharp4 {
-    @include sharpness-select-button($sharpness-blue, $pt-dark-text-color);
+    @include sharpness-select-button(
+      abstracts.$sharpness-blue,
+      bp.$pt-dark-text-color
+    );
   }
   .sharp5 {
-    @include sharpness-select-button($sharpness-white, $pt-text-color);
+    @include sharpness-select-button(
+      abstracts.$sharpness-white,
+      bp.$pt-text-color
+    );
   }
   .sharp6 {
-    @include sharpness-select-button($sharpness-purple, $pt-text-color);
+    @include sharpness-select-button(
+      abstracts.$sharpness-purple,
+      bp.$pt-text-color
+    );
   }
 }
