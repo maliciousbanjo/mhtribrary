@@ -1,4 +1,4 @@
-@import '@blueprintjs/core/lib/scss/variables';
+@use '@blueprintjs/core/lib/scss/variables' as bp;
 
 $min-width: 410px;
 
@@ -7,7 +7,7 @@ $media-mobile-width: 768px;
 $media-tablet-width: 959px;
 
 // Colors
-$selection-color: $pt-intent-primary;
+$selection-color: bp.$pt-intent-primary;
 
 $sharpness-red: #c50f3a;
 $sharpness-orange: #e85218;

@@ -1,4 +1,5 @@
-@import './abstracts/';
+@use '@blueprintjs/core/lib/scss/variables' as bp;
+@use './abstracts';
 
 .bp6-radio-group .bp6-label {
   font-weight: bold;
@@ -17,5 +18,5 @@ label.bp6-checkbox {
 }
 
 .bp6-segmented-control > .bp6-button.bp6-minimal {
-  color: $pt-text-color;
+  color: bp.$pt-text-color;
 }
