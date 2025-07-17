@@ -4,7 +4,7 @@ import { WeaponClass } from 'mh3-data/weapons';
 import React from 'react';
 import { SharpnessSelector } from './sharpness-selectors';
 import { UniqueWeaponSelectors } from './unique-weapon-selectors';
-import { WeaponProps } from './weapon';
+import { WeaponPaneProps } from './weapon-pane';
 import { WeaponInfo } from './weapon-info';
 import { getWeaponAttackOptions, weaponClassOptions } from './weapon-options';
 import { WeaponSelector } from './weapon-selector';
@@ -12,7 +12,7 @@ import { WeaponSelector } from './weapon-selector';
 export function WeaponSelectors({
   weaponArgs,
   dispatchWeaponArgs
-}: WeaponProps) {
+}: WeaponPaneProps) {
   const selectedWeapon = React.useMemo(
     () => Weapons.getWeapon(weaponArgs.weaponClass, weaponArgs.weaponId),
     [weaponArgs.weaponClass, weaponArgs.weaponId]
@@ -65,7 +65,7 @@ export function WeaponSelectors({
   ]);
 
   return (
-    <div className="weapon--selectors">
+    <div className="weapon-pane__selectors">
       <div className="flex-container-wrap">
         <FormGroup label="Class">
           <HTMLSelect

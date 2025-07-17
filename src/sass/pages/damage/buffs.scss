@@ -1,8 +1,8 @@
 @use '../../abstracts' as abstracts;
 
-.buffs {
+.buffs-pane {
   flex: 5 1 500px;
-  &--selectors {
+  &__selectors {
     @include abstracts.flex-container-wrap();
     gap: 1em;
 

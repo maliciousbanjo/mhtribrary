@@ -3,8 +3,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider, createHashRouter } from 'react-router-dom';
 import './main.scss';
-import { AboutPage } from './routes/about/about-page.tsx';
-import { DamagePage } from './routes/damage/damage-page.tsx';
+import { AboutPage } from './routes/about-page/about-page.tsx';
+import { DamagePage } from './routes/damage-page/damage-page.tsx';
 import { RootLayout } from './routes/root-layout';
 import { ErrorPage } from './routes/error/index.ts';
 

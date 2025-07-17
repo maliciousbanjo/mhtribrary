@@ -1,8 +1,8 @@
 @use '../../abstracts' as abstracts;
 
-.monster {
+.monster-pane {
   flex: 1 1 600px;
-  &--selectors {
+  &__selectors {
     @include abstracts.flex-container-wrap();
 
     .multiplier {

@@ -1,13 +1,13 @@
 import { Damage, DamageTypes } from 'mh3-data';
 import { v3 as uuidv3 } from 'uuid';
 import React from 'react';
-import { WeaponArgsState } from '../weapon';
-import { RawArgs, ElementArgs, WeaponClassArgs } from '../buffs';
+import { WeaponArgsState } from '../weapon-pane';
+import { RawArgs, ElementArgs, WeaponClassArgs } from '../buffs-pane';
 import { Section, SectionCard } from '@blueprintjs/core';
-import { MonsterParameters } from '../monster';
+import { MonsterParameters } from '../monster-pane';
 import { getMonsterStatMultipliers } from 'mh3-data/monsterLevels';
 
-interface DamageResultsProps {
+interface DamageResultsPaneProps {
   weaponArgs: WeaponArgsState;
   monsterParameters: MonsterParameters;
   rawArgs: RawArgs;
@@ -15,13 +15,13 @@ interface DamageResultsProps {
   weaponClassArgs: WeaponClassArgs;
 }
 
-export function DamageResults({
+export function DamageResultsPane({
   weaponArgs,
   monsterParameters,
   rawArgs,
   elementArgs,
   weaponClassArgs
-}: Readonly<DamageResultsProps>) {
+}: Readonly<DamageResultsPaneProps>) {
   const damage = React.useMemo<DamageTypes.Damage[]>(() => {
     const { monsterName, hitzoneIndex, monsterLevel, monsterStateIndex } =
       monsterParameters;
@@ -61,7 +61,7 @@ export function DamageResults({
   );
 
   return (
-    <Section compact title="Results" className="damage-results">
+    <Section compact title="Results" className="damage-results-pane">
       <SectionCard>
         <div className="damage-results-content">
           {damage.map<JSX.Element>((damageResult, index) => {

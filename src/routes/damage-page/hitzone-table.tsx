@@ -2,7 +2,7 @@ import { Classes, HTMLTable } from '@blueprintjs/core';
 import classNames from 'classnames';
 import { MonsterLevelTypes, Monsters } from 'mh3-data';
 import React from 'react';
-import { MonsterSelectorsProps } from './monster/monster-selectors';
+import { MonsterSelectorsProps } from './monster-pane/monster-selectors';
 
 interface HitzoneTableProps extends MonsterSelectorsProps {
   monsterMultipliers: MonsterLevelTypes.MonsterStatMultipliers;

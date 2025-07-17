@@ -1,20 +1,24 @@
 import React from 'react';
 import {
-  Buffs,
+  BuffsPane,
   ELEMENTAL_ARGS_INITIAL_STATE,
   elementArgsReducer,
   RAW_ARGS_INITIAL_STATE,
   rawArgsReducer,
   WEAPON_CLASS_ARGS_INITIAL_STATE,
   weaponClassArgsReducer
-} from './buffs';
-import { DamageResults } from './damage-results';
+} from './buffs-pane';
+import { DamageResultsPane } from './damage-results';
 import {
-  Monster,
+  MonsterPane,
   MONSTER_PARAMETERS_INITIAL_STATE,
   monsterParametersReducer
-} from './monster';
-import { Weapon, WEAPON_ARGS_INITIAL_STATE, weaponArgsReducer } from './weapon';
+} from './monster-pane';
+import {
+  WeaponPane,
+  WEAPON_ARGS_INITIAL_STATE,
+  weaponArgsReducer
+} from './weapon-pane';
 
 /**
  * Top-level page for damage calculations
@@ -53,19 +57,22 @@ export function DamagePage() {
 
   return (
     <div id="damage-page" className="damage">
-      <Weapon weaponArgs={weaponArgs} dispatchWeaponArgs={dispatchWeaponArgs} />
-      <DamageResults
+      <WeaponPane
+        weaponArgs={weaponArgs}
+        dispatchWeaponArgs={dispatchWeaponArgs}
+      />
+      <DamageResultsPane
         weaponArgs={weaponArgs}
         monsterParameters={monsterParameters}
         rawArgs={rawArgs}
         elementArgs={elementArgs}
         weaponClassArgs={weaponClassArgs}
       />
-      <Monster
+      <MonsterPane
         monsterParameters={monsterParameters}
         dispatchMonsterParameters={dispatchMonsterParameters}
       />
-      <Buffs
+      <BuffsPane
         rawArgs={rawArgs}
         dispatchRawArgs={dispatchRawArgs}
         elementArgs={elementArgs}

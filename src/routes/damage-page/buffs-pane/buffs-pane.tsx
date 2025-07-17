@@ -9,7 +9,7 @@ import {
   WeaponClassArgs
 } from './buff-types';
 
-export interface BuffsProps {
+export interface BuffsPaneProps {
   rawArgs: RawArgs;
   dispatchRawArgs: React.Dispatch<RawArgReducerAction>;
   elementArgs: ElementArgs;
@@ -18,16 +18,16 @@ export interface BuffsProps {
   dispatchWeaponClassArgs: React.Dispatch<WeaponClassArgReducerActions>;
 }
 
-export function Buffs({
+export function BuffsPane({
   rawArgs,
   dispatchRawArgs,
   elementArgs,
   dispatchElementArgs,
   weaponClassArgs,
   dispatchWeaponClassArgs
-}: BuffsProps) {
+}: BuffsPaneProps) {
   return (
-    <Section compact title="Buffs" className="buffs">
+    <Section compact title="Buffs" className="buffs-pane">
       <SectionCard>
         <BuffSelectors
           rawArgs={rawArgs}

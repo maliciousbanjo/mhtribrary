@@ -1,6 +1,6 @@
 import { Checkbox, ControlGroup, RadioGroup } from '@blueprintjs/core';
 import { ElementArgs, RawArgs, WeaponClassArgs } from './buff-types';
-import { BuffsProps } from './buffs';
+import { BuffsPaneProps } from './buffs-pane';
 import {
   armorSkillOptions,
   criticalHitOptions,
@@ -18,9 +18,9 @@ export function BuffSelectors({
   dispatchElementArgs,
   weaponClassArgs,
   dispatchWeaponClassArgs
-}: BuffsProps) {
+}: BuffsPaneProps) {
   return (
-    <div className="buffs--selectors">
+    <div className="buffs-pane__selectors">
       <ControlGroup vertical>
         <span>
           <Checkbox

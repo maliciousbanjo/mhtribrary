@@ -3,7 +3,7 @@ import { WeaponArgReducerActions, WeaponArgsState } from './weapon-reducer';
 import { WeaponSelectors } from './weapon-selectors';
 import { Section, SectionCard } from '@blueprintjs/core';
 
-export interface WeaponProps {
+export interface WeaponPaneProps {
   weaponArgs: WeaponArgsState;
   dispatchWeaponArgs: React.Dispatch<WeaponArgReducerActions>;
 }
@@ -11,9 +11,12 @@ export interface WeaponProps {
 /**
  * Top-level container for all info pertaining to the weapon
  */
-export function Weapon({ weaponArgs, dispatchWeaponArgs }: WeaponProps) {
+export function WeaponPane({
+  weaponArgs,
+  dispatchWeaponArgs
+}: WeaponPaneProps) {
   return (
-    <Section compact title="Weapon" className="weapon">
+    <Section compact title="Weapon" className="weapon-pane">
       <SectionCard>
         <WeaponSelectors
           weaponArgs={weaponArgs}

@@ -5,17 +5,17 @@ import {
 } from './monster-reducer';
 import { MonsterSelectors } from './monster-selectors';
 
-export interface MonsterProps {
+export interface MonsterPaneProps {
   monsterParameters: MonsterParameters;
   dispatchMonsterParameters: React.Dispatch<MonsterParametersReducerAction>;
 }
 
-export function Monster({
+export function MonsterPane({
   monsterParameters,
   dispatchMonsterParameters
-}: MonsterProps) {
+}: MonsterPaneProps) {
   return (
-    <Section compact title="Monster" className="monster">
+    <Section compact title="Monster" className="monster-pane">
       <SectionCard>
         <MonsterSelectors
           monsterParameters={monsterParameters}

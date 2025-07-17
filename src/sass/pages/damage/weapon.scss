@@ -2,11 +2,11 @@
 @use 'sass:color';
 @use '../../abstracts' as abstracts;
 
-.weapon {
+.weapon-pane {
   min-height: 345px;
   flex: 1 1 450px;
 
-  &--selectors {
+  &__selectors {
     @include abstracts.flex-container();
     flex-direction: column;
     align-items: flex-start;

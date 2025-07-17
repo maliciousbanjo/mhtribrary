@@ -77,7 +77,7 @@ export function MonsterSelectors({
 
   return (
     <>
-      <div className="monster--selectors">
+      <div className="monster-pane__selectors">
         <MonsterIcon monsterName={monsterParameters.monsterName} />
         <FormGroup label="Monster">
           <MonsterSelector
