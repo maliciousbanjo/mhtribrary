@@ -5,11 +5,12 @@ import { LevelSelectorDesktop } from './level-selector-desktop';
 import { LevelSelectorMobile } from './level-selector-mobile';
 import React from 'react';
 import { MonsterParameters } from '../monster-reducer';
+import { OptionProps } from '@blueprintjs/core';
 
-export interface LevelSelectorProps
-  extends Pick<MonsterSelectorsProps, 'dispatchMonsterParameters'> {
-  monsterLevels: MonsterLevelTypes.MonsterLevel[];
+export interface LevelSelectorProps {
+  monsterLevelOptions: OptionProps<string>[];
   selectedMonsterLevel: MonsterParameters['monsterLevel'];
+  onSelectLevel: (value: string) => void;
 }
 
 const DEFAULT_LEVEL: MonsterLevelTypes.MonsterLevel = 0;
@@ -31,17 +32,35 @@ export function LevelSelector({
       : [DEFAULT_LEVEL];
   }, [monsterName, questId]);
 
+  const monsterLevelOptions = React.useMemo(() => {
+    return monsterLevels.map<OptionProps<string>>(level => {
+      return {
+        value: level.toString()
+      };
+    });
+  }, [monsterLevels]);
+
+  const onSelectLevel = React.useCallback(
+    (value: string) => {
+      dispatchMonsterParameters({
+        type: 'MONSTER_LEVEL',
+        payload: parseInt(value) as MonsterLevelTypes.MonsterLevel
+      });
+    },
+    [dispatchMonsterParameters]
+  );
+
   return isMobile ? (
     <LevelSelectorMobile
-      monsterLevels={monsterLevels}
+      monsterLevelOptions={monsterLevelOptions}
       selectedMonsterLevel={monsterParameters.monsterLevel}
-      dispatchMonsterParameters={dispatchMonsterParameters}
+      onSelectLevel={onSelectLevel}
     />
   ) : (
     <LevelSelectorDesktop
-      monsterLevels={monsterLevels}
+      monsterLevelOptions={monsterLevelOptions}
       selectedMonsterLevel={monsterParameters.monsterLevel}
-      dispatchMonsterParameters={dispatchMonsterParameters}
+      onSelectLevel={onSelectLevel}
     />
   );
 }

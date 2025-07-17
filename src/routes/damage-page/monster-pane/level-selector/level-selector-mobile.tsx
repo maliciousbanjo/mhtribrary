@@ -1,32 +1,18 @@
 import { HTMLSelect } from '@blueprintjs/core';
-import { LevelSelectorProps } from '.';
 import React from 'react';
-import { MonsterLevelTypes } from 'mh3-data';
+import { LevelSelectorProps } from '.';
 
 export function LevelSelectorMobile({
-  monsterLevels,
+  monsterLevelOptions,
   selectedMonsterLevel,
-  dispatchMonsterParameters
+  onSelectLevel
 }: LevelSelectorProps) {
-  const levelOptions = React.useMemo(
-    () =>
-      monsterLevels.map<JSX.Element>(level => (
-        <option key={level} label={level.toString()}>
-          {level}
-        </option>
-      )),
-    [monsterLevels]
-  );
-
   const onChangeLevel = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { target } = event;
-      dispatchMonsterParameters({
-        type: 'MONSTER_LEVEL',
-        payload: parseInt(target.value) as MonsterLevelTypes.MonsterLevel
-      });
+      onSelectLevel(target.value);
     },
-    [dispatchMonsterParameters]
+    [onSelectLevel]
   );
 
   return (
@@ -34,9 +20,8 @@ export function LevelSelectorMobile({
       id="select-level__mobile"
       value={selectedMonsterLevel}
       onChange={onChangeLevel}
-      disabled={monsterLevels.length < 2}
-    >
-      {levelOptions}
-    </HTMLSelect>
+      options={monsterLevelOptions}
+      disabled={monsterLevelOptions.length < 2}
+    />
   );
 }
