@@ -21,44 +21,6 @@ export function BuffSelectors({
 }: BuffsPaneProps) {
   return (
     <div className="buffs-pane__selectors">
-      <ControlGroup vertical>
-        <span>
-          <Checkbox
-            key="powercharm"
-            label="Powercharm"
-            checked={weaponClassArgs.powercharm}
-            onChange={event => {
-              dispatchWeaponClassArgs({
-                type: 'POWERCHARM',
-                payload: event.target.checked
-              });
-            }}
-          />
-          <Checkbox
-            key="powertalon"
-            label="Powertalon"
-            checked={weaponClassArgs.powertalon}
-            onChange={event => {
-              dispatchWeaponClassArgs({
-                type: 'POWERTALON',
-                payload: event.target.checked
-              });
-            }}
-          />
-        </span>
-        <RadioGroup
-          key="critical-hit"
-          label="Critical Hit"
-          options={criticalHitOptions}
-          selectedValue={rawArgs.criticalHit}
-          onChange={event => {
-            dispatchRawArgs({
-              type: 'CRITICAL',
-              payload: event.currentTarget.value as RawArgs['criticalHit']
-            });
-          }}
-        />
-      </ControlGroup>
       <RadioGroup
         key="armor-skill"
         label="Attack (Armor skill)"
@@ -96,18 +58,6 @@ export function BuffSelectors({
         }}
       />
       <RadioGroup
-        key="low-health"
-        label="Low HP"
-        options={lowHealthSkillOptions}
-        selectedValue={rawArgs.lowHealthSkill}
-        onChange={event => {
-          dispatchRawArgs({
-            type: 'LOW_HEALTH_SKILL',
-            payload: event.currentTarget.value as RawArgs['lowHealthSkill']
-          });
-        }}
-      />
-      <RadioGroup
         key="fortify"
         label="Fortify"
         options={fortifyOptions}
@@ -116,6 +66,18 @@ export function BuffSelectors({
           dispatchRawArgs({
             type: 'FORTIFY',
             payload: event.currentTarget.value as RawArgs['fortify']
+          });
+        }}
+      />
+      <RadioGroup
+        key="low-health"
+        label="Low HP"
+        options={lowHealthSkillOptions}
+        selectedValue={rawArgs.lowHealthSkill}
+        onChange={event => {
+          dispatchRawArgs({
+            type: 'LOW_HEALTH_SKILL',
+            payload: event.currentTarget.value as RawArgs['lowHealthSkill']
           });
         }}
       />
@@ -146,6 +108,43 @@ export function BuffSelectors({
             }}
           />
         </span>
+      </ControlGroup>
+      <RadioGroup
+        inline
+        key="critical-hit"
+        label="Critical Hit"
+        options={criticalHitOptions}
+        selectedValue={rawArgs.criticalHit}
+        onChange={event => {
+          dispatchRawArgs({
+            type: 'CRITICAL',
+            payload: event.currentTarget.value as RawArgs['criticalHit']
+          });
+        }}
+      />
+      <ControlGroup vertical>
+        <Checkbox
+          key="powercharm"
+          label="Powercharm"
+          checked={weaponClassArgs.powercharm}
+          onChange={event => {
+            dispatchWeaponClassArgs({
+              type: 'POWERCHARM',
+              payload: event.target.checked
+            });
+          }}
+        />
+        <Checkbox
+          key="powertalon"
+          label="Powertalon"
+          checked={weaponClassArgs.powertalon}
+          onChange={event => {
+            dispatchWeaponClassArgs({
+              type: 'POWERTALON',
+              payload: event.target.checked
+            });
+          }}
+        />
       </ControlGroup>
     </div>
   );

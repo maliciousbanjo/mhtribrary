@@ -66,6 +66,14 @@ export function DamagePage() {
           flex: '2 1 0'
         }}
       >
+        {/* // TODO: Put this back later */}
+        {/* <DamageResultsPane
+          weaponArgs={weaponArgs}
+          monsterParameters={monsterParameters}
+          rawArgs={rawArgs}
+          elementArgs={elementArgs}
+          weaponClassArgs={weaponClassArgs}
+        /> */}
         <WeaponPane
           weaponArgs={weaponArgs}
           dispatchWeaponArgs={dispatchWeaponArgs}
@@ -83,15 +91,6 @@ export function DamagePage() {
         monsterParameters={monsterParameters}
         dispatchMonsterParameters={dispatchMonsterParameters}
       />
-      {/*
-        // TODO: Put this back later
-        <DamageResultsPane
-          weaponArgs={weaponArgs}
-          monsterParameters={monsterParameters}
-          rawArgs={rawArgs}
-          elementArgs={elementArgs}
-          weaponClassArgs={weaponClassArgs}
-        /> */}
     </div>
   );
 }

@@ -23,17 +23,17 @@ export function MonsterPane({
   );
   return (
     <Section compact title="Monster" className="monster-pane">
-      <SectionCard className="monster-pane__content">
-        <MonsterSelectors
-          monsterParameters={monsterParameters}
-          dispatchMonsterParameters={dispatchMonsterParameters}
-        />
-        <MonsterInfo
-          monsterName={monsterParameters.monsterName}
-          multipliers={multipliers}
-        />
-      </SectionCard>
       <SectionCard>
+        <div className="monster-pane__content">
+          <MonsterSelectors
+            monsterParameters={monsterParameters}
+            dispatchMonsterParameters={dispatchMonsterParameters}
+          />
+          <MonsterInfo
+            monsterName={monsterParameters.monsterName}
+            multipliers={multipliers}
+          />
+        </div>
         <HitzoneTable
           monsterParameters={monsterParameters}
           dispatchMonsterParameters={dispatchMonsterParameters}
