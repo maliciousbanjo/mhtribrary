@@ -57,18 +57,28 @@ export function DamagePage() {
 
   return (
     <div id="damage-page">
-      <WeaponPane
-        weaponArgs={weaponArgs}
-        dispatchWeaponArgs={dispatchWeaponArgs}
-      />
-      {/* <BuffsPane
+      <div
+        className="flex-column"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1em',
+          flex: '2 1 0'
+        }}
+      >
+        <WeaponPane
+          weaponArgs={weaponArgs}
+          dispatchWeaponArgs={dispatchWeaponArgs}
+        />
+        <BuffsPane
           rawArgs={rawArgs}
           dispatchRawArgs={dispatchRawArgs}
           elementArgs={elementArgs}
           dispatchElementArgs={dispatchElementArgs}
           weaponClassArgs={weaponClassArgs}
           dispatchWeaponClassArgs={dispatchWeaponClassArgs}
-        /> */}
+        />
+      </div>
       <MonsterPane
         monsterParameters={monsterParameters}
         dispatchMonsterParameters={dispatchMonsterParameters}

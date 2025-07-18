@@ -34,11 +34,11 @@ export function MonsterPane({
         />
       </SectionCard>
       <SectionCard>
-        {/* <HitzoneTable
+        <HitzoneTable
           monsterParameters={monsterParameters}
           dispatchMonsterParameters={dispatchMonsterParameters}
           monsterMultipliers={multipliers}
-        /> */}
+        />
       </SectionCard>
     </Section>
   );
