@@ -7,4 +7,8 @@
 #damage-page {
   @include abstracts.flex-container-wrap();
   gap: 1em;
+
+  .flex-column {
+    flex: 2 1 0;
+  }
 }

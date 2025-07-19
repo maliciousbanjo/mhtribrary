@@ -29,6 +29,7 @@
   .monster-info {
     @include abstracts.flex-container();
     align-items: center;
+    justify-content: space-evenly;
     .multiplier {
       font-size: 9pt;
       text-wrap: nowrap;

@@ -106,7 +106,7 @@ footer {
   #content {
     padding: 1em 0.5em 0 0.5em;
     @media screen and (min-width: abstracts.$media-mobile-width) {
-      max-width: 1700px;
+      max-width: 1600px;
     }
   }
 }
@@ -148,6 +148,12 @@ footer {
 
 .flex-container-wrap {
   @include abstracts.flex-container-wrap();
+}
+
+.flex-column {
+  @include abstracts.flex-container();
+  flex-direction: column;
+  row-gap: 1em;
 }
 
 .danger-text {

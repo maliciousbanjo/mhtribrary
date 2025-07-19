@@ -1,10 +1,10 @@
 @use '@blueprintjs/core/lib/scss/variables' as bp;
-@use 'sass:color';
 @use '../../abstracts' as abstracts;
 
 .weapon-pane {
   min-height: 345px;
   min-width: abstracts.$min-width;
+  flex: 2 1 0;
 
   &__selectors {
     @include abstracts.flex-container();
