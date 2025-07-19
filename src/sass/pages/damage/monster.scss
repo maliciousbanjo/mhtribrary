@@ -76,6 +76,10 @@
     padding: 0.625em;
   }
 
+  td.cell[scope='row'] {
+    font-weight: bold;
+  }
+
   .table-row {
     &--selected {
       background-color: abstracts.$selection-color;
