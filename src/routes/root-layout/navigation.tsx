@@ -30,7 +30,7 @@ export function NavigationBar({ darkMode, setDarkMode }: NavigationBarProps) {
           <Button
             className="menu-button"
             icon="menu"
-            minimal
+            variant="minimal"
             onClick={onMenuClick}
           />
           <Navbar.Heading
@@ -45,14 +45,14 @@ export function NavigationBar({ darkMode, setDarkMode }: NavigationBarProps) {
               src={'/billybobjho_lg.png'}
               width={50}
               alt="Deviljho holding raw meat"
-            ></img>
+            />
             MH Tribrary
           </Navbar.Heading>
         </Navbar.Group>
         <Navbar.Group className="top-navbar__page-buttons">
           <Navbar.Divider />
           <Link to="/blade-damage">
-            <Button minimal icon="calculator" text="Damage" />
+            <Button variant="minimal" icon="calculator" text="Damage" />
           </Link>
         </Navbar.Group>
         <Navbar.Group className="top-navbar__theme" align="right">
@@ -69,7 +69,7 @@ export function NavigationBar({ darkMode, setDarkMode }: NavigationBarProps) {
         </Navbar.Group>
         <Navbar.Group className="top-navbar__extra" align="right">
           <Link to="/about">
-            <Button minimal icon="help" text="About/FAQ" />
+            <Button variant="minimal" icon="help" text="About/FAQ" />
           </Link>
         </Navbar.Group>
       </Navbar>
@@ -84,7 +84,7 @@ export function NavigationBar({ darkMode, setDarkMode }: NavigationBarProps) {
           <Link to="/blade-damage">
             <Button
               className="sidenav__item"
-              minimal
+              variant="minimal"
               icon="calculator"
               text="Damage"
               onClick={onMenuClick}
@@ -93,7 +93,7 @@ export function NavigationBar({ darkMode, setDarkMode }: NavigationBarProps) {
           <Link to="/about">
             <Button
               className="sidenav__item"
-              minimal
+              variant="minimal"
               icon="help"
               text="About/FAQ"
               onClick={onMenuClick}

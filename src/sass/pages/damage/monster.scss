@@ -1,10 +1,22 @@
+@use '@blueprintjs/core/lib/scss/variables' as bp;
 @use '../../abstracts' as abstracts;
 
-.monster {
-  flex: 1 1 600px;
-  &--selectors {
-    @include abstracts.flex-container-wrap();
+.monster-pane {
+  min-height: 600px;
+  flex: 1 1 150px;
+  min-width: abstracts.$min-width;
+  container-type: inline-size;
+  container-name: monster-pane;
 
+  &__content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1em;
+    justify-content: space-between;
+  }
+  &__selectors {
+    display: flex;
+    flex-direction: column;
     .multiplier {
       text-indent: 0.5em;
       font-size: 8pt;
@@ -13,9 +25,45 @@
       }
     }
   }
+
+  .monster-info {
+    @include abstracts.flex-container();
+    align-items: center;
+    justify-content: space-evenly;
+    .multiplier {
+      font-size: 9pt;
+      text-wrap: nowrap;
+      label {
+        text-transform: uppercase;
+      }
+    }
+  }
 }
 
-.hitzone-table {
+.select-level {
+  width: fit-content;
+}
+
+// HITZONE TABLE
+// Dark theme zebra-striping
+.bp6-dark
+  .hitzone-table
+  tr.table-row:nth-child(even):not(.table-row--selected) {
+  background-color: bp.$dark-gray5;
+  td {
+    color: bp.$pt-dark-text-color;
+  }
+}
+
+// Zebra-striping
+.hitzone-table tr.table-row:nth-child(even):not(.table-row--selected) {
+  background-color: bp.$light-gray1;
+  td {
+    color: bp.$pt-text-color;
+  }
+}
+
+.bp6-html-table.bp6-compact.hitzone-table {
   text-wrap: nowrap;
   table-layout: fixed;
   tr.table-row {
@@ -28,6 +76,10 @@
     padding: 0.625em;
   }
 
+  td.cell[scope='row'] {
+    font-weight: bold;
+  }
+
   .table-row {
     &--selected {
       background-color: abstracts.$selection-color;
@@ -38,8 +90,9 @@
   }
 }
 
-@media screen and (max-width: abstracts.$media-mobile-width) {
-  .hitzone-table {
+// Mobile table styling
+@container monster-pane (width < 550px) {
+  .bp6-html-table.bp6-compact.hitzone-table {
     border: 0;
     width: 100%;
     thead {

@@ -1,17 +1,20 @@
 @use '../../abstracts' as abstracts;
 
-.buffs {
-  flex: 5 1 500px;
-  &--selectors {
+.buffs-pane {
+  &__selectors {
     @include abstracts.flex-container-wrap();
     gap: 1em;
 
-    > div {
-      flex: 1 1 150px;
-    }
-
     .bp6-control-group.bp6-vertical {
-      justify-content: space-between;
+      gap: 0.5em;
+    }
+  }
+}
+
+.buffs-pane {
+  @media screen and (max-width: 500px) {
+    &__selectors {
+      flex-direction: column;
     }
   }
 }

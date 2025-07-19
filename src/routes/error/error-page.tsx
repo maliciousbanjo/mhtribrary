@@ -10,7 +10,6 @@ export function ErrorPage() {
       <div id="error-content">
         <h1>You fainted.</h1>
         <div className={Classes.CODE_BLOCK}>{(error as Error).message}</div>
-        <div className={Classes.CODE_BLOCK}>{(error as Error).stack}</div>
         <br />
         <p>Please let the site maintainer know about this issue.</p>
         <p>

@@ -44,7 +44,6 @@ export function Selector<T extends SelectItem>({
   return (
     <Select<Readonly<T>>
       {...rest}
-      // fill
       className={classNames(['selector', className])}
       popoverProps={{ minimal: true }}
       items={items}
