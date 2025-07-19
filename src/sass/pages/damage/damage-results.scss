@@ -1,4 +1,6 @@
+@use '../../abstracts' as abstracts;
+
 .damage-results-pane {
-  // flex: 1 1 150px;
   flex: 1 1 0;
+  min-width: abstracts.$min-width;
 }

@@ -131,11 +131,11 @@ export const mightOptions: OptionProps<WeaponClassArgs['might']>[] = [
     label: 'Might Seed'
   },
   {
-    value: 'mightPill',
-    label: 'Might Pill'
-  },
-  {
     value: 'demonFlute',
     label: 'Demon Flute'
+  },
+  {
+    value: 'mightPill',
+    label: 'Might Pill'
   }
 ];

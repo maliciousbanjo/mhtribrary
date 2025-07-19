@@ -58,7 +58,7 @@ export function DamagePage() {
   return (
     <div id="damage-page">
       <div className="flex-column">
-        <div className="flex-container">
+        <div className="flex-container-wrap" style={{ gap: '1em' }}>
           <DamageResultsPane
             weaponArgs={weaponArgs}
             monsterParameters={monsterParameters}
