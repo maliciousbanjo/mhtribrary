@@ -40,6 +40,18 @@
   }
 }
 
+.bp6-form-group.with-info {
+  .bp6-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    .hover-info {
+      margin-top: 0px;
+    }
+  }
+}
+
 .select-level {
   width: fit-content;
 }

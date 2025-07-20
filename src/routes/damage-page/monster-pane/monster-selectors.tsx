@@ -1,6 +1,7 @@
 import { FormGroup, HTMLSelect, OptionProps } from '@blueprintjs/core';
 import { Monsters, Quests } from 'mh3-data';
 import React from 'react';
+import { HoverInfo } from '../../../ui/hover-info/hover-info';
 import { LevelSelector } from './level-selector';
 import {
   MonsterParameters,
@@ -88,7 +89,23 @@ export function MonsterSelectors({
                 dispatchMonsterParameters={dispatchMonsterParameters}
               />
             </FormGroup>
-            <FormGroup label="Level">
+            <FormGroup
+              className="with-info"
+              label={
+                <>
+                  <span>Level</span>
+                  <HoverInfo
+                    tooltipContent={
+                      <div>
+                        Determines the monster's health, defense, and stagger
+                        multipliers. Quests are configured to have 1, 3, or 5
+                        possible levels.
+                      </div>
+                    }
+                  />
+                </>
+              }
+            >
               <LevelSelector
                 monsterParameters={monsterParameters}
                 dispatchMonsterParameters={dispatchMonsterParameters}
